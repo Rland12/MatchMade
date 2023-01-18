@@ -1,15 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Categories from './categories';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>
+          Place holder title.
+        </h1>
+        <div className="search-container">
+          <form>
+            <input type="text" name="search" placeholder="Find your matches"></input>
+          </form>
+        </div>
+        <Categories categories={["Anime", "Movies","Animals", "Cartoons"] } />
+        
+        {/* <img src={logo} className="App-logo" alt="logo" />
+        
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -17,7 +26,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
     </div>
   );
