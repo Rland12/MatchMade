@@ -67,3 +67,10 @@ input[type="text"]:focus {
   color: #604760;
   user-select: all;
 }
+
+.images-container{
+  display:grid;
+}
+.image-pair{
+  background-color:#816481
+}

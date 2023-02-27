@@ -2,6 +2,7 @@ import React from "react";
 // import logo from './logo.svg';
 import "./App.css";
 import Categories from "./categories";
+import ImagePairs from "./ImagePairs";
 
 function App() {
   return (
@@ -9,16 +10,29 @@ function App() {
       <header className="App-header">
         <h1>Place holder title.</h1>
         <div className="search-container">
-          <form>
+          {/* <form>
             <input
               type="text"
               name="search"
               placeholder="Find your matches"
             ></input>
-          </form>
+          </form> */}
         </div>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
+          <ImagePairs images={[
+            [
+              {
+                url:`images\\xlb1iio4aoca1.webp`,
+                alt:"image1"
+              },
 
+              {
+                url:`images\\ar84cio4aoca1.webp`,
+                alt:"image2"
+              }
+              
+            ]
+          ]}/>
         {/* <img src={logo} className="App-logo" alt="logo" />
         
         <a
