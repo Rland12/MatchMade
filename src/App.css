@@ -18,7 +18,7 @@ p {
 }
 
 .App-header {
-  background-color: #1d1929;
+  background-color: #352635;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,9 @@ input[type="text"]:focus {
   background-color: #e0d3d3;
   outline: none;
 }
-
+.categories-container{
+  margin-bottom: 15px;
+}
 .category {
   font-family: "Nunito", sans-serif;
   background-color: #604760;
@@ -68,9 +70,6 @@ input[type="text"]:focus {
   user-select: all;
 }
 
-.images-container{
-  display:grid;
-}
-.image-pair{
-  background-color:#816481
+img{
+  border-radius:36%;
 }
