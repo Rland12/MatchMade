@@ -8,22 +8,24 @@ function ImagePairs(props) {
     <div className="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="row">
+          
             {images.map(((imagePair)=>{
               
               // console.log(images);
               // console.log(imagePair);
               return(
-                <div class="col-6 d-flex justify-content-center">
+                <div class="row">
                   {imagePair.map(imageObject=>{
                     return(
+                      <div class="col-6 d-flex justify-content-center">
                       <img src={imageObject.url}alt={imageObject.alt}class="img-fluid m-1"/>
+                      </div>
                     )
                   })}
                 </div>
               )
             }))}
-          </div>
+          
         </div>
       </div>
     </div>
