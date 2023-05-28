@@ -19,25 +19,26 @@ function App() {
           </form> */}
         </div>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
+        {/* add variety of image pairs and create modal component */}
           <ImagePairs images={[
            [ 
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/girleaf-left.webp`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/boyleaf-right.webp`,
                   alt: "image2"
                 }
               ],
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/girl-left.jpeg`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/man-right.jpeg`,
                   alt: "image2"
                 }
               ],
@@ -45,21 +46,21 @@ function App() {
             [ 
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/squidgame-girl-left.webp`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/squidgame-girl-right.webp`,
                   alt: "image2"
                 }
               ],
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/boy-heartattack-left.jpeg`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/girl-heartshot-right.jpeg`,
                   alt: "image2"
                 }
               ],
@@ -67,21 +68,21 @@ function App() {
                 [ 
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/toh-girl-left.jpg`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/toh-girl-right.jpg`,
                   alt: "image2"
                 }
               ],
               [
                 {
-                  url: `images/xlb1iio4aoca1.webp`,
+                  url: `images/catboy-left.jpg`,
                   alt: "image1"
                 },
                 {
-                  url: `images/ar84cio4aoca1.webp`,
+                  url: `images/catboy-right.jpg`,
                   alt: "image2"
                 }
               ],
