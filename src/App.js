@@ -20,78 +20,73 @@ function App() {
         </div>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
           <ImagePairs images={[
-            [
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-             
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-              
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-              
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-              
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-              
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              },
-              
-              {
-                url:`images\\xlb1iio4aoca1.webp`,
-                alt:"image1"
-              },
-
-              {
-                url:`images\\ar84cio4aoca1.webp`,
-                alt:"image2"
-              }
-              
-            ]
+           [ 
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+            ],
+            [ 
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+            ],
+                [ 
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+              [
+                {
+                  url: `images/xlb1iio4aoca1.webp`,
+                  alt: "image1"
+                },
+                {
+                  url: `images/ar84cio4aoca1.webp`,
+                  alt: "image2"
+                }
+              ],
+            ],
+          
           ]}/>
         
       </header>
