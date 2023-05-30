@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import Categories from "./categories";
 import ImagePairs from "./ImagePairs";
+import Modal from "./Modal";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </div>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
         {/* add variety of image pairs and create modal component */}
+        <Modal/>
           <ImagePairs images={[
            [ 
               [
@@ -86,8 +88,7 @@ function App() {
                   alt: "image2"
                 }
               ],
-            ],
-          
+            ]
           ]}/>
         
       </header>

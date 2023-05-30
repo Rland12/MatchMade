@@ -1,9 +1,11 @@
 function ImagePairs(props) {
   const {images}=props;
+ 
   //clog images
   //clog imagePair
   
   //image-pair class is the group of two images
+ 
   return (
     <div className="container">
       <div className="row">
@@ -14,7 +16,9 @@ function ImagePairs(props) {
                   //console.log(images);
                   //console.log(imagePair);
                 return(
-                  <div className="row">
+                  
+                  //each row may need their own target? edit modal js and see what works.
+                  <div className="row" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     {imagePair.map(imageObject=>{
                       return(
                         <div className="col-6 d-flex justify-content-center">
