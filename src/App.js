@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // import logo from './logo.svg';
 import "./App.css";
 import Categories from "./categories";
@@ -6,6 +6,11 @@ import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 
 function App() {
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleClick = (images) =>{
+    setSelectedImages(images);
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -21,17 +26,19 @@ function App() {
         </div>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
         {/* add variety of image pairs and create modal component */}
-        <Modal/>
-          <ImagePairs images={[
+        <Modal SelectedImages={selectedImages}/>
+          <ImagePairs handleClick={handleClick}images={[
            [ 
               [
                 {
                   url: `images/girleaf-left.webp`,
-                  alt: "image1"
+                  alt: "image1",
+                  target:"#leaf"
                 },
                 {
                   url: `images/boyleaf-right.webp`,
-                  alt: "image2"
+                  alt: "image2",
+                  target:"#leaf"
                 }
               ],
               [
