@@ -29,12 +29,11 @@ function ImagePairs(props) {
 const ImagePair = props => {
   const { images,handleClick } = props;
   return (
-    <div className="row" >
-
+    <div className="row" onClick={()=> handleClick(images)}>
       {images.map(imageObject => {
         return (
           <div className="col-6 d-flex justify-content-center">
-            <img src={imageObject.url} alt={imageObject.alt} className="img-fluid m-1" data-bs-toggle="modal" data-bs-target="#leaf" onClick={()=> handleClick(images)} />
+            <img src={imageObject.url} alt={imageObject.alt} className="img-fluid m-1" data-bs-toggle="modal" data-bs-target="#imagePreview"/>
           </div>
         )
       })}

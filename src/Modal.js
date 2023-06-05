@@ -5,7 +5,7 @@ function Modal(props) {
 		// possibly image pair title? yes
 		//share icons in modal footer
 		//modal images break on smaller screens
-		<div className="modal fade" id="leaf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div className="modal fade" id="imagePreview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
