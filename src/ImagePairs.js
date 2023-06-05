@@ -13,16 +13,7 @@ function ImagePairs(props) {
                 //console.log(images);
                 //console.log(imagePair) data-bs-target="#exampleModal";
                 return (
-                  <><ImagePair images={imagePair} handleClick={handleClick} />
-                    <div className="row">
-                      {imagePair.map(imageObject => {
-                        return (
-                          <div className="col-6 d-flex justify-content-center">
-                            <img src={imageObject.url} alt={imageObject.alt} className="img-fluid m-1" data-bs-toggle="modal" data-bs-target="#leaf" onClick={() => handleClick(imagePair)} />
-                          </div>
-                        );
-                      })}
-                    </div></>
+                  <ImagePair images={imagePair} handleClick={handleClick} />
                 )
               })}
             </div>
@@ -36,13 +27,14 @@ function ImagePairs(props) {
   );
 }
 const ImagePair = props => {
-  const { images } = props;
+  const { images,handleClick } = props;
   return (
-    <div className="row">
+    <div className="row" >
+
       {images.map(imageObject => {
         return (
           <div className="col-6 d-flex justify-content-center">
-            <img src={imageObject.url} alt={imageObject.alt} className="img-fluid m-1 hii" />
+            <img src={imageObject.url} alt={imageObject.alt} className="img-fluid m-1" data-bs-toggle="modal" data-bs-target="#leaf" onClick={()=> handleClick(images)} />
           </div>
         )
       })}

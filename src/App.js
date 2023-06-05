@@ -11,7 +11,7 @@ function App() {
   const handleClick = (images) => {
     setSelectedImages(images);
   }
-  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,10 +25,8 @@ function App() {
             ></input>
           </form> */}
         </div>
-        <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
-        {/* add variety of image pairs and create modal component */}
+        <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]}/>
         <Modal selectedImages={selectedImages} />
-
         <ImagePairs handleClick={handleClick} images={[
           [
             [

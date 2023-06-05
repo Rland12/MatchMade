@@ -2,9 +2,9 @@
 function Modal(props) {
 	const selectedImages = props.selectedImages;
 	return (
-		// possibly image pair title? 
+		// possibly image pair title? yes
 		//share icons in modal footer
-		//modal images will be smaller on large screens
+		//modal images break on smaller screens
 		<div className="modal fade" id="leaf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
