@@ -1,4 +1,4 @@
-//import ImagePairs from "./ImagePairs";
+import SocialShare from "./SocialFollow"
 function Modal(props) {
 	const selectedImages = props.selectedImages;
 	return (
@@ -9,10 +9,11 @@ function Modal(props) {
 			<div className="modal-dialog modal-dialog-centered">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+						
 						<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div className="modal-body row">
+					<div className="modal-body">
+					<div className="container">
 						<div className="row">
 							{selectedImages.map(images => {
 								return (
@@ -21,11 +22,15 @@ function Modal(props) {
 									</div>
 								)
 							})}
+							{/* find out how to map title to the different pairs */}
+							<h1 className="modal-title fs-3" id="exampleModalLabel">Modal title</h1>
 						</div>
+					</div>
+					{/* find functionality for download buttons */}
 						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Download Pair</button>
 					</div>
-					<div className="modal-footer">
-						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<div className="modal-footer justify-content-center">
+						<SocialShare/>
 					</div>
 				</div>
 			</div>
