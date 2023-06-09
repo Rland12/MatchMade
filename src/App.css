@@ -67,6 +67,7 @@ input[type="text"]:focus {
 .category:hover {
   background-color: #eee0e0;
   color: #604760;
+  /* what is user select all? */
   user-select: all;
 }
 .modal-content{
@@ -78,6 +79,11 @@ input[type="text"]:focus {
 
 .btn-close{
 color:white;
+}
+.active{
+  background-color: #eee0e0;
+  color: #604760;
+
 }
 img{
   border-radius:36%;

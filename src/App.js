@@ -4,6 +4,8 @@ import "./App.css";
 import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
+import Anime from "./Anime";
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 
 function App() {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -25,7 +27,15 @@ function App() {
             ></input>
           </form> */}
         </div>
+        <Router>
         <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]}/>
+        <Routes>
+        <Route path="/anime" element={<Anime />} />
+        {/* <Route path="./movies" component={Movies} />
+        <Route path="./animals" component={Animals} />
+        <Route path="./cartoons" component={Cartoons} /> */}
+      </Routes>
+      </Router>
         <Modal selectedImages={selectedImages} />
         <ImagePairs handleClick={handleClick} images={[
           [

@@ -42,7 +42,6 @@ function Modal(props) {
 					<button type="button" className="btn btn-secondary" onClick={handleDownload}>
               Download Image Pair
             </button>
-						{/* <a href={selectedImages} download><button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >Download Pair</button></a> */}
 					</div>
 					<div className="modal-footer justify-content-center">
 						<SocialShare/>
