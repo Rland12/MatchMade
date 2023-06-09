@@ -7,10 +7,10 @@ import {
     TwitterIcon,
     WhatsappShareButton,
     WhatsappIcon
-  } from "react-share";
-  import ImagePairs from "./ImagePairs";
+}from "react-share";
+import ImagePairs from "./ImagePairs";
   //add sharing functionality. url has to be image pair url
- function SocialShare() {
+function SocialShare() {
   return (
     <div class="social-container">
       <h3>Share:</h3>

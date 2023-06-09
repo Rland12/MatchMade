@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import logo from './logo.svg';
 import "./App.css";
-import Categories from "./categories";
+import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 
