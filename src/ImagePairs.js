@@ -1,5 +1,16 @@
+import { imageMap } from "./ImageMap";
+import { useParams } from "react-router-dom";
+
 function ImagePairs(props) {
-  const { images, handleClick } = props;
+  // console.log(useParams());
+  console.log(imageMap);
+  
+  const params = useParams();
+  const { handleClick } = props;
+  const images = imageMap[params.category || "/"];
+  
+  console.log(params.category);
+  
   //clog images
   //clog imagePair
   //image-pair class is the group of two images

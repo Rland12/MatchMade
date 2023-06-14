@@ -12,7 +12,7 @@ import ImagePairs from "./ImagePairs";
   //add sharing functionality. url has to be image pair url
 function SocialShare() {
   return (
-    <div class="social-container">
+    <div className="social-container">
       <h3>Share:</h3>
       <div>
       <FacebookMessengerShareButton
