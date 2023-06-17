@@ -27,6 +27,7 @@ function App() {
           </form> */}
           </div>
           <Router>
+            {/* edit h1 with css to hide that it looks like a link */}
           <h1 className="placeholder-title"><Link to="/">Place holder title.</Link></h1>
           <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
           <Routes>
