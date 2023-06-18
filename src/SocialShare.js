@@ -9,14 +9,14 @@ import {
     WhatsappIcon
 }from "react-share";
 import ImagePairs from "./ImagePairs";
-  //add sharing functionality. url has to be image pair url
+  //add sharing functionality. url has to be image pair url. maybe modal url
 function SocialShare() {
   return (
     <div className="social-container">
       <h3>Share:</h3>
       <div>
       <FacebookMessengerShareButton
-        url={<ImagePairs imageObject/>}
+        url={"http://localhost:3000/"}
         appId={'add app id'}
         quote={'Dummy text!'}
         hashtag="#muo"
@@ -25,7 +25,7 @@ function SocialShare() {
       </FacebookMessengerShareButton>
 
       <TwitterShareButton
-  url={'https://www.example.com'}
+  url={'http://localhost:3000/'}
   quote={'Dummy text!'}
   hashtag="#muo"
 >

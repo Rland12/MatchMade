@@ -12,7 +12,7 @@ function ImagePairs(props) {
   //clog images
   //clog imagePair
   //image-pair class is the group of two images
-
+  //future:on mobile 8 pictures per section
   return (
     <div className="container">
       <div className="row">

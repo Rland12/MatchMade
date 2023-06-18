@@ -12,13 +12,20 @@ h6 {
 p {
   font-family: "Nunito", sans-serif;
 }
+a{
+  text-decoration:none;
+  color:white;
+}
+h1 a:hover{
+color:white;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 .App-header {
-  background-color: #352635;
+  background-color:#352635;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,7 +36,7 @@ p {
 }
 
 .App-link {
-  color: #61dafb;
+  color:#61dafb;
 }
 
 .search-container {
@@ -39,8 +46,8 @@ p {
 }
 input[type="text"] {
   font-family: "Nunito", sans-serif;
-  background-color: #eee0e0;
-  border: 1px solid #08070c;
+  background-color:#eee0e0;
+  border: 1px solid#08070c;
   box-sizing: border-box;
   border-radius: 100px;
   padding: 12px 20px 12px 40px;
@@ -49,42 +56,49 @@ input[type="text"] {
 }
 input[type="text"]:focus {
   box-shadow: 2px 2px black;
-  background-color: #e0d3d3;
+  background-color:#e0d3d3;
   outline: none;
 }
-.categories-container{
-  margin-bottom: 15px;
-}
+
 .category {
   font-family: "Nunito", sans-serif;
-  background-color: #604760;
+  background-color:#604760;
   border-radius: 16px;
   border-style: none;
   margin-right: 10px;
-  color: #eee0e0;
+  color:#eee0e0;
+  text-decoration: none;
   padding: 5px;
 }
 .category:hover {
-  background-color: #eee0e0;
-  color: #604760;
+  background-color:#eee0e0;
+  color:#604760;
   /* what is user select all? */
   user-select: all;
 }
 .modal-content{
-  background-color:#604760;
+  background-color:#352635;
 }
 .modal-header{
   border:none;
 }
 
 .btn-close{
-color:white;
+filter: invert(1) hue-rotate(180deg);
 }
 .active{
-  background-color: #eee0e0;
-  color: #604760;
-
+  background-color:#eee0e0;
+  color:#604760;
 }
 img{
   border-radius:36%;
 }
+.btn{
+  background-color:#604760;
+  color:#eee0e0;
+}
+.btn:hover{
+  background-color:#eee0e0;
+  color:#604760;
+}
+
