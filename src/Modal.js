@@ -18,7 +18,6 @@ function Modal(props) {
 	
 	
 	return (
-		//possibly image pair title? yes
 		//share icons in modal footer
 		//future:in modal add credit to artist if original work
 		<div className="modal fade" id="imagePreview" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,16 +39,6 @@ function Modal(props) {
 
 								})}
 								<h1 className="modal-title fs-3" id="modalTitle">{selectedImages.title}</h1>
-								{/* find out how to map title to the different pairs */}
-								
-								{/* {ImagePairTitle.map(pair => {
-									console.log(pair);
-									return(
-										<h1 className="modal-title fs-3" id="modalTitle">{pair.title}</h1>
-									);
-									
-								})} */}
-								
 							</div>
 						</div>
 						<button type="button" className="btn"onClick={handleDownload} data-bs-dismiss="modal" >

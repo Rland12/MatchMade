@@ -6,8 +6,9 @@ import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 import { imageMap } from "./ImageMap";
-//mvp final steps?: image title mapping and add images 
+
 //future: pagination for pages of images
+//future: some type of download logging for a featured/popular page?
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
 
@@ -27,8 +28,10 @@ function App() {
             ></input>
           </form> */}
           </div>
+          {/* categories need to have the same sizing and padding no matter how big the word is */}
           <Router>
-          <h1 className="title"><Link to="/">Place holder title.</Link></h1>
+          <h1 className="title"><Link to="/">MatchMade</Link></h1>
+          {/* <p className="sub-title"><Link to="/">Find matching profile pictures for friends or someone special</Link></p> */}
           <Categories categories={["Anime","Cartoons","Cute"]} />
           <Routes>
             <Route path="/" element={<ImagePairs images={imageMap["/"]} handleClick={handleClick} />} />
