@@ -73,8 +73,6 @@ input[type="text"]:focus {
 .category:hover {
   background-color:#eee0e0;
   color:#604760;
-  /* what is user select all? */
-  user-select: all;
 }
 .modal-content{
   background-color:#352635;

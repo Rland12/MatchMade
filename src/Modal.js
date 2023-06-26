@@ -1,10 +1,10 @@
-import SocialShare from "./SocialShare";
+// import SocialShare from "./SocialShare";
 
 function Modal(props) {
 	const {selectedImages} = props;
 	//future:image alt title will be file name?
 	const handleDownload = () => {
-		selectedImages.forEach((image, index) => {
+		selectedImages.imageSet.forEach((image, index) => {
 			const link = document.createElement("a");
 			const extension = image.url.split(".").pop(); // Extract the extension from the image URL
 			const filename = `image_${index + 1}.${extension}`;
@@ -15,8 +15,10 @@ function Modal(props) {
 			link.click();
 		});
 	};
+	
+	
 	return (
-		// possibly image pair title? yes
+		//possibly image pair title? yes
 		//share icons in modal footer
 		//future:in modal add credit to artist if original work
 		<div className="modal fade" id="imagePreview" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -28,16 +30,26 @@ function Modal(props) {
 					<div className="modal-body">
 						<div className="container">
 							<div className="row">
-								{selectedImages.map((images, index) => {
+								{selectedImages.imageSet && selectedImages.imageSet.map((images, index) => {
 									const key = images.url + index;
 									return (
 										<div className="col-6 d-flex justify-content-center" key={key}>
 											<img src={images.url} className="img-fluid m-1" alt={images.alt} />
 										</div>
-									)
+									);
+
 								})}
+								<h1 className="modal-title fs-3" id="modalTitle">{selectedImages.title}</h1>
 								{/* find out how to map title to the different pairs */}
-								<h1 className="modal-title fs-3" id="modalTitle">Modal title</h1>
+								
+								{/* {ImagePairTitle.map(pair => {
+									console.log(pair);
+									return(
+										<h1 className="modal-title fs-3" id="modalTitle">{pair.title}</h1>
+									);
+									
+								})} */}
+								
 							</div>
 						</div>
 						<button type="button" className="btn"onClick={handleDownload} data-bs-dismiss="modal" >

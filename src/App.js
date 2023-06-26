@@ -6,9 +6,10 @@ import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 import { imageMap } from "./ImageMap";
-
+//mvp final steps?: image title mapping and add images 
+//future: pagination for pages of images
 function App() {
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState({});
 
   const handleClick = (images) => {
     setSelectedImages(images);
@@ -28,7 +29,7 @@ function App() {
           </div>
           <Router>
           <h1 className="title"><Link to="/">Place holder title.</Link></h1>
-          <Categories categories={["Anime", "Movies", "Animals", "Cartoons"]} />
+          <Categories categories={["Anime","Cartoons","Cute"]} />
           <Routes>
             <Route path="/" element={<ImagePairs images={imageMap["/"]} handleClick={handleClick} />} />
             <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />

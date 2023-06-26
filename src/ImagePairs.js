@@ -35,7 +35,7 @@ const ImagePair = props => {
   const { images, handleClick } = props;
   return (
     <div className="row" onClick={() => handleClick(images)}>
-      {images.map((imageObject, index) => {
+      {images.imageSet.map((imageObject, index) => {
         const key = imageObject.url + index;
         return (
           <div className="col-6 d-flex justify-content-center" key={key}>
