@@ -1,5 +1,3 @@
-// import SocialShare from "./SocialShare";
-
 function Modal(props) {
 	const {selectedImages} = props;
 	//future:image alt title will be file name?
@@ -18,7 +16,7 @@ function Modal(props) {
 	
 	
 	return (
-		//share icons in modal footer
+		//future:share icons in modal footer
 		//future:in modal add credit to artist if original work
 		<div className="modal fade" id="imagePreview" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered">

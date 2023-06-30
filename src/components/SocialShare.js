@@ -8,8 +8,7 @@ import {
     WhatsappShareButton,
     WhatsappIcon
 }from "react-share";
-import ImagePairs from "./ImagePairs";
-  //add sharing functionality. url has to be image pair url. maybe modal url
+  //future:add sharing functionality. url has to be image pair url. maybe modal url
 function SocialShare() {
   return (
     <div className="social-container">

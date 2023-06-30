@@ -2,15 +2,10 @@ import { imageMap } from "../utils/imageMap";
 import { useParams } from "react-router-dom";
 
 function ImagePairs(props) {
-  console.log(imageMap);
-
   const params = useParams();
   const { handleClick } = props;
   //Use "/" as the default category if params.category is undefined
   const images = imageMap[params.category || "/"];
-  console.log(params.category);
-  //clog images
-  //clog imagePair
   //image-pair class is the group of two images
   //future:on mobile 8 pictures per section
   return (
