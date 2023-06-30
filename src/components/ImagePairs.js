@@ -1,4 +1,4 @@
-import { imageMap } from "./ImageMap";
+import { imageMap } from "../utils/imageMap";
 import { useParams } from "react-router-dom";
 
 function ImagePairs(props) {

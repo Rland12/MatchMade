@@ -59,12 +59,13 @@ input[type="text"]:focus {
   background-color:#e0d3d3;
   outline: none;
 }
-
+.nav{
+  margin-bottom:20px;
+}
 .category {
   font-family: "Nunito", sans-serif;
   background-color:#604760;
   border-radius: 16px;
-  border-style: none;
   margin-right: 10px;
   color:#eee0e0;
   text-decoration: none;

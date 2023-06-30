@@ -5,12 +5,12 @@ function Categories(props) {
 
   return (
     <div className="container">
-          <ul className="list-unstyled d-flex justify-content-center">
+          <ul className="nav d-flex justify-content-center">
             {props.categories.map((category) => {
               const isActive = location.pathname === `/${category}`;
-              const className = isActive ? "category active" : "category";
+              const className = isActive ? "category nav-link active" : "category nav-link";
               return (
-                <li key={category}>
+                <li key={category} className="nav-item">
                 <Link to={`/${category}`} className={className}>
                   {category}
                 </Link>

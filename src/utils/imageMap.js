@@ -158,7 +158,7 @@ export const imageMap = {
         ]
       },
       {
-        title: "Kaguya and Shirogame Pair",
+        title: "Kaguya & Shirogame Pair",
         imageSet: [
           {
             url: `images/anime/kaguya-glasses-left.jpg`,
@@ -188,7 +188,7 @@ export const imageMap = {
         ],
       },
       {
-        title: "Hotel Transylvania Couple Pair",
+        title: "Jonathan & Mavis Pair",
         imageSet: [
           {
             url: `images/cartoon/hotel-trans-left.jpg`,
