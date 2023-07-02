@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import { HashRouter, Link, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
@@ -19,14 +19,14 @@ function App() {
   return (
     <div className="App">
         <header className="App-header">
-          <Router>
+        <HashRouter>
           <h1 className="title"><Link to="/">MatchMade</Link></h1>
           <Categories categories={["Anime","Cartoons","Cute"]} />
           <Routes>
             <Route path="/" element={<ImagePairs images={imageMap["/"]} handleClick={handleClick} />} />
             <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
           </Routes>
-          </Router>
+          </HashRouter>
           <Modal selectedImages={selectedImages} />
         </header>
     </div>
