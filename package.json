@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "name": "matchmade",
+  "homepage": "http://rland12.github.io/matchmade",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,11 +30,14 @@
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +59,7 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.6.0",
+    "gh-pages": "^5.0.0",
     "prettier": "2.8.1"
   }
 }

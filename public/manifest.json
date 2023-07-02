@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Matchmade",
+  "name": "MatchmadePics",
   
   "start_url": ".",
   "display": "standalone",
