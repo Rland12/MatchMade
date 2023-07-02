@@ -4,6 +4,7 @@ import "./App.css";
 import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
+import NotFound from "./NotFound";
 import { imageMap } from "../utils/imageMap";
 
 //future: pagination for pages of images
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ImagePairs images={imageMap["/"]} handleClick={handleClick} />} />
             <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           </HashRouter>
           <Modal selectedImages={selectedImages} />
