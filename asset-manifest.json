@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/matchmade/static/css/main.2a93cacd.css",
-    "main.js": "/matchmade/static/js/main.69ad116c.js",
+    "main.js": "/matchmade/static/js/main.1263dc23.js",
     "static/js/787.ab3bc339.chunk.js": "/matchmade/static/js/787.ab3bc339.chunk.js",
     "service-worker.js": "/matchmade/service-worker.js",
     "index.html": "/matchmade/index.html",
     "main.2a93cacd.css.map": "/matchmade/static/css/main.2a93cacd.css.map",
-    "main.69ad116c.js.map": "/matchmade/static/js/main.69ad116c.js.map",
+    "main.1263dc23.js.map": "/matchmade/static/js/main.1263dc23.js.map",
     "787.ab3bc339.chunk.js.map": "/matchmade/static/js/787.ab3bc339.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2a93cacd.css",
-    "static/js/main.69ad116c.js"
+    "static/js/main.1263dc23.js"
   ]
 }
