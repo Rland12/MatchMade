@@ -5,11 +5,9 @@ import NotFound from "./NotFound";
 function ImagePairs(props) {
   const params = useParams();
   const { handleClick } = props;
-  console.log('params:', params);
   //Use "/" as the default category if params.category is undefined
- const category = params.category || "/";
+  const category = params.category || "/";
   const images = imageMap[category];
-  console.log('images:', images);
 
   // Check if images exist, if not render the NotFound component
   
