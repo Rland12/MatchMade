@@ -1,9 +1,9 @@
 function NotFound() {
     return (
-      <div>
-        <h2>404 Not Found</h2>
-        <p>Oops! The page you're looking for does not exist.</p>
-      </div>
-    );
-  }
-export default NotFound;  
+        <div>
+            <h2>Oops! You seem to be lost.</h2>
+            <p>Tap one of the categories to find your match!</p>
+        </div>
+    )
+}
+export default NotFound;
