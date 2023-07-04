@@ -2,17 +2,39 @@ function Modal(props) {
 	const {selectedImages} = props;
 	//future:image alt title will be file name?
 	const handleDownload = () => {
-		selectedImages.imageSet.forEach((image, index) => {
+		const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		
+		if (isMobile && navigator.share) {
+		  // Mobile device with share API support
+		  const files = selectedImages.imageSet.map((image, index) => ({
+			url: image.url,
+			name: `image_${index + 1}.${image.url.split(".").pop()}`,
+		  }));
+	  
+		  navigator.share({
+			files,
+		  })
+			.then(() => {
+			  console.log("Images shared successfully.");
+			})
+			.catch((error) => {
+			  console.error("Error sharing images:", error);
+			});
+		} else {
+		  // Desktop or mobile device without share API support
+		  selectedImages.imageSet.forEach((image, index) => {
 			const link = document.createElement("a");
-			const extension = image.url.split(".").pop(); // Extract the extension from the image URL
+			const extension = image.url.split(".").pop();
 			const filename = `image_${index + 1}.${extension}`;
 			link.href = image.url;
 			link.download = filename;
 			link.target = "_blank";
 			link.rel = "noopener noreferrer";
 			link.click();
-		});
-	};
+		  });
+		}
+	  };
+	  
 	
 	
 	return (
