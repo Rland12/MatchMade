@@ -1,10 +1,10 @@
 function Modal(props) {
-	const {selectedImages} = props;
+	const { selectedImages } = props;
 	//future:image alt title will be file name?
 	const handleDownload = () => {
 		const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 		
-		if (isMobile && navigator.share) {
+		if (isMobile && navigator.share && !navigator.userAgent.includes("Instagram")) {
 		  // Mobile device with share API support
 		  const files = selectedImages.imageSet.map((image, index) => ({
 			url: image.url,
@@ -20,8 +20,11 @@ function Modal(props) {
 			.catch((error) => {
 			  console.error("Error sharing images:", error);
 			});
+		} else if (isMobile && navigator.userAgent.includes("iPhone")) {
+		  // iPhone with no share API support
+		  alert("To save the images, please long-press on each image and choose 'Save Image'.");
 		} else {
-		  // Desktop or mobile device without share API support
+		  // Desktop or other mobile devices
 		  selectedImages.imageSet.forEach((image, index) => {
 			const link = document.createElement("a");
 			const extension = image.url.split(".").pop();
@@ -35,8 +38,7 @@ function Modal(props) {
 		}
 	  };
 	  
-	
-	
+
 	return (
 		//future:share icons in modal footer
 		//future:in modal add credit to artist if original work
@@ -61,7 +63,7 @@ function Modal(props) {
 								<h1 className="modal-title fs-3" id="modalTitle">{selectedImages.title}</h1>
 							</div>
 						</div>
-						<button type="button" className="btn"onClick={handleDownload} data-bs-dismiss="modal" >
+						<button type="button" className="btn" onClick={handleDownload} data-bs-dismiss="modal" >
 							Download Image Pair
 						</button>
 					</div>
