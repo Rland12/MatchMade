@@ -102,15 +102,15 @@ export const imageMap = {
         ]
       },
       {
-        title: "Blue and Pink Couple Pair",
+        title: "Aqua and Ruby Pair",
         imageSet: [
           {
             url: `${process.env.PUBLIC_URL}/images/anime/blueboy-left.webp`,
-            alt: "blue colored boy on the left"
+            alt: "Aqua on the left"
           },
           {
             url: `${process.env.PUBLIC_URL}/images/anime/pinkgirl-right.webp`,
-            alt: "pink colored on the right"
+            alt: "Ruby on the right"
           }
         ]
       }
