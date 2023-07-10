@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/MatchMade/static/css/main.3a705154.css",
+    "main.js": "/MatchMade/static/js/main.63d2ef41.js",
+    "static/js/787.ab3bc339.chunk.js": "/MatchMade/static/js/787.ab3bc339.chunk.js",
+    "service-worker.js": "/MatchMade/service-worker.js",
+    "index.html": "/MatchMade/index.html",
+    "main.3a705154.css.map": "/MatchMade/static/css/main.3a705154.css.map",
+    "main.63d2ef41.js.map": "/MatchMade/static/js/main.63d2ef41.js.map",
+    "787.ab3bc339.chunk.js.map": "/MatchMade/static/js/787.ab3bc339.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a705154.css",
+    "static/js/main.63d2ef41.js"
+  ]
+}
