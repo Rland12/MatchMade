@@ -21,7 +21,7 @@ function App() {
         <HashRouter>
           <h1 className="title"><Link to="/">MatchMade</Link></h1>
           <p className="sub-title"> Matching profile pictures for friends or special someone.</p>
-          <Categories categories={["Anime", "Cartoons", "Cute"]} />
+          <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
           <Routes>
             <Route path="/" element={<ImagePairs images={imageMap["/"]} handleClick={handleClick} />} />
             <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
