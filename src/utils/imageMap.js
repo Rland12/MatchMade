@@ -343,5 +343,91 @@ export const imageMap = {
         ]
       }
     ],
-  ]
+  ],
+  Lgbtq: [
+    [
+      {
+        title: "Tender Boys Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/tender-boys-left.jpeg`,
+            alt: "tender boy on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/tender-boys-right.jpeg`,
+            alt: "tender boy on the right"
+          }
+        ],
+      },
+      {
+        title: "Moo Boys Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/cowboys-left.jpeg`,
+            alt: "Man in cowsuit on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/cowboys-right.jpeg`,
+            alt: "Man in cowsuit on the right"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        title: "Adoring Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/girl-chin-left.jpeg`,
+            alt: "girl grabs chin on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/girl-chin-right.jpeg`,
+            alt: "girl grabs chin on the right"
+          }
+        ]
+      },
+      {
+        title: "Water girls Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/water-girl-left.jpeg`,
+            alt: "girl underwater on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/water-girl-right.jpeg`,
+            alt: "girl underwater on the right"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        title: "Clueless Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/clueless-girls-left.jpeg`,
+            alt: "girl with black hair questioning on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/clueless-girls-right.jpeg`,
+            alt: "silent blonde haired girl on the right"
+          }
+        ]
+      },
+      {
+        title: "Blushing Girls Pair",
+        imageSet: [
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/blush-girl-left.jpeg`,
+            alt: "girl with black hair blushing on the left"
+          },
+          {
+            url: `${process.env.PUBLIC_URL}/images/lgbtq/blush-girl-right.jpeg`,
+            alt: "girl with blonde hair blushing on the right"
+          }
+        ]
+      }
+    ],
+  ],
 }
