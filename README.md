@@ -3,9 +3,5 @@ This is a website about finding matching pictures for friends or someone special
 
 ## Get Started
 1) clone the repo
-<<<<<<< Updated upstream
-2) run npm start
-=======
 2) npm install
 3) run npm start
->>>>>>> Stashed changes
