@@ -8,6 +8,8 @@ import { imageMap } from "../utils/imageMap";
 //future: pagination for pages of images
 //future: some type of download logging for a featured/popular page?
 //future: logo in logo.svg
+//future: add more categories
+//future: lgbtq small images dont match up to the big images look at the imageMap for differences
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
 
