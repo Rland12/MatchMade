@@ -10,6 +10,7 @@ import { imageMap } from "../utils/imageMap";
 //future: logo in logo.svg
 //future: add more categories
 //future: lgbtq small images dont match up to the big images look at the imageMap for differences
+//current commits are not deployed use npm run build to deploy later
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
 
