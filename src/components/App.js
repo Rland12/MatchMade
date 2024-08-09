@@ -5,6 +5,7 @@ import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 import { imageMap } from "../utils/imageMap";
+import { HarmonySetup } from "harmony-ai-editor";
 //future: pagination for pages of images
 //future: some type of download logging for a featured/popular page?
 //future: logo in logo.svg
@@ -32,7 +33,9 @@ function App() {
         </HashRouter>
         <Modal selectedImages={selectedImages} />
       </header>
+      <HarmonySetup repositoryId="7adbfebd-a7f7-4ee4-9932-4227b0152b56"/>
     </div>
+   
   );
 }
 
