@@ -11,7 +11,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
-    "harmony-ai-editor": "^0.12.12",
     "harmony-ai-plugin": "^0.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -32,9 +31,9 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build"
@@ -59,10 +58,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@craco/craco": "^7.1.0",
     "eslint-config-prettier": "^8.6.0",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^6.3.0",
     "prettier": "2.8.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "5.0.1"
   }
 }
