@@ -33,9 +33,8 @@ function App() {
             element={<ImagePairs handleClick={handleClick} />}
           />
         </Routes>
-
-        <Modal selectedImages={selectedImages} />
       </header>
+      <Modal selectedImages={selectedImages} />
     </div>
   );
 }

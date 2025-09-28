@@ -88,7 +88,9 @@ input[type="text"]:focus {
 .modal-header{
   border:none;
 }
-
+.modal-footer{
+  justify-content: center;
+}
 .btn-close{
 filter: invert(1) hue-rotate(180deg);
 }
@@ -98,13 +100,127 @@ filter: invert(1) hue-rotate(180deg);
 }
 img{
   border-radius:36%;
+
 }
 .btn{
   background-color:#604760;
   color:#eee0e0;
+  border: none;
 }
 .btn:hover{
   background-color:#eee0e0;
   color:#604760;
+}
+/* ===============================
+   MatchMade image skeleton + fade-in
+   - Reserves a square (1:1) box to avoid layout shift
+   - Shows a rounded, shimmery placeholder until the image loads
+   - Fades the real image in on load
+   =============================== */
+
+/* Wrapper reserves space and contains layers */
+.mm-imgwrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;            /* Avoid CLS; fallback below if needed */
+  overflow: hidden;               /* Clip any overflows from children */
+  contain: content;               /* Hint: isolate paint/layout work */
+}
+
+/* Actual image: absolutely positioned to fill the box */
+.mm-imgwrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;              /* Fill square neatly */
+  opacity: 0;                     /* Hidden until loaded */
+  transition: opacity .3s ease;   /* Fade-in on load */
+  cursor: pointer;                /* Clickable thumb feel */
+  will-change: opacity;           /* Micro-optimization for the fade */
+}
+
+/* Reveal once loaded (toggled by React) */
+.mm-imgwrap img.is-loaded {
+  opacity: 1;
+}
+
+/* Skeleton placeholder (visible under the image until it fades in) */
+.mm-skel {
+  position: absolute;
+  inset: 0;
+  border-radius: 36%;             /* Your signature rounded look */
+  overflow: hidden;
+  background: #604760;            /* Base skeleton tone */
+  color: #EEE;                    /* If any text ever appears inside */
+  opacity: 0.7;                   /* Subtle translucency */
+  background-position: center;    /* If we set a blurred LQIP bg-image */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Shimmer sweep */
+.mm-skel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  /* Slightly asymmetric gradient for a softer pass */
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(238, 224, 224, 0.25) 45%,
+    rgba(238, 224, 224, 0.35) 55%,
+    transparent 100%
+  );
+  animation: mm-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Animation keyframes */
+@keyframes mm-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* --------------------------------
+   Progressive enhancement & a11y
+   -------------------------------- */
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mm-skel::after {
+    animation: none;
+  }
+}
+
+/* Fallback for browsers without aspect-ratio (optional):
+   Apply a square via padding-top trick on the wrapper.
+   Remove if you don't target older browsers. */
+@supports not (aspect-ratio: 1 / 1) {
+  .mm-imgwrap {
+    height: 0;
+    padding-top: 100%;  /* 1:1 box */
+  }
+  .mm-imgwrap img,
+  .mm-skel {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+/* Optional: dark mode fine-tune (keeps your palette but eases contrast a touch) */
+@media (prefers-color-scheme: dark) {
+  .mm-skel {
+    background: #5a3f5a;
+  }
+  .mm-skel::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(238, 224, 224, 0.22) 45%,
+      rgba(238, 224, 224, 0.30) 55%,
+      transparent 100%
+    );
+  }
 }
 
