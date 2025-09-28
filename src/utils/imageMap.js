@@ -6,11 +6,11 @@ export const imageMap = {
         title: "Fall Leaf Pair",
         imageSet: [
           {
-            url: `/images/home/girleaf-left.webp`,
+            url: `./images/home/girleaf-left.webp`,
             alt: "girl with leaf on the left"
           },
           {
-            url: `/images/home/boyleaf-right.webp`,
+            url: `./images/home/boyleaf-right.webp`,
             alt: "boy with leaf on the left"
           }
         ]
@@ -19,11 +19,11 @@ export const imageMap = {
         title: "Matching Boy & Girl Pair",
         imageSet: [
           {
-            url: `/images/home/girl-left.jpeg`,
+            url: `./images/home/girl-left.jpeg`,
             alt: "normal girl on the left"
           },
           {
-            url: `/images/home/man-right.jpeg`,
+            url: `./images/home/man-right.jpeg`,
             alt: "normal man on the right"
           }
         ]
@@ -34,11 +34,11 @@ export const imageMap = {
         title: "Squidgame Girls",
         imageSet: [
           {
-            url: `/images/home/squidgame-girl-left.webp`,
+            url: `./images/home/squidgame-girl-left.webp`,
             alt: "squidgame girl left"
           },
           {
-            url: `/images/home/squidgame-girl-right.webp`,
+            url: `./images/home/squidgame-girl-right.webp`,
             alt: "squidgame girl right "
           }
         ]
@@ -47,11 +47,11 @@ export const imageMap = {
         title: "Boy & Girl Heartshot Pair",
         imageSet: [
           {
-            url: `/images/home/boy-heartattack-left.jpeg`,
+            url: `./images/home/boy-heartattack-left.jpeg`,
             alt: "boy heart attack left "
           },
           {
-            url: `/images/home/girl-heartshot-right.jpeg`,
+            url: `./images/home/girl-heartshot-right.jpeg`,
             alt: "girl heart shot right"
           }
         ]
@@ -62,11 +62,11 @@ export const imageMap = {
         title: "The Owl House Girls",
         imageSet: [
           {
-            url: `/images/home/toh-girl-left.jpg`,
+            url: `./images/home/toh-girl-left.jpg`,
             alt: "the owl house girl left"
           },
           {
-            url: `/images/home/toh-girl-right.jpg`,
+            url: `./images/home/toh-girl-right.jpg`,
             alt: "the owl house girl right"
           }
         ]
@@ -75,11 +75,11 @@ export const imageMap = {
         title: "Cat Boys Pair",
         imageSet: [
           {
-            url: `/images/home/catboy-left.jpg`,
+            url: `./images/home/catboy-left.jpg`,
             alt: "cat boy on the left"
           },
           {
-            url: `/images/home/catboy-right.jpg`,
+            url: `./images/home/catboy-right.jpg`,
             alt: "cat boy on the right"
           }
         ]
@@ -92,11 +92,11 @@ export const imageMap = {
         title: "Anime Boy & Girl Holding Hands ",
         imageSet: [
           {
-            url: `/images/anime/anime-girl-hold-left.webp`,
+            url: `./images/anime/anime-girl-hold-left.webp`,
             alt: "girl holding hand on the left"
           },
           {
-            url: `/images/anime/anime-boy-hold-right.webp`,
+            url: `./images/anime/anime-boy-hold-right.webp`,
             alt: "boy holding hand on the right"
           }
         ]
@@ -105,11 +105,11 @@ export const imageMap = {
         title: "Aqua and Ruby Pair",
         imageSet: [
           {
-            url: `/images/anime/oshinoboy-left.webp`,
+            url: `./images/anime/oshinoboy-left.webp`,
             alt: "Aqua on the left"
           },
           {
-            url: `/images/anime/oshinogirl-right.webp`,
+            url: `./images/anime/oshinogirl-right.webp`,
             alt: "Ruby on the right"
           }
         ]
@@ -120,11 +120,11 @@ export const imageMap = {
         title: "Boy Lovers Pair",
         imageSet: [
           {
-            url: `/images/anime/his-lover-left.jpeg`,
+            url: `./images/anime/his-lover-left.jpeg`,
             alt: "boy lover on the left"
           },
           {
-            url: `/images/anime/he-is-mine-right.jpg`,
+            url: `./images/anime/he-is-mine-right.jpg`,
             alt: "boy lover on the right "
           }
         ]
@@ -133,11 +133,11 @@ export const imageMap = {
         title: "Cheeky Couple Pair",
         imageSet: [
           {
-            url: `/images/anime/girl-pinch-cheeks-left.jpg`,
+            url: `./images/anime/girl-pinch-cheeks-left.jpg`,
             alt: "girl gets cheeks pinched on the left"
           },
           {
-            url: `/images/anime/boy-pinch-cheeks-right.jpeg`,
+            url: `./images/anime/boy-pinch-cheeks-right.jpeg`,
             alt: "boy gets cheeks pinched right"
           }
         ]
@@ -148,11 +148,11 @@ export const imageMap = {
         title: "Bear Couple Pair",
         imageSet: [
           {
-            url: `/images/anime/bear-boy-left.jpg`,
+            url: `./images/anime/bear-boy-left.jpg`,
             alt: "boy in bear suit on the left"
           },
           {
-            url: `/images/anime/bear-girl-right.jpg`,
+            url: `./images/anime/bear-girl-right.jpg`,
             alt: "girl in bear suit on the right"
           }
         ]
@@ -161,11 +161,11 @@ export const imageMap = {
         title: "Kaguya & Shirogame Pair",
         imageSet: [
           {
-            url: `/images/anime/kaguya-glasses-left.jpg`,
+            url: `./images/anime/kaguya-glasses-left.jpg`,
             alt: "Kaguya sama wearing glasses on the left"
           },
           {
-            url: `/images/anime/kaguya-glasses-right.jpg`,
+            url: `./images/anime/kaguya-glasses-right.jpg`,
             alt: "Shirogame wearing glasses on the right"
           }
         ]
@@ -178,11 +178,11 @@ export const imageMap = {
         title: "Aladin & Jasmine Pair",
         imageSet: [
           {
-            url: `/images/cartoon/aladin-left.jpg`,
+            url: `./images/cartoon/aladin-left.jpg`,
             alt: "Princess Jasmine on the left"
           },
           {
-            url: `/images/cartoon/aladin-right.jpg`,
+            url: `./images/cartoon/aladin-right.jpg`,
             alt: "Aladin on the right"
           }
         ],
@@ -191,11 +191,11 @@ export const imageMap = {
         title: "Jonathan & Mavis Pair",
         imageSet: [
           {
-            url: `/images/cartoon/hotel-trans-left.jpg`,
+            url: `./images/cartoon/hotel-trans-left.jpg`,
             alt: "Jonathan on the left"
           },
           {
-            url: `/images/cartoon/hotel-trans-right.jpg`,
+            url: `./images/cartoon/hotel-trans-right.jpg`,
             alt: "Mavis on the right"
           }
         ]
@@ -206,11 +206,11 @@ export const imageMap = {
         title: "Miles Morales & Gwen Stacy Pair",
         imageSet: [
           {
-            url: `/images/cartoon/spiderverse-miles-left.jpg`,
+            url: `./images/cartoon/spiderverse-miles-left.jpg`,
             alt: "Miles Morales on the left"
           },
           {
-            url: `/images/cartoon/spiderverse-gwen-right.jpg`,
+            url: `./images/cartoon/spiderverse-gwen-right.jpg`,
             alt: "Gwen Stacy on the right "
           }
         ]
@@ -219,11 +219,11 @@ export const imageMap = {
         title: "Kitty & Daniel Pair",
         imageSet: [
           {
-            url: `/images/cartoon/hello-kitty-left.jpg`,
+            url: `./images/cartoon/hello-kitty-left.jpg`,
             alt: "Hello Kitty on the left"
           },
           {
-            url: `/images/cartoon/hello-kitty-right.jpg`,
+            url: `./images/cartoon/hello-kitty-right.jpg`,
             alt: "Dear Daniel on the right "
           }
         ]
@@ -234,11 +234,11 @@ export const imageMap = {
         title: "Marcy & Princess Bubblegum Pair",
         imageSet: [
           {
-            url: `/images/cartoon/Marcy-and-PB-matching-pfp.webp`,
+            url: `./images/cartoon/Marcy-and-PB-matching-pfp.webp`,
             alt: "Marceline on the left"
           },
           {
-            url: `/images/cartoon/Marcy-and-PB-matching-pfp-2.jpg`,
+            url: `./images/cartoon/Marcy-and-PB-matching-pfp-2.jpg`,
             alt: "Princess Bubblegum on the right"
           }
         ]
@@ -247,11 +247,11 @@ export const imageMap = {
         title: "Miles & Gwen Sitting Pair",
         imageSet: [
           {
-            url: `/images/cartoon/spider-miles-sit-left.jpg`,
+            url: `./images/cartoon/spider-miles-sit-left.jpg`,
             alt: "miles sitting on the left"
           },
           {
-            url: `/images/cartoon/spider-gwen-sit-right.jpg`,
+            url: `./images/cartoon/spider-gwen-sit-right.jpg`,
             alt: "gwen sitting on the right"
           }
         ]
@@ -264,11 +264,11 @@ export const imageMap = {
         title: "Cat Dog Heart Pair",
         imageSet: [
           {
-            url: `/images/cute/cat-heart-left.jpg`,
+            url: `./images/cute/cat-heart-left.jpg`,
             alt: "Cat with heart drawn on screen looking at user on the left"
           },
           {
-            url: `/images/cute/cat-heart-right.jpg`,
+            url: `./images/cute/cat-heart-right.jpg`,
             alt: "Dog with heart drawn on screen looking at user on the right"
           }
         ],
@@ -277,11 +277,11 @@ export const imageMap = {
         title: "Cute Gamer Pair",
         imageSet: [
           {
-            url: `/images/cute/cute-gamer-left.jpg`,
+            url: `./images/cute/cute-gamer-left.jpg`,
             alt: "gamer boy on the left"
           },
           {
-            url: `/images/cute/cute-gamer-right.jpg`,
+            url: `./images/cute/cute-gamer-right.jpg`,
             alt: "gamer girl on the right"
           }
         ]
@@ -292,11 +292,11 @@ export const imageMap = {
         title: "Cute Couple Pair",
         imageSet: [
           {
-            url: `/images/cute/cute-couple-left.jpg`,
+            url: `./images/cute/cute-couple-left.jpg`,
             alt: "cute girl with bear on the left"
           },
           {
-            url: `/images/cute/cute-couple-right.jpg`,
+            url: `./images/cute/cute-couple-right.jpg`,
             alt: "cute boy with flowers on the right"
           }
         ]
@@ -305,11 +305,11 @@ export const imageMap = {
         title: "Animal Keepers Pair",
         imageSet: [
           {
-            url: `/images/cute/animal-heart-hold-left.jpg`,
+            url: `./images/cute/animal-heart-hold-left.jpg`,
             alt: "rabbit holding heart on the left"
           },
           {
-            url: `/images/cute/animal-heart-hold-right.jpg`,
+            url: `./images/cute/animal-heart-hold-right.jpg`,
             alt: "tiger holding heart on the right"
           }
         ]
@@ -320,11 +320,11 @@ export const imageMap = {
         title: "Sleepy Bear & Rabbit Pair",
         imageSet: [
           {
-            url: `/images/cute/sleepy-grass-animal-left.jpg`,
+            url: `./images/cute/sleepy-grass-animal-left.jpg`,
             alt: "brown bear laying in grass on the left"
           },
           {
-            url: `/images/cute/sleepy-grass-animal-right.jpg`,
+            url: `./images/cute/sleepy-grass-animal-right.jpg`,
             alt: "white rabbit laying in grass on the right"
           }
         ]
@@ -333,11 +333,11 @@ export const imageMap = {
         title: "Cat Fight Pair",
         imageSet: [
           {
-            url: `/images/cute/cat-fight-left.jpg`,
+            url: `./images/cute/cat-fight-left.jpg`,
             alt: "black cat on the left"
           },
           {
-            url: `/images/cute/cat-fight-right.jpg`,
+            url: `./images/cute/cat-fight-right.jpg`,
             alt: "orange cat on the right"
           }
         ]
@@ -350,11 +350,11 @@ export const imageMap = {
         title: "Tender Boys Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/tender-boys-left.jpeg`,
+            url: `./images/lgbtq/tender-boys-left.jpeg`,
             alt: "tender boy on the left"
           },
           {
-            url: `/images/lgbtq/tender-boys-right.jpeg`,
+            url: `./images/lgbtq/tender-boys-right.jpeg`,
             alt: "tender boy on the right"
           }
         ],
@@ -363,11 +363,11 @@ export const imageMap = {
         title: "Moo Boys Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/cowboys-left.jpeg`,
+            url: `./images/lgbtq/cowboys-left.jpeg`,
             alt: "Man in cowsuit on the left"
           },
           {
-            url: `/images/lgbtq/cowboys-right.jpeg`,
+            url: `./images/lgbtq/cowboys-right.jpeg`,
             alt: "Man in cowsuit on the right"
           }
         ]
@@ -378,11 +378,11 @@ export const imageMap = {
         title: "Adoring Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/girl-chin-left.jpeg`,
+            url: `./images/lgbtq/girl-chin-left.jpeg`,
             alt: "girl grabs chin on the left"
           },
           {
-            url: `/images/lgbtq/girl-chin-right.jpeg`,
+            url: `./images/lgbtq/girl-chin-right.jpeg`,
             alt: "girl grabs chin on the right"
           }
         ]
@@ -391,11 +391,11 @@ export const imageMap = {
         title: "Water girls Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/water-girl-left.jpeg`,
+            url: `./images/lgbtq/water-girl-left.jpeg`,
             alt: "girl underwater on the left"
           },
           {
-            url: `/images/lgbtq/water-girl-right.jpeg`,
+            url: `./images/lgbtq/water-girl-right.jpeg`,
             alt: "girl underwater on the right"
           }
         ]
@@ -406,11 +406,11 @@ export const imageMap = {
         title: "Clueless Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/clueless-girls-left.jpeg`,
+            url: `./images/lgbtq/clueless-girls-left.jpeg`,
             alt: "girl with black hair questioning on the left"
           },
           {
-            url: `/images/lgbtq/clueless-girls-right.jpeg`,
+            url: `./images/lgbtq/clueless-girls-right.jpeg`,
             alt: "silent blonde haired girl on the right"
           }
         ]
@@ -419,11 +419,11 @@ export const imageMap = {
         title: "Blushing Girls Pair",
         imageSet: [
           {
-            url: `/images/lgbtq/blush-girl-left.jpeg`,
+            url: `./images/lgbtq/blush-girl-left.jpeg`,
             alt: "girl with black hair blushing on the left"
           },
           {
-            url: `/images/lgbtq/blush-girl-right.jpeg`,
+            url: `./images/lgbtq/blush-girl-right.jpeg`,
             alt: "girl with blonde hair blushing on the right"
           }
         ]

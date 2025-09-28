@@ -8,16 +8,19 @@ h4,
 h5,
 h6 {
   font-family: "Dosis", sans-serif;
+  color:#FEF8FF;
+ 
 }
 p {
   font-family: "Nunito", sans-serif;
+  color:#FEF8FF;
 }
 a{
   text-decoration:none;
-  color:white;
+  color:#FEF8FF;
 }
 .title a:hover{
-color:white;
+color:#FEF8FF;
 }
 .App-logo {
   height: 40vmin;

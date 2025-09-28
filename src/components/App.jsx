@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="title"><Link to="../">MatchMade</Link></h1>
+        <h1 className="title"><Link to="/">MatchMade</Link></h1>
         <p className="sub-title">Matching profile pictures for friends or special someone.</p>
 
         <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
