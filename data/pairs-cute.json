@@ -1,0 +1,98 @@
+{
+  "folder": "cute",
+  "generatedAt": "2025-09-30T07:45:48.246Z",
+  "totalPairs": 7,
+  "items": [
+    {
+      "title": "Animal Heart Hold Pair",
+      "imageSet": [
+        {
+          "publicId": "animal-heart-hold-left",
+          "alt": "Animal Heart Hold Pair — Left"
+        },
+        {
+          "publicId": "animal-heart-hold-right",
+          "alt": "Animal Heart Hold Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Cat Fight Pair",
+      "imageSet": [
+        {
+          "publicId": "cat-fight-left",
+          "alt": "Cat Fight Pair — Left"
+        },
+        {
+          "publicId": "cat-fight-right",
+          "alt": "Cat Fight Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Cat Heart Pair",
+      "imageSet": [
+        {
+          "publicId": "cat-heart-left",
+          "alt": "Cat Heart Pair — Left"
+        },
+        {
+          "publicId": "cat-heart-right",
+          "alt": "Cat Heart Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Cute Couple Pair",
+      "imageSet": [
+        {
+          "publicId": "cute-couple-left",
+          "alt": "Cute Couple Pair — Left"
+        },
+        {
+          "publicId": "cute-couple-right",
+          "alt": "Cute Couple Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Cute Gamer Pair",
+      "imageSet": [
+        {
+          "publicId": "cute-gamer-left",
+          "alt": "Cute Gamer Pair — Left"
+        },
+        {
+          "publicId": "cute-gamer-right",
+          "alt": "Cute Gamer Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Sleeping Bear Pair",
+      "imageSet": [
+        {
+          "publicId": "sleeping-bear-left",
+          "alt": "Sleeping Bear Pair — Left"
+        },
+        {
+          "publicId": "sleeping-bear-right",
+          "alt": "Sleeping Bear Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Sleepy Grass Animal Pair",
+      "imageSet": [
+        {
+          "publicId": "sleepy-grass-animal-left",
+          "alt": "Sleepy Grass Animal Pair — Left"
+        },
+        {
+          "publicId": "sleepy-grass-animal-right",
+          "alt": "Sleepy Grass Animal Pair — Right"
+        }
+      ]
+    }
+  ]
+}

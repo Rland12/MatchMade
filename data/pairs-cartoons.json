@@ -1,0 +1,111 @@
+{
+  "folder": "cartoons",
+  "generatedAt": "2025-09-30T07:45:47.474Z",
+  "totalPairs": 8,
+  "items": [
+    {
+      "title": "Aladin Pair",
+      "imageSet": [
+        {
+          "publicId": "aladin-left",
+          "alt": "Aladin Pair — Left"
+        },
+        {
+          "publicId": "aladin-right",
+          "alt": "Aladin Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Beast Raven Pair",
+      "imageSet": [
+        {
+          "publicId": "beast-raven-left",
+          "alt": "Beast Raven Pair — Left"
+        },
+        {
+          "publicId": "beast-raven-right",
+          "alt": "Beast Raven Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Hello Kitty Pair",
+      "imageSet": [
+        {
+          "publicId": "hello-kitty-left",
+          "alt": "Hello Kitty Pair — Left"
+        },
+        {
+          "publicId": "hello-kitty-right",
+          "alt": "Hello Kitty Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Hotel Trans Pair",
+      "imageSet": [
+        {
+          "publicId": "hotel-trans-left",
+          "alt": "Hotel Trans Pair — Left"
+        },
+        {
+          "publicId": "hotel-trans-right",
+          "alt": "Hotel Trans Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Marcy And Pb Pair",
+      "imageSet": [
+        {
+          "publicId": "marcy-and-pb-left",
+          "alt": "Marcy And Pb Pair — Left"
+        },
+        {
+          "publicId": "marcy-and-pb-right",
+          "alt": "Marcy And Pb Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Prince Kiss Tiana Pair",
+      "imageSet": [
+        {
+          "publicId": "prince-kiss-tiana-left",
+          "alt": "Prince Kiss Tiana Pair — Left"
+        },
+        {
+          "publicId": "prince-kiss-tiana-right",
+          "alt": "Prince Kiss Tiana Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Spider Gwen Miles Pair",
+      "imageSet": [
+        {
+          "publicId": "spider-gwen-miles-left",
+          "alt": "Spider Gwen Miles Pair — Left"
+        },
+        {
+          "publicId": "spider-gwen-miles-right",
+          "alt": "Spider Gwen Miles Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Spiderverse Gwen M Pair",
+      "imageSet": [
+        {
+          "publicId": "spiderverse-gwen-m-left",
+          "alt": "Spiderverse Gwen M Pair — Left"
+        },
+        {
+          "publicId": "spiderverse-gwen-m-right",
+          "alt": "Spiderverse Gwen M Pair — Right"
+        }
+      ]
+    }
+  ]
+}

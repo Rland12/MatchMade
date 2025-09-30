@@ -1,0 +1,163 @@
+{
+  "folder": "anime",
+  "generatedAt": "2025-09-30T07:45:47.231Z",
+  "totalPairs": 12,
+  "items": [
+    {
+      "title": "Anime Cheek Grab Pair",
+      "imageSet": [
+        {
+          "publicId": "anime-cheek-grab-left",
+          "alt": "Anime Cheek Grab Pair — Left"
+        },
+        {
+          "publicId": "anime-cheek-grab-right",
+          "alt": "Anime Cheek Grab Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Anime Chin Hold Pair",
+      "imageSet": [
+        {
+          "publicId": "anime-chin-hold-left",
+          "alt": "Anime Chin Hold Pair — Left"
+        },
+        {
+          "publicId": "anime-chin-hold-right",
+          "alt": "Anime Chin Hold Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Anime Hold Pair",
+      "imageSet": [
+        {
+          "publicId": "anime-hold-left",
+          "alt": "Anime Hold Pair — Left"
+        },
+        {
+          "publicId": "anime-hold-right",
+          "alt": "Anime Hold Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Anya Becky Pair",
+      "imageSet": [
+        {
+          "publicId": "anya-becky-left",
+          "alt": "Anya Becky Pair — Left"
+        },
+        {
+          "publicId": "anya-becky-right",
+          "alt": "Anya Becky Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Bear Bg Pair",
+      "imageSet": [
+        {
+          "publicId": "bear-bg-left",
+          "alt": "Bear Bg Pair — Left"
+        },
+        {
+          "publicId": "bear-bg-right",
+          "alt": "Bear Bg Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Bg Pinch Cheeks Pair",
+      "imageSet": [
+        {
+          "publicId": "bg-pinch-cheeks-left",
+          "alt": "Bg Pinch Cheeks Pair — Left"
+        },
+        {
+          "publicId": "bg-pinch-cheeks-right",
+          "alt": "Bg Pinch Cheeks Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Blindboydemon Pair",
+      "imageSet": [
+        {
+          "publicId": "blindboydemon_left",
+          "alt": "Blindboydemon Pair — Left"
+        },
+        {
+          "publicId": "blindboydemon_right",
+          "alt": "Blindboydemon Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Kaguya Glasses Pair",
+      "imageSet": [
+        {
+          "publicId": "kaguya-glasses-left",
+          "alt": "Kaguya Glasses Pair — Left"
+        },
+        {
+          "publicId": "kaguya-glasses-right",
+          "alt": "Kaguya Glasses Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Kaguya Hug Pair",
+      "imageSet": [
+        {
+          "publicId": "kaguya-hug-left",
+          "alt": "Kaguya Hug Pair — Left"
+        },
+        {
+          "publicId": "kaguya-hug-right",
+          "alt": "Kaguya Hug Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Mine Lover Pair",
+      "imageSet": [
+        {
+          "publicId": "mine-lover-left",
+          "alt": "Mine Lover Pair — Left"
+        },
+        {
+          "publicId": "mine-lover-right",
+          "alt": "Mine Lover Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Oshinobg Pair",
+      "imageSet": [
+        {
+          "publicId": "oshinobg-left",
+          "alt": "Oshinobg Pair — Left"
+        },
+        {
+          "publicId": "oshinobg-right",
+          "alt": "Oshinobg Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Owari Cook Pair",
+      "imageSet": [
+        {
+          "publicId": "owari-cook-left",
+          "alt": "Owari Cook Pair — Left"
+        },
+        {
+          "publicId": "owari-cook-right",
+          "alt": "Owari Cook Pair — Right"
+        }
+      ]
+    }
+  ]
+}

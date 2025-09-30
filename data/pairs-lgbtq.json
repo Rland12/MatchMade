@@ -1,0 +1,111 @@
+{
+  "folder": "lgbtq",
+  "generatedAt": "2025-09-30T07:45:48.439Z",
+  "totalPairs": 8,
+  "items": [
+    {
+      "title": "Blush Girl Pair",
+      "imageSet": [
+        {
+          "publicId": "blush-girl-left",
+          "alt": "Blush Girl Pair — Left"
+        },
+        {
+          "publicId": "blush-girl-right",
+          "alt": "Blush Girl Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Clueless Girls Pair",
+      "imageSet": [
+        {
+          "publicId": "clueless-girls-left",
+          "alt": "Clueless Girls Pair — Left"
+        },
+        {
+          "publicId": "clueless-girls-right",
+          "alt": "Clueless Girls Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Cowboys Pair",
+      "imageSet": [
+        {
+          "publicId": "cowboys-left",
+          "alt": "Cowboys Pair — Left"
+        },
+        {
+          "publicId": "cowboys-right",
+          "alt": "Cowboys Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Girl Chin Pair",
+      "imageSet": [
+        {
+          "publicId": "girl-chin-left",
+          "alt": "Girl Chin Pair — Left"
+        },
+        {
+          "publicId": "girl-chin-right",
+          "alt": "Girl Chin Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Heart Girls Pair",
+      "imageSet": [
+        {
+          "publicId": "heart-girls-left",
+          "alt": "Heart Girls Pair — Left"
+        },
+        {
+          "publicId": "heart-girls-right",
+          "alt": "Heart Girls Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Pink Green Girls Pair",
+      "imageSet": [
+        {
+          "publicId": "pink-green-girls-left",
+          "alt": "Pink Green Girls Pair — Left"
+        },
+        {
+          "publicId": "pink-green-girls-right",
+          "alt": "Pink Green Girls Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Tender Boys Pair",
+      "imageSet": [
+        {
+          "publicId": "tender-boys-left",
+          "alt": "Tender Boys Pair — Left"
+        },
+        {
+          "publicId": "tender-boys-right",
+          "alt": "Tender Boys Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Water Girl Pair",
+      "imageSet": [
+        {
+          "publicId": "water-girl-left",
+          "alt": "Water Girl Pair — Left"
+        },
+        {
+          "publicId": "water-girl-right",
+          "alt": "Water Girl Pair — Right"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "folder": "home",
+  "generatedAt": "2025-09-30T07:45:47.087Z",
+  "totalPairs": 6,
+  "items": [
+    {
+      "title": "Autumn Crush Pair",
+      "imageSet": [
+        {
+          "publicId": "autumn-crush-left",
+          "alt": "Autumn Crush Pair — Left"
+        },
+        {
+          "publicId": "autumn-crush-right",
+          "alt": "Autumn Crush Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Catboy Pair",
+      "imageSet": [
+        {
+          "publicId": "catboy-left",
+          "alt": "Catboy Pair — Left"
+        },
+        {
+          "publicId": "catboy-right",
+          "alt": "Catboy Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Heartshot Pair",
+      "imageSet": [
+        {
+          "publicId": "heartshot-left",
+          "alt": "Heartshot Pair — Left"
+        },
+        {
+          "publicId": "heartshot-right",
+          "alt": "Heartshot Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Matching Boy Girl Pair Pair",
+      "imageSet": [
+        {
+          "publicId": "matching-boy-girl-pair-left",
+          "alt": "Matching Boy Girl Pair Pair — Left"
+        },
+        {
+          "publicId": "matching-boy-girl-pair-right",
+          "alt": "Matching Boy Girl Pair Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Squidgame Girl Pair",
+      "imageSet": [
+        {
+          "publicId": "squidgame-girl-left",
+          "alt": "Squidgame Girl Pair — Left"
+        },
+        {
+          "publicId": "squidgame-girl-right",
+          "alt": "Squidgame Girl Pair — Right"
+        }
+      ]
+    },
+    {
+      "title": "Toh Girl Pair",
+      "imageSet": [
+        {
+          "publicId": "toh-girl-left",
+          "alt": "Toh Girl Pair — Left"
+        },
+        {
+          "publicId": "toh-girl-right",
+          "alt": "Toh Girl Pair — Right"
+        }
+      ]
+    }
+  ]
+}
