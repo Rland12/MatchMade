@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "prebuild": "node scripts/build-pairs.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/copy-404.js",
+    "dev": "vite",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint .",
@@ -13,6 +15,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "cloudinary": "^2.7.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "react": "^19.1.1",
@@ -22,6 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@vitejs/plugin-react": "^5.0.3",
+    "dotenv": "^17.2.2",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",

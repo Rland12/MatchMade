@@ -1,50 +1,178 @@
-// Displays 3 columns of image "pairs" for a given category.
-// Each pair consists of two images (left/right). Uses Cloudinary via cldUrl.
-// Includes a lightweight LQIP/skeleton while full images load.
+// ImagePairs.jsx
+// Loads image pairs from static JSON (/data/pairs-<folder>.json),
+// paginates 6 pairs per page, and lays them out in 3 balanced columns.
 
-import { imageMap } from "../utils/imageMap";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import NotFound from "./NotFound";
 import { cldUrl } from "../libs/cdn";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const PAIRS_PER_PAGE = 6;
+
+// Map route category -> Cloudinary folder (update as needed)
+const folderForCategory = (cat) => {
+  const slug = (cat || "/").replace(/^\/+/, "").toLowerCase();
+  if (!slug) return "home";
+  const map = { anime: "anime", cartoons: "cartoons", cute: "cute", lgbtq: "lgbtq" };
+  return map[slug] || slug;
+};
+
 
 function ImagePairs({ handleClick }) {
-  // Read the route param `/category`; default to "/" if missing
+  // Category from route ("/" default)
   const category = useParams().category || "/";
+  const folder   = folderForCategory(category);
 
-  // Pull the 3-column structure for this category
-  const images = imageMap[category];
-  if (!images) return <NotFound />;
+  // Page from URL (?p=); keep in URL so links are shareable
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawPage = parseInt(searchParams.get("p") || "1", 10);
+  const pageFromUrl = Number.isFinite(rawPage) ? Math.max(1, rawPage) : 1;
+
+  // Local state for the JSON payload + paging
+  const [state, setState] = useState({
+    loading: true,
+    error: null,
+    allPairs: [],   // flat array of pairs for the folder
+  });
+
+// Fetch the static JSON for the selected folder (single, safe fetch)
+useEffect(() => {
+  let cancelled = false;
+
+  (async () => {
+    try {
+      // show spinner
+      setState({ loading: true, error: null, allPairs: [] });
+
+      const url = `/data/pairs-${encodeURIComponent(folder)}.json`;
+      console.log("[ImagePairs] category:", category, "folder:", folder, "url:", url);
+
+      const res = await fetch(url, { cache: "no-store" });
+      const ct = res.headers.get("content-type") || "";
+
+      // Guard: 200 HTML (index.html) masquerading as JSON is common on dev servers
+      if (!res.ok || !ct.includes("application/json")) {
+        const text = await res.text().catch(() => "");
+        console.error("[ImagePairs] BAD RESPONSE", {
+          status: res.status,
+          ct,
+          sample: text.slice(0, 200),
+        });
+        throw new Error(`Bad JSON for ${folder}`);
+      }
+
+      const data = await res.json();
+      console.log("[ImagePairs] loaded pairs:", data.items?.length ?? 0);
+      if (cancelled) return;
+
+      const all = data.items || [];
+      setState({ loading: false, error: null, allPairs: all });
+
+      // Clamp ?p to valid range once
+      const totalPages = Math.max(1, Math.ceil(all.length / PAIRS_PER_PAGE));
+      const clamped = Math.min(Math.max(pageFromUrl, 1), totalPages);
+      if (clamped !== pageFromUrl) {
+        const next = new URLSearchParams(searchParams);
+        next.set("p", String(clamped));
+        setSearchParams(next, { replace: true });
+      }
+    } catch (err) {
+      if (cancelled) return;
+      setState({ loading: false, error: err.message, allPairs: [] });
+    }
+  })();
+
+  return () => { cancelled = true; };
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [folder]);
+
+  // Derive pagination from state + URL
+  const { totalPages, page, pageItems } = useMemo(() => {
+    const total = state.allPairs.length;
+    const pages = Math.max(1, Math.ceil(total / PAIRS_PER_PAGE));
+    const safePage = Math.min(Math.max(pageFromUrl, 1), pages);
+    const start = (safePage - 1) * PAIRS_PER_PAGE;
+    const items = state.allPairs.slice(start, start + PAIRS_PER_PAGE);
+    return { totalPages: pages, page: safePage, pageItems: items };
+  }, [state.allPairs, pageFromUrl]);
+
+  // Balance current page items into 3 columns (0,1,2,0,1,2)
+  const columns = useMemo(() => {
+    const cols = [[], [], []];
+    pageItems.forEach((pair, idx) => cols[idx % 3].push(pair));
+    return cols;
+  }, [pageItems]);
+
+  // Jump to page n (clamped) and scroll to top
+  const goTo = (n) => {
+    const clamped = Math.min(Math.max(n, 1), totalPages || 1);
+    const next = new URLSearchParams(searchParams);
+    next.set("p", String(clamped));
+    setSearchParams(next);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Error or missing JSON → NotFound (e.g., no such folder)
+  if (state.error) return <NotFound />;
+
+  // Initial loading state
+  if (state.loading && pageItems.length === 0) {
+    return <div className="container py-5 text-center">Loading…</div>;
+  }
 
   return (
     <div className="container">
+      {/* Grid */}
       <div className="row">
-        {/* 3 columns */}
-        {images.map((col, colIndex) => (
+        {columns.map((col, colIndex) => (
           <div className="col-md-4" key={`col-${colIndex}`}>
-            {/* Each column contains multiple "pairs" */}
             {col.map((imagePair, pairIndex) => (
               <ImagePair
                 images={imagePair}
-                handleClick={handleClick} // parent updates selectedImages for the modal
-                key={`imagePair-${colIndex}-${pairIndex}`}
+                handleClick={handleClick}
+                key={`imagePair-${colIndex}-${pairIndex}-${imagePair.title || ""}`}
               />
             ))}
           </div>
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <nav className="mt-4" aria-label="Image pairs pagination">
+          <ul className="pagination justify-content-center">
+            <li className={`page-item ${page <= 1 ? "disabled" : ""}`}>
+              <button className="page-link" onClick={() => goTo(page - 1)} aria-label="Previous page">
+                &laquo;
+              </button>
+            </li>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <li key={n} className={`page-item ${n === page ? "active" : ""}`}>
+                <button
+                  className="page-link"
+                  onClick={() => goTo(n)}
+                  aria-current={n === page ? "page" : undefined}
+                >
+                  {n}
+                </button>
+              </li>
+            ))}
+
+            <li className={`page-item ${page >= totalPages ? "disabled" : ""}`}>
+              <button className="page-link" onClick={() => goTo(page + 1)} aria-label="Next page">
+                &raquo;
+              </button>
+            </li>
+          </ul>
+        </nav>
+      )}
     </div>
   );
 }
 
-/**
- * Renders a single pair (two images). Clicking anywhere on the row
- * triggers the parent handler to set the modal's selectedImages.
- *
- * Note:
- *  - Grid thumbs use `c_fill,g_auto` (gravity is fine with fill).
- *  - LQIP: we request a tiny blurred version for a nicer skeleton.
- */
+/* ===== Pair & Thumb components (unchanged) ===== */
+
 const ImagePair = ({ images, handleClick }) => {
   // Thumb size for grid; adjust once and all thumbs follow
   const dims = { w: 560, h: 560, fit: "fill", g: "auto" };
@@ -74,15 +202,6 @@ const ImagePair = ({ images, handleClick }) => {
   );
 };
 
-/**
- * Small reusable image with:
- *  - reserved aspect ratio space to avoid layout shift,
- *  - shimmer/blur skeleton until the full image loads,
- *  - Bootstrap modal trigger attributes on the <img>.
- *
- * Accessibility:
- *  - role="button" + keyboard handler so Enter/Space opens modal too.
- */
 function MMImage({ src, tiny, alt }) {
   const [loaded, setLoaded] = useState(false);
 
@@ -109,11 +228,9 @@ function MMImage({ src, tiny, alt }) {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
-
           // Bootstrap modal trigger. Make sure <Modal id="imagePreview" /> is mounted once on the page.
           data-bs-toggle="modal"
           data-bs-target="#imagePreview"
-
           // Keyboard support (Enter/Space to open)
           role="button"
           tabIndex={0}

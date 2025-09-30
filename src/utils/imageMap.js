@@ -6,11 +6,11 @@ export const imageMap = {
         title: "Fall Leaf Pair",
         imageSet: [
           {
-            publicId: `girleaf-left.webp`,
+            publicId: `autumn-crush-left.webp`,
             alt: "girl with leaf on the left"
           },
           {
-            publicId: `boyleaf-right.webp`,
+            publicId: `autumn-crush-right.webp`,
             alt: "boy with leaf on the left"
           }
         ]
@@ -19,11 +19,11 @@ export const imageMap = {
         title: "Matching Boy & Girl Pair",
         imageSet: [
           {
-            publicId: `girl-left.jpeg`,
+            publicId: `matching-boy-girl-pair-left.jpeg`,
             alt: "normal girl on the left"
           },
           {
-            publicId: `man-right.jpeg`,
+            publicId: `matching-boy-girl-pair-right.jpeg`,
             alt: "normal man on the right"
           }
         ]
@@ -47,11 +47,11 @@ export const imageMap = {
         title: "Boy & Girl Heartshot Pair",
         imageSet: [
           {
-            publicId: `boy-heartattack-left.jpeg`,
+            publicId: `heartshot-left.jpeg`,
             alt: "boy heart attack left "
           },
           {
-            publicId: `girl-heartshot-right.jpeg`,
+            publicId: `heartshot-right.jpeg`,
             alt: "girl heart shot right"
           }
         ]
@@ -92,11 +92,11 @@ export const imageMap = {
         title: "Anime Boy & Girl Holding Hands ",
         imageSet: [
           {
-            publicId: `anime-girl-hold-left.webp`,
+            publicId: `anime-hold-left.webp`,
             alt: "girl holding hand on the left"
           },
           {
-            publicId: `anime-boy-hold-right.webp`,
+            publicId: `anime-hold-right.webp`,
             alt: "boy holding hand on the right"
           }
         ]
@@ -105,11 +105,11 @@ export const imageMap = {
         title: "Aqua and Ruby Pair",
         imageSet: [
           {
-            publicId: `oshinoboy-left.webp`,
+            publicId: `oshinobg-left.webp`,
             alt: "Aqua on the left"
           },
           {
-            publicId: `oshinogirl-right.webp`,
+            publicId: `oshinobg-right.webp`,
             alt: "Ruby on the right"
           }
         ]
@@ -120,11 +120,11 @@ export const imageMap = {
         title: "Boy Lovers Pair",
         imageSet: [
           {
-            publicId: `his-lover-left.jpeg`,
+            publicId: `mine-lover-left.jpeg`,
             alt: "boy lover on the left"
           },
           {
-            publicId: `he-is-mine-right.jpg`,
+            publicId: `mine-lover-right.jpg`,
             alt: "boy lover on the right "
           }
         ]
@@ -133,11 +133,11 @@ export const imageMap = {
         title: "Cheeky Couple Pair",
         imageSet: [
           {
-            publicId: `girl-pinch-cheeks-left.jpg`,
+            publicId: `bg-pinch-cheeks-left.jpg`,
             alt: "girl gets cheeks pinched on the left"
           },
           {
-            publicId: `boy-pinch-cheeks-right.jpeg`,
+            publicId: `bg-pinch-cheeks-right.jpeg`,
             alt: "boy gets cheeks pinched right"
           }
         ]
@@ -148,11 +148,11 @@ export const imageMap = {
         title: "Bear Couple Pair",
         imageSet: [
           {
-            publicId: `bear-boy-left.jpg`,
+            publicId: `bear-bg-left.jpg`,
             alt: "boy in bear suit on the left"
           },
           {
-            publicId: `bear-girl-right.jpg`,
+            publicId: `bear-bg-right.jpg`,
             alt: "girl in bear suit on the right"
           }
         ]
@@ -206,11 +206,11 @@ export const imageMap = {
         title: "Miles Morales & Gwen Stacy Pair",
         imageSet: [
           {
-            publicId: `spiderverse-miles-left.jpg`,
+            publicId: `spiderverse-gwen-m-left.jpg`,
             alt: "Miles Morales on the left"
           },
           {
-            publicId: `spiderverse-gwen-right.jpg`,
+            publicId: `spiderverse-gwen-m-right.jpg`,
             alt: "Gwen Stacy on the right "
           }
         ]
@@ -234,11 +234,11 @@ export const imageMap = {
         title: "Marcy & Princess Bubblegum Pair",
         imageSet: [
           {
-            publicId: `Marcy-and-PB-matching-pfp.webp`,
+            publicId: `marcy-and-pb-left.webp`,
             alt: "Marceline on the left"
           },
           {
-            publicId: `Marcy-and-PB-matching-pfp-2.jpg`,
+            publicId: `marcy-and-pb-right.jpg`,
             alt: "Princess Bubblegum on the right"
           }
         ]
@@ -247,11 +247,11 @@ export const imageMap = {
         title: "Miles & Gwen Sitting Pair",
         imageSet: [
           {
-            publicId: `spider-miles-sit-left.jpg`,
+            publicId: `spider-gwen-miles-left.jpg`,
             alt: "miles sitting on the left"
           },
           {
-            publicId: `spider-gwen-sit-right.jpg`,
+            publicId: `spider-gwen-miles-right.jpg`,
             alt: "gwen sitting on the right"
           }
         ]
