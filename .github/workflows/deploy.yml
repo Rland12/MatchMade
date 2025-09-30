@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ rland-branch ]
+    branches: [ main, rland-branch ]
   workflow_dispatch: {}
 
 permissions:
