@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, rland-branch ]
+    branches: [ rland-branch ] 
   workflow_dispatch: {}
 
 permissions:
@@ -25,21 +25,20 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # Build static pairs JSON from Cloudinary into /public/data
       - name: Build pairs JSON
         env:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY:    ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          PAIRS_FOLDERS: "home,anime,cartoons,cute,lgbtq"   # edit to your folders
+          PAIRS_FOLDERS: "home,anime,cartoons,cute,lgbtq"
         run: node scripts/build-pairs.mjs
 
-      # Build Vite site; copy 404 for SPA deep links
-      - name: Build pairs JSON
+      - name: Build site
         env:
           VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
         run: |
-          run: node scripts/build-pairs.mjs
+          npm run build
+          cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -51,7 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
