@@ -1,16 +1,34 @@
-# React + Vite
+# MatchMade
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Matching profile pictures for friends, couples, and special connections.
 
-Currently, two official plugins are available:
+**MatchMade** is a web app that curates and delivers matching profile pictures (PFPs) for friends, couples, and communities.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The site sources images from Cloudinary and organizes them into categories like Anime, Cartoons, Cute, and LGBTQ.
+Users can browse pairs, view them in a modal, and save them in one click. Making it easy to coordinate profile pics with someone special.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+📂 **Dynamic Cloudinary Integration:?** Images are pulled and paired automatically from Cloudinary folders.
 
-## Expanding the ESLint configuration
+🖼 **Image Pairs:** Every PFP set comes in left/right pairs.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📱 **Responsive Grid:** Balanced three-column layout with skeleton loaders.
+
+🔍 **Pagination:** 6 pairs per page for faster browsing.
+
+🎨 **Modal Preview:** Enlarged view with both images side-by-side.
+
+⚡ **Static JSON Generation:** A Node.js build script fetches Cloudinary assets and generates static pairs-<category>.json files for GitHub Pages hosting.
+
+## Tech Stack
+
+- **Frontend:** React 19, React Router 7, Vite
+
+- **Styling:** Bootstrap 5 + custom CSS
+
+- **Hosting:** GitHub Pages (custom domain at matchmadepics.com)
+
+- **Media:** Cloudinary (image storage, transformations, overlays)
+
+- **Automation:** GitHub Actions (CI/CD, JSON regeneration)

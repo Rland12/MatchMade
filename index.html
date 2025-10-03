@@ -3,11 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MatchMade: Matching Profile Pics for Friends & Relationships</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Matching profile pictures to share with your friends or special someone. Choose from anime or LGBTQ matching pfps." />
+  <title>MatchMade: Matching Profile Pics for Friends & Relationships</title>
+  <meta name="description" content="Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps." />
   <link rel="canonical" href="https://www.matchmadepics.com/" />
+
+  <!-- Open Graph (Facebook, LinkedIn, Discord, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MatchMade">
+  <meta property="og:title" content="MatchMade — Matching Profile Picture Pairs">
+  <meta property="og:description" content="Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps.">
+  <meta property="og:url" content="https://www.matchmadepics.com/">
+  <meta property="og:image" content="%OG_PAIR_URL%">
+ 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MatchMade — Matching Profile Picture Pairs">
+  <meta name="twitter:description" content="Matching profile pictures for friends or special someone. Download both sides in one click.">
+  <meta name="twitter:image" content="%OG_PAIR_URL%">
+
+
+  <!-- JSON-LD structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MatchMade",
+    "url": "https://www.matchmadepics.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.matchmadepics.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
 
   <link rel="icon" href="/favicon_package/favicon.ico" />
   <link rel="shortcut icon" href="/favicon_package/favicon.ico" />
@@ -16,7 +46,7 @@
   <meta name="msapplication-config" content="/favicon_package/browserconfig.xml" />
   <link rel="manifest" href="/manifest.json" />
   <!-- Optional brand color -->
-  <!-- <meta name="theme-color" content="#9D41EF" /> -->
+  <meta name="theme-color" content="#9D41EF" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,14 +62,6 @@
     gtag('config', 'G-YBYZLNZQWD');
   </script>
 
-  <!-- Optional: social share cards -->
-  <!--
-  <meta property="og:title" content="MatchMade" />
-  <meta property="og:description" content="Matching profile pictures for friends or someone special." />
-  <meta property="og:url" content="https://www.matchmadepics.com/" />
-  <meta property="og:image" content="https://www.matchmadepics.com/og-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  -->
 </head>
 <body>
   <div id="root"></div>

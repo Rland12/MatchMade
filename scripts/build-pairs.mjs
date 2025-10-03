@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { v2 as cloudinary } from 'cloudinary';
 
+
 // CONFIG: which Cloudinary folders to export (match your categories)
 const FOLDERS = (process.env.PAIRS_FOLDERS || 'home,anime,cartoons,cute,lgbtq')
   .split(',')
@@ -21,6 +22,7 @@ cloudinary.config({
   api_key:    process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
 
 async function listAllInFolder(folder) {
   const resources = [];
@@ -38,6 +40,26 @@ async function listAllInFolder(folder) {
   } while (next);
   return resources;
 }
+function asOverlayId(publicId) {
+  return String(publicId)
+    .replace(/\.(png|jpe?g|webp|avif|gif)$/i, "")
+    .replace(/\//g, ":"); // folder/asset -> folder:asset for overlays
+}
+
+/** 1200x630 card, left/right centered then shifted by ±300px. */
+function buildOgPairUrl(cloudName, leftPublicId, rightPublicId, baseId = "canvas") {
+  const l = asOverlayId(leftPublicId);
+  const r = asOverlayId(rightPublicId);
+
+  // Keep this as ONE line when it’s generated
+  return `https://res.cloudinary.com/${cloudName}/image/upload/` +
+         `w_1200,h_630,c_fill,b_black/` +
+         `l_${l},w_600,h_630,c_fit,g_center,x_-320/` +
+         `l_${r},w_600,h_630,c_fit,g_center,x_320/` +
+         `${baseId}`;
+}
+
+
 
 /**
  * Pair files using "<base>-left" / "<base>-right"  OR  "<base>_left" / "<base>_right" (case-insensitive)
@@ -141,6 +163,7 @@ async function run() {
     console.log(`   Wrote ${complete.length} pairs → ${path.relative(process.cwd(), outPath)}`);
   }
 
+  // === Build categories.json for client ===
   const categoriesOut = path.join(OUT_DIR, 'categories.json');
   fs.writeFileSync(
     categoriesOut,
@@ -149,7 +172,35 @@ async function run() {
   );
   console.log(`   Wrote categories → ${path.relative(process.cwd(), categoriesOut)}`);
 
-  console.log('✓ Done.');
+  // === Build and inject OG pair URL (from first Home pair) ===
+  // after writing pairs*.json & categories.json
+try {
+  const cloud = process.env.CLOUDINARY_CLOUD_NAME;
+  const homePath = path.join(OUT_DIR, "pairs-home.json");
+  const indexPath = path.join(process.cwd(), "index.html");
+
+  let ogUrl = null;
+  if (fs.existsSync(homePath)) {
+    const home = JSON.parse(fs.readFileSync(homePath, "utf8"));
+    const first = (home.items || [])[0];
+    if (first?.imageSet?.length >= 2) {
+      const left  = first.imageSet[0].publicId;
+      const right = first.imageSet[1].publicId;
+      ogUrl = buildOgPairUrl(cloud, left, right); // <-- your base asset
+    }
+  }
+  if (!ogUrl) ogUrl = `https://res.cloudinary.com/${cloud}/image/upload/w_1200,h_630,c_fill,b_black/canvas`;
+
+
+  let indexHtml = fs.readFileSync(indexPath, "utf8");
+  indexHtml = indexHtml.replace(/%OG_PAIR_URL%/g, ogUrl);
+  fs.writeFileSync(indexPath, indexHtml, "utf8");
+
+  console.log(`   Injected OG image → ${ogUrl}`);
+} catch (e) {
+  console.warn("   Skipped OG injection (non-fatal):", e.message);
+}
+
 }
 
 run().catch((e) => {

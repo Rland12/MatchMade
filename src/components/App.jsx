@@ -5,12 +5,8 @@ import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
 import Modal from "./Modal";
 
-//future: pagination for pages of images
 //future: some type of download logging for a featured/popular page?
-//future: logo in logo.svg
 //future: add more categories
-//future: lgbtq small images dont match up to the big images look at the imageMap for differences
-//current commits are not deployed use npm run build to deploy later
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
   const handleClick = (images) => setSelectedImages(images);
