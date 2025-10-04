@@ -25,7 +25,7 @@ function ImagePairs({ handleClick }) {
 
   // Page from URL (?p=); keep in URL so links are shareable
   const [searchParams, setSearchParams] = useSearchParams();
-  const rawPage = parseInt(searchParams.get("p") || "1", 10);
+  const rawPage = parseInt(searchParams.get("page") || "1", 10);
   const pageFromUrl = Number.isFinite(rawPage) ? Math.max(1, rawPage) : 1;
 
   // Local state for the JSON payload + paging
