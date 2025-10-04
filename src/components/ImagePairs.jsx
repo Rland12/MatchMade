@@ -73,7 +73,7 @@ useEffect(() => {
       const clamped = Math.min(Math.max(pageFromUrl, 1), totalPages);
       if (clamped !== pageFromUrl) {
         const next = new URLSearchParams(searchParams);
-        next.set("p", String(clamped));
+        next.set("page", String(clamped));
         setSearchParams(next, { replace: true });
       }
     } catch (err) {
@@ -107,7 +107,7 @@ useEffect(() => {
   const goTo = (n) => {
     const clamped = Math.min(Math.max(n, 1), totalPages || 1);
     const next = new URLSearchParams(searchParams);
-    next.set("p", String(clamped));
+    next.set("page", String(clamped));
     setSearchParams(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
