@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "prebuild": "node scripts/build-sitemap.mjs",
     "postbuild": "node scripts/copy-404.js",
     "dev": "vite",
     "lint": "eslint .",

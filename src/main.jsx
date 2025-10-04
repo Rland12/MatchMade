@@ -2,15 +2,15 @@ import "bootstrap/dist/css/bootstrap.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 import App from './components/App.jsx';
 import './index.css';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-     <HashRouter>
+     <BrowserRouter basename="/">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>
 )
 
