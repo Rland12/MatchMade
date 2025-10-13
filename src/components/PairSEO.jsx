@@ -79,6 +79,16 @@ export default function PairSEO() {
       .filter(Boolean),
   };
 
+   const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE + "/" },
+      { "@type": "ListItem", position: 2, name: humanize(folder), item: `${SITE}/${folder}` },
+      { "@type": "ListItem", position: 3, name: item.title, item: canonical }
+    ]
+  };
+
   return (
     <>
       <Helmet>
@@ -102,6 +112,7 @@ export default function PairSEO() {
         <meta name="twitter:description" content={description} />
 
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       </Helmet>
 
       <div className="container py-4">
@@ -123,6 +134,8 @@ export default function PairSEO() {
                 <img
                   src={src}
                   alt={img.alt || safeTitle}
+                  width="1024"
+                  height="1024"
                   loading="eager"
                   decoding="sync"
                   className="img-fluid rounded"

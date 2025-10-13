@@ -250,6 +250,8 @@ function MMImage({ src, tiny, alt }) {
         <img
           src={src}
           alt={alt}
+          width="560"
+          height="560"
           className={loaded ? "is-loaded" : ""}
           loading="lazy"
           decoding="async"

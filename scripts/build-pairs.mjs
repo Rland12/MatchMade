@@ -187,11 +187,17 @@ function buildSitemapAndRobots() {
     for (const item of json.items || []) {
       const slug = slugify(item.title || "");
       if (!slug) continue;
-      urls.push({
-        loc: `${SITE}/pair/${folder}/${slug}`,
+     urls.push({
+        loc: `${siteUrl}/pair/${folder}/${slug}`,
         changefreq: "monthly",
         priority: "0.8",
         lastmod: nowIso,
+        images: (item.imageSet || []).map(img => ({
+          loc: img.publicId
+            ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024)
+            : img.url,
+          title: item.title
+        }))
       });
     }
   }
@@ -210,7 +216,25 @@ function buildSitemapAndRobots() {
       return "  " + lines.join("");
     })
     .join("\n");
-  const xml = `${xmlHead}${xmlBody}\n</urlset>\n`;
+    const xml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ` +
+    `xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+    urls.map(u => {
+      const imagesXml = (u.images || [])
+        .map(im => `    <image:image><image:loc>${im.loc}</image:loc>${im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : ""}</image:image>`)
+        .join("\n");
+      return [
+        "  <url>",
+        `    <loc>${u.loc}</loc>`,
+        u.lastmod ? `    <lastmod>${u.lastmod}</lastmod>` : "",
+        u.changefreq ? `    <changefreq>${u.changefreq}</changefreq>` : "",
+        u.priority ? `    <priority>${u.priority}</priority>` : "",
+        imagesXml,
+        "  </url>"
+      ].filter(Boolean).join("\n");
+    }).join("\n") +
+    `\n</urlset>\n`;
 
   const sitemapPath = path.join(OUT_PUBLIC, "sitemap.xml");
   fs.writeFileSync(sitemapPath, xml, "utf8");
