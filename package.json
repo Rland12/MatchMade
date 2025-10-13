@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dr.pogodin/react-helmet": "^3.0.4",
     "bootstrap": "^5.3.8",
     "cloudinary": "^2.7.0",
     "file-saver": "^2.0.5",
