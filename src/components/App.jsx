@@ -3,7 +3,6 @@ import { Link, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
-import { imageMap } from "../utils/imageMap";
 
 const Modal = lazy(() => import("./Modal"));
 const PairSEO = lazy(() => import("./PairSEO"));
@@ -26,6 +25,7 @@ function App() {
         <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
 
         <Routes location={state?.backgroundLocation || location}>
+          <Route path="/" element={<ImagePairs handleClick={handleClick} />} />
           <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
           <Route
             path="/pair/:folder/:slug"
