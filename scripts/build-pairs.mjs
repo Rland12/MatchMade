@@ -188,7 +188,7 @@ function buildSitemapAndRobots() {
       const slug = slugify(item.title || "");
       if (!slug) continue;
      urls.push({
-        loc: `${siteUrl}/pair/${folder}/${slug}`,
+        loc: `${SITE}/pair/${folder}/${slug}`,
         changefreq: "monthly",
         priority: "0.8",
         lastmod: nowIso,

@@ -1,33 +1,383 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.matchmadepics.com/</loc>
-    <changefreq>daily</changefreq>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/home</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/anime</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/cartoons</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/cute</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/lgbtq</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/autumn-crush-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/autumn-crush-left</image:loc><image:title>Autumn Crush Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/autumn-crush-right</image:loc><image:title>Autumn Crush Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/catboy-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/catboy-left</image:loc><image:title>Catboy Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/catboy-right</image:loc><image:title>Catboy Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/heartshot-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/heartshot-left</image:loc><image:title>Heartshot Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/heartshot-right</image:loc><image:title>Heartshot Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/matching-boy-girl-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/matching-boy-girl-left</image:loc><image:title>Matching Boy Girl Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/matching-boy-girl-right</image:loc><image:title>Matching Boy Girl Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/squidgame-girl-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/squidgame-girl-left</image:loc><image:title>Squidgame Girl Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/squidgame-girl-right</image:loc><image:title>Squidgame Girl Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/home/toh-girl-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/toh-girl-left</image:loc><image:title>Toh Girl Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/toh-girl-right</image:loc><image:title>Toh Girl Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/edwinry-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/Edwinry-left</image:loc><image:title>Edwinry Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/Edwinry-right</image:loc><image:title>Edwinry Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/anime-cheek-grab-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-cheek-grab-left</image:loc><image:title>Anime Cheek Grab Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-cheek-grab-right</image:loc><image:title>Anime Cheek Grab Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/anime-chin-hold-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-chin-hold-left</image:loc><image:title>Anime Chin Hold Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-chin-hold-right</image:loc><image:title>Anime Chin Hold Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/anime-hold-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-hold-left</image:loc><image:title>Anime Hold Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anime-hold-right</image:loc><image:title>Anime Hold Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/anya-becky-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anya-becky-left</image:loc><image:title>Anya Becky Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/anya-becky-right</image:loc><image:title>Anya Becky Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/bear-bg-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/bear-bg-left</image:loc><image:title>Bear Bg Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/bear-bg-right</image:loc><image:title>Bear Bg Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/bg-pinch-cheeks-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/bg-pinch-cheeks-left</image:loc><image:title>Bg Pinch Cheeks Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/bg-pinch-cheeks-right</image:loc><image:title>Bg Pinch Cheeks Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/blindboydemon-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/blindboydemon_left</image:loc><image:title>Blindboydemon Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/blindboydemon_right</image:loc><image:title>Blindboydemon Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/kaguya-glasses-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/kaguya-glasses-left</image:loc><image:title>Kaguya Glasses Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/kaguya-glasses-right</image:loc><image:title>Kaguya Glasses Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/kaguya-hug-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/kaguya-hug-left</image:loc><image:title>Kaguya Hug Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/kaguya-hug-right</image:loc><image:title>Kaguya Hug Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/mine-lover-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/mine-lover-left</image:loc><image:title>Mine Lover Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/mine-lover-right</image:loc><image:title>Mine Lover Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/oshinobg-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/oshinobg-left</image:loc><image:title>Oshinobg Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/oshinobg-right</image:loc><image:title>Oshinobg Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/owari-cook-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/owari-cook-left</image:loc><image:title>Owari Cook Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/owari-cook-right</image:loc><image:title>Owari Cook Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/aladin-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/aladin-left</image:loc><image:title>Aladin Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/aladin-right</image:loc><image:title>Aladin Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/beast-raven-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/beast-raven-left</image:loc><image:title>Beast Raven Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/beast-raven-right</image:loc><image:title>Beast Raven Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/hello-kitty-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/hello-kitty-left</image:loc><image:title>Hello Kitty Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/hello-kitty-right</image:loc><image:title>Hello Kitty Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/hotel-trans-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/hotel-trans-left</image:loc><image:title>Hotel Trans Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/hotel-trans-right</image:loc><image:title>Hotel Trans Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/marcy-and-pb-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/marcy-and-pb-left</image:loc><image:title>Marcy And Pb Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/marcy-and-pb-right</image:loc><image:title>Marcy And Pb Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/prince-kiss-tiana-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/prince-kiss-tiana-left</image:loc><image:title>Prince Kiss Tiana Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/prince-kiss-tiana-right</image:loc><image:title>Prince Kiss Tiana Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/spider-gwen-miles-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/spider-gwen-miles-left</image:loc><image:title>Spider Gwen Miles Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/spider-gwen-miles-right</image:loc><image:title>Spider Gwen Miles Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/spiderverse-gwen-m-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/spiderverse-gwen-m-left</image:loc><image:title>Spiderverse Gwen M Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/spiderverse-gwen-m-right</image:loc><image:title>Spiderverse Gwen M Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/kairisora-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/KairiSora-left</image:loc><image:title>Kairisora Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/KairiSora-right</image:loc><image:title>Kairisora Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/animal-heart-hold-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/animal-heart-hold-left</image:loc><image:title>Animal Heart Hold Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/animal-heart-hold-right</image:loc><image:title>Animal Heart Hold Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/cat-fight-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cat-fight-left</image:loc><image:title>Cat Fight Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cat-fight-right</image:loc><image:title>Cat Fight Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/cat-heart-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cat-heart-left</image:loc><image:title>Cat Heart Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cat-heart-right</image:loc><image:title>Cat Heart Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/cute-couple-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cute-couple-left</image:loc><image:title>Cute Couple Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cute-couple-right</image:loc><image:title>Cute Couple Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/cute-gamer-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cute-gamer-left</image:loc><image:title>Cute Gamer Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cute-gamer-right</image:loc><image:title>Cute Gamer Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/sleeping-bear-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/sleeping-bear-left</image:loc><image:title>Sleeping Bear Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/sleeping-bear-right</image:loc><image:title>Sleeping Bear Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/sleepy-grass-animal-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/sleepy-grass-animal-left</image:loc><image:title>Sleepy Grass Animal Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/sleepy-grass-animal-right</image:loc><image:title>Sleepy Grass Animal Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/blush-girl-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/blush-girl-left</image:loc><image:title>Blush Girl Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/blush-girl-right</image:loc><image:title>Blush Girl Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/clueless-girls-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/clueless-girls-left</image:loc><image:title>Clueless Girls Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/clueless-girls-right</image:loc><image:title>Clueless Girls Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/cowboys-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cowboys-left</image:loc><image:title>Cowboys Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/cowboys-right</image:loc><image:title>Cowboys Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/girl-chin-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/girl-chin-left</image:loc><image:title>Girl Chin Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/girl-chin-right</image:loc><image:title>Girl Chin Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/heart-girls-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/heart-girls-left</image:loc><image:title>Heart Girls Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/heart-girls-right</image:loc><image:title>Heart Girls Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/pink-green-girls-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/pink-green-girls-left</image:loc><image:title>Pink Green Girls Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/pink-green-girls-right</image:loc><image:title>Pink Green Girls Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/tender-boys-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/tender-boys-left</image:loc><image:title>Tender Boys Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/tender-boys-right</image:loc><image:title>Tender Boys Pair</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/lgbtq/water-girl-pair</loc>
+    <lastmod>2025-10-13T02:36:48.805Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/water-girl-left</image:loc><image:title>Water Girl Pair</image:title></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit/water-girl-right</image:loc><image:title>Water Girl Pair</image:title></image:image>
   </url>
 </urlset>
