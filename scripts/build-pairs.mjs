@@ -54,8 +54,8 @@ function asOverlayId(publicId) {
     .replace(/\.(png|jpe?g|webp|avif|gif)$/i, "")
     .replace(/\//g, ":");
 }
-function viewUrl(cloud, publicId, w = 900) {
-  return `https://res.cloudinary.com/${cloud}/image/upload/w_${w},c_fit/${publicId}`;
+function viewUrl(cloud, publicId, w = 900, fmt = "jpg") {
+  return `https://res.cloudinary.com/${cloud}/image/upload/w_${w},c_fit,f_${fmt}/${publicId}`;
 }
 function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS_ID) {
   const l = asOverlayId(leftPublicId);
@@ -78,7 +78,9 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <title>${safeTitle} | MatchMade</title>
   <meta name="description" content="${safeDesc}"/>
   <link rel="canonical" href="${canonical}"/>
-
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="stylesheet" href="../../styles.css"/>
+  
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="MatchMade"/>
   <meta property="og:title" content="${safeTitle} | MatchMade"/>
@@ -94,12 +96,11 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <main style="margin:16px auto;max-width:1200px;padding:16px">
     <h1 style="font:600 22px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif">${safeTitle}</h1>
     <figure style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
-      <img src="${leftUrl}" alt="${safeTitle} — Left" style="max-width:48%;height:auto"/>
-      <img src="${rightUrl}" alt="${safeTitle} — Right" style="max-width:48%;height:auto"/>
+      <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
+      <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
     </figure>
     <p><a href="/${folder}" style="text-decoration:none">← Back to ${escapeHtml(folder)}</a></p>
   </main>
-  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>`;
 }
@@ -177,6 +178,7 @@ function buildSitemapAndRobots() {
   urls.push({ loc: `${SITE}/`, changefreq: "weekly", priority: "1.0", lastmod: nowIso });
 
   for (const folder of FOLDERS) {
+    if (folder === "home") continue;
     urls.push({ loc: `${SITE}/${folder}`, changefreq: "weekly", priority: "0.9", lastmod: nowIso });
   }
 
@@ -192,37 +194,26 @@ function buildSitemapAndRobots() {
         changefreq: "monthly",
         priority: "0.8",
         lastmod: nowIso,
-        images: (item.imageSet || []).map(img => ({
-          loc: img.publicId
-            ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024)
-            : img.url,
-          title: item.title
-        }))
+        images: (item.imageSet || []).map(img => {
+          const loc = img.publicId
+          ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
+          : img.url;
+          return { loc, title: item.title, caption: `${item.title} matching profile picture pair (${folder})` };
+        })
       });
     }
   }
-
-  const xmlHead = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-  const xmlBody = urls
-    .map((u) => {
-      const lines = [
-        "<url>",
-        `<loc>${u.loc}</loc>`,
-        u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : "",
-        u.changefreq ? `<changefreq>${u.changefreq}</changefreq>` : "",
-        u.priority ? `<priority>${u.priority}</priority>` : "",
-        "</url>",
-      ].filter(Boolean);
-      return "  " + lines.join("");
-    })
-    .join("\n");
     const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ` +
     `xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
     urls.map(u => {
       const imagesXml = (u.images || [])
-        .map(im => `    <image:image><image:loc>${im.loc}</image:loc>${im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : ""}</image:image>`)
+       .map(im => `    <image:image>`
+       + `<image:loc>${im.loc}</image:loc>`
+       + (im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : "")
+       + (im.caption ? `<image:caption>${escapeHtml(im.caption)}</image:caption>` : "")
+       + `</image:image>`)
         .join("\n");
       return [
         "  <url>",
