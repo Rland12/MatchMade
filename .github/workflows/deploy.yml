@@ -25,17 +25,12 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Build pairs JSON
+      - name: Build site
         env:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY:    ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           PAIRS_FOLDERS: "home,anime,cartoons,cute,lgbtq"
-        run: node scripts/build-pairs.mjs
-
-      - name: Build site
-        env:
-          VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
         run: |
           npm run build
           cp dist/index.html dist/404.html
