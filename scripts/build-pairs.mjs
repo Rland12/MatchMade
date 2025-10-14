@@ -99,7 +99,7 @@ function categoryHtml({ site, folder }) {
   </head>
   <body class="App App-header">
     <main>
-      <h1 class="title">MatchMade</h1>
+      <h1>MatchMade</h1>
       <p class="sub-title">${desc}</p>
       <p><a href="/">← Back to home</a></p>
       <!-- The SPA will still hydrate when loaded via / (fallback). This page exists so /${folder} returns 200 for crawlers. -->
