@@ -91,8 +91,13 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:image" content="${ogImage}"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
+
 </head>
-<body>
+<body class="App App-header">
   <main>
     <h1>${safeTitle}</h1>
     <figure>
