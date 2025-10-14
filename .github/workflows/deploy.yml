@@ -31,6 +31,7 @@ jobs:
           CLOUDINARY_API_KEY:    ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           PAIRS_FOLDERS: "home,anime,cartoons,cute,lgbtq"
+          VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
         run: |
           npm run build
           cp dist/index.html dist/404.html
