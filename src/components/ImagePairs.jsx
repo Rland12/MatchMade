@@ -1,3 +1,4 @@
+// ImagePairs.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "@dr.pogodin/react-helmet";
@@ -17,12 +18,12 @@ const folderForCategory = (cat) => {
 
 const humanize = (s) =>
   String(s || "")
-    .replace(/[-_]/g, " ")
+    .replace(/[-_]+/g, " ")
     .trim()
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
-function ImagePairs({ handleClick }) {
+export default function ImagePairs({ handleClick }) {
   const category = useParams().category || "/";
   const folder = folderForCategory(category);
 
@@ -75,7 +76,9 @@ function ImagePairs({ handleClick }) {
         if (!cancelled) setState({ loading: false, error: err.message, allPairs: [] });
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [folder]);
 
@@ -106,10 +109,9 @@ function ImagePairs({ handleClick }) {
   const prettyCat = humanize(folder);
   const baseUrl = `${SITE}/${folder}`;
   const canonical = page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
-  const title =
-    page > 1
-      ? `${prettyCat} Matching PFP Pairs – Page ${page} | MatchMade`
-      : `${prettyCat} Matching PFP Pairs | MatchMade`;
+  const title = page > 1
+    ? `${prettyCat} Matching PFP Pairs – Page ${page} | MatchMade`
+    : `${prettyCat} Matching PFP Pairs | MatchMade`;
   const description = `Browse ${prettyCat} matching profile picture pairs. Download both sides in one click. Page ${page} of ${totalPages}.`;
 
   if (state.error) return <NotFound />;
@@ -135,10 +137,10 @@ function ImagePairs({ handleClick }) {
           {columns.map((col, colIndex) => (
             <div className="col-md-4" key={`col-${colIndex}`}>
               {col.map((pair, pairIndex) => (
-                <ImagePair
+                <PairCard
                   pair={pair}
                   handleClick={handleClick}
-                  key={`imagePair-${colIndex}-${pairIndex}-${pair.title || ""}`}
+                  key={`pair-${colIndex}-${pairIndex}-${pair.title || ""}`}
                 />
               ))}
             </div>
@@ -179,16 +181,17 @@ function ImagePairs({ handleClick }) {
   );
 }
 
-/* ===== Pair and Thumb components ===== */
+/* ===== Pair & Thumb components ===== */
 
-const ImagePair = ({ pair, handleClick }) => {
+function PairCard({ pair, handleClick }) {
   const folder = (useParams().category || "home").toLowerCase();
   const slug = slugify(pair.title);
   const dims = { w: 560, h: 560, fit: "fill", g: "auto" };
   const navigate = useNavigate();
   const location = useLocation();
 
-  const hrefStr = `/pair/${folder}/${slug}`;
+  const isHome = folder === "home";
+  const hrefStr = isHome ? `/pair/${slug}` : `/pair/${folder}/${slug}`;
 
   const openAsModal = (e) => {
     if (e) e.preventDefault();
@@ -224,7 +227,7 @@ const ImagePair = ({ pair, handleClick }) => {
 
         return (
           <MMImage
-            key={(img.publicId || img.url) || index}
+            key={(img.publicId || img.url || "") + index}
             src={fullSrc}
             tiny={tinySrc}
             alt={img.alt}
@@ -233,7 +236,7 @@ const ImagePair = ({ pair, handleClick }) => {
       })}
     </a>
   );
-};
+}
 
 function MMImage({ src, tiny, alt }) {
   const [loaded, setLoaded] = useState(false);
@@ -250,8 +253,6 @@ function MMImage({ src, tiny, alt }) {
         <img
           src={src}
           alt={alt}
-          width="560"
-          height="560"
           className={loaded ? "is-loaded" : ""}
           loading="lazy"
           decoding="async"
@@ -261,5 +262,3 @@ function MMImage({ src, tiny, alt }) {
     </div>
   );
 }
-
-export default ImagePairs;

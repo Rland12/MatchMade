@@ -24,6 +24,11 @@ cloudinary.config({
 });
 
 // helpers
+function pathForPair(folder, slug) {
+  const seg = folder === "home" ? "" : `/${folder}`;
+  return `/pair${seg}/${slug}`;
+}
+
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
@@ -67,9 +72,11 @@ function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS
     `${baseId}`;
 }
 function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl }) {
-  const canonical = `${site}/pair/${folder}/${slug}`;
+  const canonical = `${site}${pathForPair(folder, slug)}`;
   const safeTitle = escapeHtml(title);
-  const safeDesc = escapeHtml(desc);
+  const safeDesc  = escapeHtml(desc);
+  const backHref  = folder === "home" ? "/" : `/${folder}`;
+  const backLabel = folder === "home" ? "Home" : escapeHtml(folder);
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -95,7 +102,6 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
-
 </head>
 <body class="App App-header">
   <main>
@@ -104,7 +110,7 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
       <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
       <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
     </figure>
-    <p><a href="/${folder}">← Back to ${escapeHtml(folder)}</a></p>
+    <p><a href="${backHref}">← Back to ${backLabel}</a></p>
   </main>
 </body>
 </html>`;
@@ -194,8 +200,8 @@ function buildSitemapAndRobots() {
     for (const item of json.items || []) {
       const slug = slugify(item.title || "");
       if (!slug) continue;
-     urls.push({
-        loc: `${SITE}/pair/${folder}/${slug}`,
+      urls.push({
+        loc: `${SITE}${pathForPair(folder, slug)}`,
         changefreq: "monthly",
         priority: "0.8",
         lastmod: nowIso,
@@ -204,9 +210,8 @@ function buildSitemapAndRobots() {
             ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
             : img.url;
 
-          const side = idx === 0 ? "Left" : "Right"; 
-          const folderLabel =
-            folder === "home" ? "" : ` (${toTitleCase(folder)})`;
+          const side = idx === 0 ? "Left" : "Right";
+          const folderLabel = folder === "home" ? "" : ` (${toTitleCase(folder)})`;
 
           return {
             loc,
@@ -333,7 +338,8 @@ async function run() {
         rightUrl,
       });
 
-      const pairDir = path.join(OUT_PAIR_DIR, folder, slug);
+      const relPairDir = folder === "home" ? path.join("pair", slug) : path.join("pair", folder, slug);
+      const pairDir = path.join(OUT_PUBLIC, relPairDir);
       ensureDir(pairDir);
       fs.writeFileSync(path.join(pairDir, "index.html"), html, "utf8");
     }

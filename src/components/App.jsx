@@ -35,6 +35,9 @@ function App() {
               </Suspense>
             }
           />
+           {/* clean home pair path */}
+  <Route path="/pair/:slug" element={<PairSEO />} />
+
         </Routes>
       </header>
 
