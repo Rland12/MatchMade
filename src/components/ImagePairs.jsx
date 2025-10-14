@@ -110,7 +110,7 @@ export default function ImagePairs({ handleClick }) {
   const baseUrl = `${SITE}/${folder}`;
   const canonical = page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
   const title = page > 1
-    ? `${prettyCat} Matching PFP Pairs – Page ${page} | MatchMade`
+    ? `${prettyCat} Matching PFP Pairs - Page ${page} | MatchMade`
     : `${prettyCat} Matching PFP Pairs | MatchMade`;
   const description = `Browse ${prettyCat} matching profile picture pairs. Download both sides in one click. Page ${page} of ${totalPages}.`;
 

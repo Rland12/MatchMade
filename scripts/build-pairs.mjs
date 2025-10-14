@@ -71,6 +71,50 @@ function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS
     `l_${r},w_600,h_630,c_fit,g_center,x_320/` +
     `${baseId}`;
 }
+
+// add near your helpers
+function categoryHtml({ site, folder }) {
+  const title = `${folder === "home" ? "Home" : folder.charAt(0).toUpperCase() + folder.slice(1)} Matching PFP Pairs | MatchMade`;
+  const canonical = folder === "home" ? `${site}/` : `${site}/${folder}`;
+  const desc = `Browse ${folder} matching profile picture pairs. Download both sides in one click.`;
+
+  return `<!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>${title}</title>
+    <meta name="description" content="${desc}"/>
+    <link rel="canonical" href="${canonical}"/>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="/backgroundApp.css">
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="${title}"/>
+    <meta property="og:description" content="${desc}"/>
+    <meta property="og:url" content="${canonical}"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
+  </head>
+  <body class="App App-header">
+    <main>
+      <h1 class="title">MatchMade</h1>
+      <p class="sub-title">${desc}</p>
+      <p><a href="/">← Back to home</a></p>
+      <!-- The SPA will still hydrate when loaded via / (fallback). This page exists so /${folder} returns 200 for crawlers. -->
+    </main>
+  </body>
+  </html>`;
+}
+// emit a real HTML file for each category so /<category> returns 200
+for (const folder of FOLDERS) {
+  if (folder === "home") continue;
+  const outDir = path.join(OUT_PUBLIC, folder);
+  ensureDir(outDir);
+  fs.writeFileSync(path.join(outDir, "index.html"), categoryHtml({ site: SITE, folder }), "utf8");
+}
+
 function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl }) {
   const canonical = `${site}${pathForPair(folder, slug)}`;
   const safeTitle = escapeHtml(title);
@@ -78,42 +122,42 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   const backHref  = folder === "home" ? "/" : `/${folder}`;
   const backLabel = folder === "home" ? "Home" : escapeHtml(folder);
   return `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${safeTitle} | MatchMade</title>
-  <meta name="description" content="${safeDesc}"/>
-  <link rel="canonical" href="${canonical}"/>
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <link rel="stylesheet" href="/backgroundApp.css">
+  <html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>${safeTitle} | MatchMade</title>
+    <meta name="description" content="${safeDesc}"/>
+    <link rel="canonical" href="${canonical}"/>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="/backgroundApp.css">
 
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="MatchMade"/>
-  <meta property="og:title" content="${safeTitle} | MatchMade"/>
-  <meta property="og:description" content="${safeDesc}"/>
-  <meta property="og:url" content="${canonical}"/>
-  <meta property="og:image" content="${ogImage}"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image" content="${ogImage}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="MatchMade"/>
+    <meta property="og:title" content="${safeTitle} | MatchMade"/>
+    <meta property="og:description" content="${safeDesc}"/>
+    <meta property="og:url" content="${canonical}"/>
+    <meta property="og:image" content="${ogImage}"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="${ogImage}"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
-</head>
-<body class="App App-header">
-  <main>
-    <h1>${safeTitle}</h1>
-    <figure>
-      <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
-      <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
-    </figure>
-    <p><a href="${backHref}">← Back to ${backLabel}</a></p>
-  </main>
-</body>
-</html>`;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
+  </head>
+  <body class="App App-header">
+    <main>
+      <h1>${safeTitle}</h1>
+      <figure>
+        <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
+        <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
+      </figure>
+      <p><a href="${backHref}">← Back to ${backLabel}</a></p>
+    </main>
+  </body>
+  </html>`;
 }
 
 // cloudinary listing and pairing
