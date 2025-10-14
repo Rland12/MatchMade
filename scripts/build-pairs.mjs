@@ -199,11 +199,20 @@ function buildSitemapAndRobots() {
         changefreq: "monthly",
         priority: "0.8",
         lastmod: nowIso,
-        images: (item.imageSet || []).map(img => {
+        images: (item.imageSet || []).map((img, idx) => {
           const loc = img.publicId
-          ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
-          : img.url;
-          return { loc, title: item.title, caption: `${item.title} matching profile picture pair (${folder})` };
+            ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
+            : img.url;
+
+          const side = idx === 0 ? "Left" : "Right"; 
+          const folderLabel =
+            folder === "home" ? "" : ` (${toTitleCase(folder)})`;
+
+          return {
+            loc,
+            title: `${item.title} — ${side}`,
+            caption: `${item.title} matching profile picture pair${folderLabel}`
+          };
         })
       });
     }
