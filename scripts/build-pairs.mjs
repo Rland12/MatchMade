@@ -79,8 +79,8 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <meta name="description" content="${safeDesc}"/>
   <link rel="canonical" href="${canonical}"/>
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-  <link rel="stylesheet" href="../../styles.css"/>
-  
+  <link rel="stylesheet" href="/backgroundApp.css">
+
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="MatchMade"/>
   <meta property="og:title" content="${safeTitle} | MatchMade"/>
@@ -93,13 +93,13 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <meta name="twitter:image" content="${ogImage}"/>
 </head>
 <body>
-  <main style="margin:16px auto;max-width:1200px;padding:16px">
-    <h1 style="font:600 22px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif">${safeTitle}</h1>
-    <figure style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+  <main>
+    <h1>${safeTitle}</h1>
+    <figure>
       <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
       <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
     </figure>
-    <p><a href="/${folder}" style="text-decoration:none">← Back to ${escapeHtml(folder)}</a></p>
+    <p><a href="/${folder}">← Back to ${escapeHtml(folder)}</a></p>
   </main>
 </body>
 </html>`;
