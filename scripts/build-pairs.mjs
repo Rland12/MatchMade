@@ -74,9 +74,13 @@ function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS
 
 // add near your helpers
 function categoryHtml({ site, folder }) {
-  const title = `${folder === "home" ? "Home" : folder.charAt(0).toUpperCase() + folder.slice(1)} Matching PFP Pairs | MatchMade`;
+  const label = folder === "home" ? "Home" : toTitleCase(folder);
+  const title = `${label} Matching PFP Pairs | MatchMade`;
   const canonical = folder === "home" ? `${site}/` : `${site}/${folder}`;
-  const desc = `Browse ${folder} matching profile picture pairs. Download both sides in one click.`;
+  const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
+
+  // Optional: a simple OG image (uses your canvas placeholder)
+  const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
 
   return `<!doctype html>
   <html lang="en">
@@ -84,15 +88,20 @@ function categoryHtml({ site, folder }) {
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>${title}</title>
-    <meta name="description" content="${desc}"/>
+    <meta name="description" content="${escapeHtml(desc)}"/>
     <link rel="canonical" href="${canonical}"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="MatchMade"/>
+    <meta property="og:title" content="${escapeHtml(title)}"/>
+    <meta property="og:description" content="${escapeHtml(desc)}"/>
+    <meta property="og:url" content="${canonical}"/>
+    <meta property="og:image" content="${og}"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link rel="stylesheet" href="/backgroundApp.css">
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="${title}"/>
-    <meta property="og:description" content="${desc}"/>
-    <meta property="og:url" content="${canonical}"/>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
@@ -100,13 +109,14 @@ function categoryHtml({ site, folder }) {
   <body class="App App-header">
     <main>
       <h1>MatchMade</h1>
-      <p class="sub-title">${desc}</p>
+      <p class="sub-title">${escapeHtml(desc)}</p>
       <p><a href="/">← Back to home</a></p>
-      <!-- The SPA will still hydrate when loaded via / (fallback). This page exists so /${folder} returns 200 for crawlers. -->
+      <!-- Real HTML stub so /${folder} returns 200 for crawlers. SPA handles navigation client-side. -->
     </main>
   </body>
   </html>`;
 }
+
 // emit a real HTML file for each category so /<category> returns 200
 for (const folder of FOLDERS) {
   if (folder === "home") continue;
@@ -126,7 +136,7 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>${safeTitle} | MatchMade</title>
+    <title>${folder === "home" ? safeTitle : `${safeTitle} | ${toTitleCase(folder)} | MatchMade`}</title>
     <meta name="description" content="${safeDesc}"/>
     <link rel="canonical" href="${canonical}"/>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -260,7 +270,7 @@ function buildSitemapAndRobots() {
           return {
             loc,
             title: `${item.title} — ${side}`,
-            caption: `${item.title} matching profile picture pair${folderLabel}`
+            caption: `${item.title} matching profile picture pair${folder === "home" ? "" : ` (${toTitleCase(folder)})`}`
           };
         })
       });
@@ -369,7 +379,9 @@ async function run() {
       const ogImage = buildOgPairUrl(cloud, leftId, rightId, BASE_CANVAS_ID);
       const leftUrl = viewUrl(cloud, leftId, 900);
       const rightUrl = viewUrl(cloud, rightId, 900);
-      const desc = `Download the ${item.title} matching profile picture pair. Left and Right images included.`;
+      const cleanFolder = folder === "home" ? "" : `${toTitleCase(folder)} `;
+      const desc = `Browse ${cleanFolder}matching profile picture pairs for friends or special someone. Download both sides in one click.`;
+
 
       const html = pairHtml({
         site: SITE,
