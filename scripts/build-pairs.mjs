@@ -24,6 +24,7 @@ cloudinary.config({
 });
 
 // helpers
+
 function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
   return `/pair${seg}/${slug}`;
@@ -72,15 +73,88 @@ function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS
     `${baseId}`;
 }
 
-// add near your helpers
-function categoryHtml({ site, folder }) {
+function rawImageUrl(cloud, publicId) {
+  return `https://res.cloudinary.com/${cloud}/image/upload/${publicId}`;
+}
+
+function jsonLdBreadcrumb({ site, parts }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: parts.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      item: `${site}${p.path}`
+    }))
+  };
+}
+
+function jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId, rightPublicId }) {
+  const url = `${site}${pathForPair(folder, slug)}`;
+  const mk = (pubId, side) => ({
+    "@type": "ImageObject",
+    name: `${title} — ${side}`,
+    caption: `${title} matching profile picture pair${folder === "home" ? "" : ` (${toTitleCase(folder)})`}`,
+    url,
+    contentUrl: rawImageUrl(cloud, pubId),
+    thumbnailUrl: viewUrl(cloud, pubId, 512, "jpg")
+  });
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: title,
+      url,
+      hasPart: [mk(leftPublicId, "Left"), mk(rightPublicId, "Right")]
+    },
+    jsonLdBreadcrumb({
+      site,
+      parts: [
+        { name: "Home", path: "/" },
+        ...(folder !== "home" ? [{ name: toTitleCase(folder), path: `/${folder}` }] : []),
+        { name: title, path: pathForPair(folder, slug) }
+      ]
+    })
+  ];
+}
+
+function jsonLdCategoryPage({ site, folder, items }) {
+  const url = folder === "home" ? `${site}/` : `${site}/${folder}`;
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `${folder === "home" ? "Home" : toTitleCase(folder)} Matching PFP Pairs`,
+      url,
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: (items || []).slice(0, 50).map((it, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: it.title,
+          url: `${site}${pathForPair(folder, slugify(it.title))}`
+        }))
+      }
+    },
+    jsonLdBreadcrumb({
+      site,
+      parts: [
+        { name: "Home", path: "/" },
+        ...(folder !== "home" ? [{ name: toTitleCase(folder), path: `/${folder}` }] : [])
+      ]
+    })
+  ];
+}
+
+//keep near helpers
+function categoryHtml({ site, folder, items }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
   const title = `${label} Matching PFP Pairs | MatchMade`;
   const canonical = folder === "home" ? `${site}/` : `${site}/${folder}`;
   const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
-
-  // Optional: a simple OG image (uses your canvas placeholder)
   const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
+  const jsonLd = JSON.stringify(jsonLdCategoryPage({ site, folder, items }), null, 0);
 
   return `<!doctype html>
   <html lang="en">
@@ -105,6 +179,7 @@ function categoryHtml({ site, folder }) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
+    <script type="application/ld+json">${jsonLd}</script>
   </head>
   <body class="App App-header">
     <main>
@@ -117,20 +192,19 @@ function categoryHtml({ site, folder }) {
   </html>`;
 }
 
-// emit a real HTML file for each category so /<category> returns 200
-for (const folder of FOLDERS) {
-  if (folder === "home") continue;
-  const outDir = path.join(OUT_PUBLIC, folder);
-  ensureDir(outDir);
-  fs.writeFileSync(path.join(outDir, "index.html"), categoryHtml({ site: SITE, folder }), "utf8");
-}
 
-function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl }) {
+function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rightId, leftUrl, rightUrl }) {
   const canonical = `${site}${pathForPair(folder, slug)}`;
   const safeTitle = escapeHtml(title);
-  const safeDesc  = escapeHtml(desc);
-  const backHref  = folder === "home" ? "/" : `/${folder}`;
+  const safeDesc = escapeHtml(desc);
+  const backHref = folder === "home" ? "/" : `/${folder}`;
   const backLabel = folder === "home" ? "Home" : escapeHtml(folder);
+
+  const jsonLd = JSON.stringify(
+    jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId: leftId, rightPublicId: rightId }),
+    null, 0
+  );
+
   return `<!doctype html>
   <html lang="en">
   <head>
@@ -156,6 +230,7 @@ function pairHtml({ site, folder, slug, title, desc, ogImage, leftUrl, rightUrl 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
+    <script type="application/ld+json">${jsonLd}</script>
   </head>
   <body class="App App-header">
     <main>
@@ -276,17 +351,17 @@ function buildSitemapAndRobots() {
       });
     }
   }
-    const xml =
+  const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ` +
     `xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
     urls.map(u => {
       const imagesXml = (u.images || [])
-       .map(im => `    <image:image>`
-       + `<image:loc>${im.loc}</image:loc>`
-       + (im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : "")
-       + (im.caption ? `<image:caption>${escapeHtml(im.caption)}</image:caption>` : "")
-       + `</image:image>`)
+        .map(im => `    <image:image>`
+          + `<image:loc>${im.loc}</image:loc>`
+          + (im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : "")
+          + (im.caption ? `<image:caption>${escapeHtml(im.caption)}</image:caption>` : "")
+          + `</image:image>`)
         .join("\n");
       return [
         "  <url>",
@@ -385,14 +460,18 @@ async function run() {
 
       const html = pairHtml({
         site: SITE,
+        cloud,
         folder,
         slug,
         title: item.title,
         desc,
         ogImage,
+        leftId,
+        rightId,
         leftUrl,
-        rightUrl,
+        rightUrl
       });
+
 
       const relPairDir = folder === "home" ? path.join("pair", slug) : path.join("pair", folder, slug);
       const pairDir = path.join(OUT_PUBLIC, relPairDir);
@@ -414,6 +493,13 @@ async function run() {
       unmatched.slice(0, 10).forEach((id) => console.log(`     - ${id}`));
       if (unmatched.length > 10) console.log(`     ...and ${unmatched.length - 10} more`);
     }
+  }
+  // emit a real HTML file for each category so /<category> returns 200
+  for (const folder of FOLDERS) {
+    if (folder === "home") continue;
+    const outDir = path.join(OUT_PUBLIC, folder);
+    ensureDir(outDir);
+    fs.writeFileSync(path.join(outDir, "index.html"), categoryHtml({ site: SITE, folder }), "utf8");
   }
 
   const categoriesPath = path.join(OUT_DATA_DIR, "categories.json");
