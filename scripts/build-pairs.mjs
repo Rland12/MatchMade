@@ -29,18 +29,11 @@ function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
   return `/pair${seg}/${slug}`;
 }
-// === Improved Alt Text Generator ===
-function makeAltText({ base, side, folder }) {
-  const folderLabel =
-    folder === "home"
-      ? "matching profile picture pair"
-      : `${toTitleCase(folder)} matching profile picture pair`;
 
-  const sideLabel = side === "left"
-    ? "left image of the pair"
-    : "right image of the pair";
-
-  return `${folderLabel} titled "${toTitleCase(base)}", ${sideLabel}.`;
+function makeAltText(title, side, folder) {
+  const theme = folder && folder !== "home" ? `${toTitleCase(folder)} ` : "";
+  const sideLabel = side === "left" ? "left side" : "right side";
+  return `${theme}matching profile picture pair titled “${title}”, ${sideLabel}`;
 }
 
 function ensureDir(p) {
@@ -159,16 +152,23 @@ function jsonLdCategoryPage({ site, folder, items }) {
     })
   ];
 }
+function safeMaxIso(a, b) {
+  const t1 = a ? Date.parse(a) : 0;
+  const t2 = b ? Date.parse(b) : 0;
+  return new Date(Math.max(t1, t2) || Date.now()).toISOString();
+}
 
 
 //keep near helpers
-function categoryHtml({ site, folder, items }) {
+function categoryHtml({ site, folder, items, generatedAt }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
   const title = `${label} Matching PFP Pairs | MatchMade`;
   const canonical = folder === "home" ? `${site}/` : `${site}/${folder}`;
   const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
   const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
-  const jsonLd = JSON.stringify(jsonLdCategoryPage({ site, folder, items }), null, 0);
+  const [pageLd, crumbsLd] = jsonLdCategoryPage({ site, folder, items });
+  if (generatedAt) pageLd.dateModified = generatedAt;
+  const jsonLd = JSON.stringify([pageLd, crumbsLd], null, 0);
 
   return `<!doctype html>
   <html lang="en">
@@ -207,15 +207,25 @@ function categoryHtml({ site, folder, items }) {
 }
 
 
-function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rightId, leftUrl, rightUrl }) {
+function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rightId, leftUrl, rightUrl, leftCreatedAt, rightCreatedAt }) {
   const canonical = `${site}${pathForPair(folder, slug)}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(desc);
   const backHref = folder === "home" ? "/" : `/${folder}`;
   const backLabel = folder === "home" ? "Home" : escapeHtml(folder);
 
+  const leftTs = leftCreatedAt ? Date.parse(leftCreatedAt) : 0;
+  const rightTs = rightCreatedAt ? Date.parse(rightCreatedAt) : 0;
+  const latestTs = Math.max(leftTs, rightTs) || Date.now();
+  const earliestTs = Math.min(...[leftTs, rightTs].filter(Boolean)) || latestTs;
+  const dateModified = new Date(latestTs).toISOString();
+  const datePublished = new Date(earliestTs).toISOString();
   const jsonLd = JSON.stringify(
-    jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId: leftId, rightPublicId: rightId }),
+    {
+      ...jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId: leftId, rightPublicId: rightId })[0],
+      datePublished,
+      dateModified
+    },
     null, 0
   );
 
@@ -238,6 +248,7 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
     <meta property="og:image" content="${ogImage}"/>
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="630"/>
+    <meta property="og:updated_time" content="${dateModified}"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:image" content="${ogImage}"/>
 
@@ -278,9 +289,11 @@ async function listAllInFolder(folder) {
 function toPairs(resources, folder) {
   const unmatched = [];
   const partial = new Map();
-  const map = new Map();
+  const map = new Map(); // key -> { dir, base, left: {publicId, createdAt}? , right: {...}? }
 
   for (const r of resources) {
+    // r.created_at is returned by Cloudinary Search (ISO string)
+    const createdAt = r.created_at || null;
     const parts = r.public_id.split("/");
     const filename = parts.pop();
     const dir = parts.join("/");
@@ -294,8 +307,9 @@ function toPairs(resources, folder) {
     const side = m[2].toLowerCase();
     const key = `${dir}/${base}`;
 
-    if (!map.has(key)) map.set(key, { dir, base, left: null, right: null });
+    if (!map.has(key)) map.set(key, { dir, base, left: null, right: null, leftMeta: null, rightMeta: null });
     map.get(key)[side] = r.public_id;
+    map.get(key)[`${side}Meta`] = { createdAt };
 
     const p = partial.get(key) || {};
     p[side] = r.public_id;
@@ -311,8 +325,8 @@ function toPairs(resources, folder) {
         title,
         base: p.base,
         imageSet: [
-          { publicId: p.left, alt: makeAltText({ base: p.base, side: "left", folder }) },
-          { publicId: p.right, alt: makeAltText({ base: p.base, side: "right", folder }) },
+          { publicId: p.left, alt: makeAltText(title, "left", p.dir.split("/")[0]), createdAt: p.leftMeta?.createdAt || null },
+          { publicId: p.right, alt: makeAltText(title, "right", p.dir.split("/")[0]), createdAt: p.rightMeta?.createdAt || null },
         ],
       };
     });
@@ -329,11 +343,15 @@ function buildSitemapAndRobots() {
   const nowIso = new Date().toISOString();
   const urls = [];
 
-  urls.push({ loc: `${SITE}/`, changefreq: "weekly", priority: "1.0", lastmod: nowIso });
-
   for (const folder of FOLDERS) {
     if (folder === "home") continue;
-    urls.push({ loc: `${SITE}/${folder}`, changefreq: "weekly", priority: "0.9", lastmod: nowIso });
+    const fp = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
+    let catLastmod = nowIso;
+    if (fs.existsSync(fp)) {
+      const data = JSON.parse(fs.readFileSync(fp, "utf8"));
+      catLastmod = data.generatedAt || nowIso;
+    }
+    urls.push({ loc: `${SITE}/${folder}`, changefreq: "weekly", priority: "0.9", lastmod: catLastmod });
   }
 
   for (const folder of FOLDERS) {
@@ -347,7 +365,10 @@ function buildSitemapAndRobots() {
         loc: `${SITE}${pathForPair(folder, slug)}`,
         changefreq: "monthly",
         priority: "0.8",
-        lastmod: nowIso,
+        lastmod: safeMaxIso(
+          (item.imageSet?.[0]?.createdAt) || null,
+          (item.imageSet?.[1]?.createdAt) || null
+        ),
         images: (item.imageSet || []).map((img, idx) => {
           const loc = img.publicId
             ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
@@ -464,6 +485,8 @@ async function run() {
       const slug = slugify(item.title);
       const leftId = item.imageSet[0].publicId;
       const rightId = item.imageSet[1].publicId;
+      const leftCreatedAt = item.imageSet[0].createdAt || null;
+      const rightCreatedAt = item.imageSet[1].createdAt || null;
 
       const ogImage = buildOgPairUrl(cloud, leftId, rightId, BASE_CANVAS_ID);
       const leftUrl = viewUrl(cloud, leftId, 900);
@@ -483,7 +506,9 @@ async function run() {
         leftId,
         rightId,
         leftUrl,
-        rightUrl
+        rightUrl,
+        leftCreatedAt,
+        rightCreatedAt
       });
 
 
@@ -513,7 +538,19 @@ async function run() {
     if (folder === "home") continue;
     const outDir = path.join(OUT_PUBLIC, folder);
     ensureDir(outDir);
-    fs.writeFileSync(path.join(outDir, "index.html"), categoryHtml({ site: SITE, folder }), "utf8");
+    const fp = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
+    let items = [];
+    let generatedAt = null;
+    if (fs.existsSync(fp)) {
+      const data = JSON.parse(fs.readFileSync(fp, "utf8"));
+      items = data.items || [];
+      generatedAt = data.generatedAt || null;
+    }
+    fs.writeFileSync(
+      path.join(outDir, "index.html"),
+      categoryHtml({ site: SITE, folder, items, generatedAt }),
+      "utf8"
+    );
   }
 
   const categoriesPath = path.join(OUT_DATA_DIR, "categories.json");

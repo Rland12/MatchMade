@@ -13,9 +13,16 @@ const humanize = (s) =>
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
+
+const makeAltText = (title, side, folder) => {
+  const theme = folder && folder !== "home" ? `${humanize(folder)} ` : "";
+  const sideLabel = side === "left" ? "left side" : "right side";
+  return `${theme}matching profile picture pair titled “${title}”, ${sideLabel}`;
+};
+
 export default function PairSEO() {
   const params = useParams();
-  const isCleanHome = params.slug && !params.folder;       // /pair/:slug
+  const isCleanHome = params.slug && !params.folder; // /pair/:slug
   const folder = isCleanHome ? "home" : (params.folder || "home");
   const slug = isCleanHome ? params.slug : (params.slug || "");
   const [state, setState] = useState({ loading: true, error: null, item: null });
@@ -99,11 +106,14 @@ export default function PairSEO() {
             const src = img.publicId
               ? cldUrl(img.publicId, { w: 1024, h: 1024, fit: "fill", g: "auto" })
               : img.url;
+            const side = i === 0 ? "left" : "right";
+            const alt = (img.alt && img.alt.trim()) || makeAltText(item.title, side, folder);
+
             return (
               <div className="col-12 col-md-6 mb-3" key={(img.publicId || img.url) || i}>
                 <img
                   src={src}
-                  alt={img.alt || item.title}
+                  alt={alt}
                   loading="eager"
                   decoding="sync"
                   className="img-fluid rounded"
@@ -120,4 +130,3 @@ export default function PairSEO() {
     </>
   );
 }
-

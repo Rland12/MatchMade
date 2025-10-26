@@ -23,6 +23,12 @@ const humanize = (s) =>
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
+const makeAltText = (title, side, folder) => {
+  const theme = folder && folder !== "home" ? `${humanize(folder)} ` : "";
+  const sideLabel = side === "left" ? "left side" : "right side";
+  return `${theme}matching profile picture pair titled “${title}”, ${sideLabel}`;
+};
+
 export default function ImagePairs({ handleClick }) {
   const params = useParams();
   const isHome = !params.category;           // "/" has no category segment
@@ -224,7 +230,7 @@ function PairCard({ pair, handleClick }) {
       href={hrefStr}
       className="row text-decoration-none"
       role="button"
-      aria-label={`${pair.title} – open preview`}
+      aria-label={`${pair.title} - open preview`}
       onClick={openAsModal}
       onKeyDown={onKeyDown}
     >
@@ -233,12 +239,14 @@ function PairCard({ pair, handleClick }) {
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
         const tinySrc = isCloud ? cldUrl(img.publicId, { w: 24, q: 10, blur: 2000 }) : null;
 
+        const side = index === 0 ? "left" : "right";
+        const alt = (img.alt && img.alt.trim()) || makeAltText(pair.title, side, folder);
         return (
           <MMImage
             key={(img.publicId || img.url || "") + index}
             src={fullSrc}
             tiny={tinySrc}
-            alt={img.alt}
+            alt={alt}
           />
         );
       })}
