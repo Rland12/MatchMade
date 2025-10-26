@@ -2,7 +2,6 @@
 // Dedicated route for a single pair: /pair/:folder/:slug
 // - Renders both images so crawlers can index them.
 // - Emits per-pair <title>, description, canonical, and (optional) OG/Twitter.
-// - Still works with your modal via a window event if you want.
 
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";

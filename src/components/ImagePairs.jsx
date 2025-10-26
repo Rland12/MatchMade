@@ -24,8 +24,9 @@ const humanize = (s) =>
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
 export default function ImagePairs({ handleClick }) {
-  const category = useParams().category || "/";
-  const folder = folderForCategory(category);
+  const params = useParams();
+  const isHome = !params.category;           // "/" has no category segment
+  const folder = folderForCategory(params.category || "/");
 
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPageParam = searchParams.get("page") ?? searchParams.get("p");
@@ -107,12 +108,19 @@ export default function ImagePairs({ handleClick }) {
   };
 
   const prettyCat = humanize(folder);
-  const baseUrl = `${SITE}/${folder}`;
-  const canonical = page > 1 ? `${baseUrl}?page=${page}` : baseUrl;
-  const title = page > 1
-    ? `${prettyCat} Matching PFP Pairs - Page ${page} | MatchMade`
-    : `${prettyCat} Matching PFP Pairs | MatchMade`;
-  const description = `Browse ${prettyCat} matching profile picture pairs. Download both sides in one click. Page ${page} of ${totalPages}.`;
+  const baseUrl = isHome ? `${SITE}/` : `${SITE}/${folder}`;
+  const canonical = page > 1 && !isHome ? `${baseUrl}?page=${page}` : baseUrl;
+  // For home, use the site-wide title/desc you want (or skip Helmet entirely)
+  const homeTitle = "MatchMade — Matching Profile Picture Pairs";
+  const homeDesc = "Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps.";
+  const title = isHome
+    ? homeTitle
+    : (page > 1
+      ? `${prettyCat} Matching PFP Pairs - Page ${page} | MatchMade`
+      : `${prettyCat} Matching PFP Pairs | MatchMade`);
+  const description = isHome
+    ? homeDesc
+    : `Browse ${prettyCat} matching profile picture pairs. Download both sides in one click. Page ${page} of ${totalPages}.`;
 
   if (state.error) return <NotFound />;
   if (state.loading && pageItems.length === 0) {
@@ -125,8 +133,8 @@ export default function ImagePairs({ handleClick }) {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
-        {page > 1 && <link rel="prev" href={`${baseUrl}?page=${page - 1}`} />}
-        {page < totalPages && <link rel="next" href={`${baseUrl}?page=${page + 1}`} />}
+        {!isHome && page > 1 && <link rel="prev" href={`${baseUrl}?page=${page - 1}`} />}
+        {!isHome && page < totalPages && <link rel="next" href={`${baseUrl}?page=${page + 1}`} />}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
