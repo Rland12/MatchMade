@@ -29,6 +29,19 @@ function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
   return `/pair${seg}/${slug}`;
 }
+// === Improved Alt Text Generator ===
+function makeAltText({ base, side, folder }) {
+  const folderLabel =
+    folder === "home"
+      ? "matching profile picture pair"
+      : `${toTitleCase(folder)} matching profile picture pair`;
+
+  const sideLabel = side === "left"
+    ? "left image of the pair"
+    : "right image of the pair";
+
+  return `${folderLabel} titled "${toTitleCase(base)}", ${sideLabel}.`;
+}
 
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
@@ -147,6 +160,7 @@ function jsonLdCategoryPage({ site, folder, items }) {
   ];
 }
 
+
 //keep near helpers
 function categoryHtml({ site, folder, items }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
@@ -261,7 +275,7 @@ async function listAllInFolder(folder) {
   } while (next);
   return resources;
 }
-function toPairs(resources) {
+function toPairs(resources, folder) {
   const unmatched = [];
   const partial = new Map();
   const map = new Map();
@@ -297,8 +311,8 @@ function toPairs(resources) {
         title,
         base: p.base,
         imageSet: [
-          { publicId: p.left, alt: `${title} — Left` },
-          { publicId: p.right, alt: `${title} — Right` },
+          { publicId: p.left, alt: makeAltText({ base: p.base, side: "left", folder }) },
+          { publicId: p.right, alt: makeAltText({ base: p.base, side: "right", folder }) },
         ],
       };
     });
@@ -434,7 +448,7 @@ async function run() {
   for (const folder of FOLDERS) {
     console.log(`→ Building pairs for folder: ${folder}`);
     const resources = await listAllInFolder(folder);
-    const { complete, unmatched, incomplete } = toPairs(resources);
+    const { complete, unmatched, incomplete } = toPairs(resources, folder);
 
     const jsonOut = {
       folder,
