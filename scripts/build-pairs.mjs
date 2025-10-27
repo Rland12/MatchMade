@@ -61,6 +61,9 @@ function escapeHtml(s) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 }
+function stripTrailingPair(title = "") {
+  return String(title).replace(/\s*Pair$/i, "").trim();
+}
 function asOverlayId(publicId) {
   return String(publicId)
     .replace(/\.(png|jpe?g|webp|avif|gif)$/i, "")
@@ -378,7 +381,7 @@ function buildSitemapAndRobots() {
           return {
             loc,
             title: `${item.title} — ${side}`,
-            caption: `${item.title} matching profile picture pair${capFolder}`
+            caption: `${stripTrailingPair(item.title)} matching profile picture pair${capFolder}`
           };
         })
       });
