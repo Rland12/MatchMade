@@ -155,8 +155,10 @@ function jsonLdCategoryPage({ site, folder, items }) {
 function safeMaxIso(a, b) {
   const t1 = a ? Date.parse(a) : 0;
   const t2 = b ? Date.parse(b) : 0;
-  return new Date(Math.max(t1, t2) || Date.now()).toISOString();
+  const max = Math.max(t1, t2);
+  return max ? new Date(max).toISOString() : undefined;
 }
+
 
 
 //keep near helpers
@@ -177,6 +179,7 @@ function categoryHtml({ site, folder, items, generatedAt }) {
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>${title}</title>
     <meta name="description" content="${escapeHtml(desc)}"/>
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="${canonical}"/>
 
     <meta property="og:type" content="website"/>
@@ -236,6 +239,7 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>${folder === "home" ? safeTitle : `${safeTitle} | ${toTitleCase(folder)} | MatchMade`}</title>
     <meta name="description" content="${safeDesc}"/>
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="${canonical}"/>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link rel="stylesheet" href="/backgroundApp.css">
@@ -261,8 +265,8 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
     <main>
       <h1>${safeTitle}</h1>
       <figure>
-        <img src="${leftUrl}" alt="${safeTitle} — Left" width="900" height="900" style="max-width:48%;height:auto"/>
-        <img src="${rightUrl}" alt="${safeTitle} — Right" width="900" height="900" style="max-width:48%;height:auto"/>
+        <img src="${leftUrl}" alt="${escapeHtml(makeAltText(title, "left", folder))}"  width="900" height="900" style="max-width:48%;height:auto"/>
+        <img src="${rightUrl}" alt="${escapeHtml(makeAltText(title, "right", folder))}" width="900" height="900" style="max-width:48%;height:auto"/>
       </figure>
       <p><a href="${backHref}">← Back to ${backLabel}</a></p>
     </main>
@@ -286,9 +290,9 @@ async function listAllInFolder(folder) {
   } while (next);
   return resources;
 }
-function toPairs(resources, folder) {
+function toPairs(resources) {
   const unmatched = [];
-  const partial = new Map();
+  const partial = new Map(); // key -> { left:{id,ts}, right:{id,ts} }
   const map = new Map(); // key -> { dir, base, left: {publicId, createdAt}? , right: {...}? }
 
   for (const r of resources) {
@@ -340,64 +344,78 @@ function toPairs(resources, folder) {
 
 // sitemap and robots
 function buildSitemapAndRobots() {
-  const nowIso = new Date().toISOString();
   const urls = [];
+  const folderNewest = new Map(); // folder -> ISO lastmod (newest pair item)
+  let newestAll = 0;
 
-  for (const folder of FOLDERS) {
-    if (folder === "home") continue;
-    const fp = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
-    let catLastmod = nowIso;
-    if (fs.existsSync(fp)) {
-      const data = JSON.parse(fs.readFileSync(fp, "utf8"));
-      catLastmod = data.generatedAt || nowIso;
-    }
-    urls.push({ loc: `${SITE}/${folder}`, changefreq: "weekly", priority: "0.9", lastmod: catLastmod });
-  }
-
+  // Pairs + gather newest times
   for (const folder of FOLDERS) {
     const p = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
     if (!fs.existsSync(p)) continue;
     const json = JSON.parse(fs.readFileSync(p, "utf8"));
+    let newestInFolder = 0;
+
     for (const item of json.items || []) {
       const slug = slugify(item.title || "");
       if (!slug) continue;
+
+      const pairLast = safeMaxIso(item.imageSet?.[0]?.createdAt, item.imageSet?.[1]?.createdAt);
+      const pairTs = pairLast ? Date.parse(pairLast) : 0;
+      newestInFolder = Math.max(newestInFolder, pairTs);
+      newestAll = Math.max(newestAll, pairTs);
+
       urls.push({
         loc: `${SITE}${pathForPair(folder, slug)}`,
         changefreq: "monthly",
         priority: "0.8",
-        lastmod: safeMaxIso(
-          (item.imageSet?.[0]?.createdAt) || null,
-          (item.imageSet?.[1]?.createdAt) || null
-        ),
+        lastmod: pairLast,
         images: (item.imageSet || []).map((img, idx) => {
           const loc = img.publicId
             ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
             : img.url;
-
           const side = idx === 0 ? "Left" : "Right";
-          const folderLabel = folder === "home" ? "" : ` (${toTitleCase(folder)})`;
-
+          const capFolder = folder === "home" ? "" : ` (${toTitleCase(folder)})`;
           return {
             loc,
             title: `${item.title} — ${side}`,
-            caption: `${item.title} matching profile picture pair${folder === "home" ? "" : ` (${toTitleCase(folder)})`}`
+            caption: `${item.title} matching profile picture pair${capFolder}`
           };
         })
       });
     }
+
+    // category entry (skip home here; we’ll add home separately)
+    if (folder !== "home") {
+      folderNewest.set(folder, newestInFolder ? new Date(newestInFolder).toISOString() : undefined);
+      urls.push({
+        loc: `${SITE}/${folder}`,
+        changefreq: "weekly",
+        priority: "0.9",
+        lastmod: folderNewest.get(folder),
+      });
+    }
   }
+
+  // Home entry = newest across all folders
+  urls.unshift({
+    loc: `${SITE}/`,
+    changefreq: "weekly",
+    priority: "1.0",
+    lastmod: newestAll ? new Date(newestAll).toISOString() : undefined,
+  });
+
+  // Build XML (only include <lastmod> if present)
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ` +
-    `xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
     urls.map(u => {
       const imagesXml = (u.images || [])
-        .map(im => `    <image:image>`
-          + `<image:loc>${im.loc}</image:loc>`
-          + (im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : "")
-          + (im.caption ? `<image:caption>${escapeHtml(im.caption)}</image:caption>` : "")
-          + `</image:image>`)
-        .join("\n");
+        .map(im => `    <image:image>` +
+          `<image:loc>${im.loc}</image:loc>` +
+          (im.title ? `<image:title>${escapeHtml(im.title)}</image:title>` : "") +
+          (im.caption ? `<image:caption>${escapeHtml(im.caption)}</image:caption>` : "") +
+          `</image:image>`).join("\n");
+
       return [
         "  <url>",
         `    <loc>${u.loc}</loc>`,
@@ -469,7 +487,7 @@ async function run() {
   for (const folder of FOLDERS) {
     console.log(`→ Building pairs for folder: ${folder}`);
     const resources = await listAllInFolder(folder);
-    const { complete, unmatched, incomplete } = toPairs(resources, folder);
+    const { complete, unmatched, incomplete } = toPairs(resources);
 
     const jsonOut = {
       folder,
@@ -540,15 +558,23 @@ async function run() {
     ensureDir(outDir);
     const fp = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
     let items = [];
-    let generatedAt = null;
+    let lastmod = null;
+
     if (fs.existsSync(fp)) {
       const data = JSON.parse(fs.readFileSync(fp, "utf8"));
       items = data.items || [];
-      generatedAt = data.generatedAt || null;
+
+      // compute newest per folder from item image timestamps
+      const newest = items.reduce((acc, it) => {
+        const iso = safeMaxIso(it.imageSet?.[0]?.createdAt, it.imageSet?.[1]?.createdAt);
+        return Math.max(acc, iso ? Date.parse(iso) : 0);
+      }, 0);
+      lastmod = newest ? new Date(newest).toISOString() : null;
     }
+
     fs.writeFileSync(
       path.join(outDir, "index.html"),
-      categoryHtml({ site: SITE, folder, items, generatedAt }),
+      categoryHtml({ site: SITE, folder, items, generatedAt: lastmod }),
       "utf8"
     );
   }
