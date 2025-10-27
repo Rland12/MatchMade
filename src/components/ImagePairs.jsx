@@ -5,6 +5,7 @@ import { Helmet } from "@dr.pogodin/react-helmet";
 import { slugify } from "@/utils/slug";
 import NotFound from "./NotFound";
 import { cldUrl } from "../libs/cdn";
+import { analytics } from "@/libs/analytics";
 
 const PAIRS_PER_PAGE = 6;
 const SITE = "https://www.matchmadepics.com";
@@ -209,6 +210,8 @@ function PairCard({ pair, handleClick }) {
 
   const openAsModal = (e) => {
     if (e) e.preventDefault();
+    // Track “select item” (click from list to detail)
+    analytics.selectItem({ folder, slug, title: pair.title });
     navigate(hrefStr, { state: { modal: true, backgroundLocation: location } });
 
     const payload = pair;

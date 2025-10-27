@@ -1,15 +1,34 @@
 import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import ModalJs from "bootstrap/js/dist/modal";
 import { cldUrl } from "../libs/cdn";
+import { analytics } from "@/libs/analytics";
+import { slugify } from "@/utils/slug";
 
 function Modal(props) {
-   const { selectedImages, onClose } = props;
+  const { selectedImages, onClose } = props;
 
   const set = selectedImages?.imageSet ?? [];
   const title = selectedImages?.title ?? "";
 
   const modalRef = useRef(null);
   const lastActiveRef = useRef(null);
+  const sentViewRef = useRef(false);
+
+  const location = useLocation();
+
+  // Derive folder from the current URL: /pair/:slug  => home,  /pair/:folder/:slug => folder
+  const getFolderFromPath = () => {
+    const path = location?.pathname || "/";
+    // normalize
+    const parts = path.replace(/^\/+|\/+$/g, "").split("/");
+    // expect ["pair", "<slug>"] or ["pair", "<folder>", "<slug>"]
+    if (parts[0] !== "pair") return "home";
+    if (parts.length === 2) return "home";
+    if (parts.length >= 3) return parts[1] || "home";
+    return "home";
+  };
+  const folder = getFolderFromPath();
 
   // Focus management
   useEffect(() => {
@@ -22,10 +41,9 @@ function Modal(props) {
       }
     };
 
-      el.addEventListener("hide.bs.modal", onHide);
-      return () => el.removeEventListener("hide.bs.modal", onHide);
+    el.addEventListener("hide.bs.modal", onHide);
+    return () => el.removeEventListener("hide.bs.modal", onHide);
   }, []);
-
 
   useEffect(() => {
     const el = modalRef.current;
@@ -42,6 +60,8 @@ function Modal(props) {
       if (lastActiveRef.current instanceof HTMLElement) {
         lastActiveRef.current.focus();
       }
+      // allow a fresh view event next time this opens
+      sentViewRef.current = false;
       // ensure state resets so same pair can reopen cleanly
       if (typeof onClose === "function") onClose();
     };
@@ -53,9 +73,8 @@ function Modal(props) {
       el.removeEventListener("hidden.bs.modal", onHidden);
     };
   }, [onClose]);
-  
 
-  // Open when selectedImages changes
+  // Open when selectedImages changes + send GA view_item once per open
   useEffect(() => {
     const hasImages =
       selectedImages &&
@@ -69,15 +88,39 @@ function Modal(props) {
     Promise.resolve().then(() => {
       requestAnimationFrame(() => {
         const instance = ModalJs.getOrCreateInstance(el);
+        // Attach a one-time listener for the "shown" event to fire view_item
+        const onShown = () => {
+          if (!sentViewRef.current) {
+            analytics.viewItem({
+              folder,
+              slug: slugify(title || ""),
+              title: title || ""
+            });
+            sentViewRef.current = true;
+          }
+          el.removeEventListener("shown.bs.modal", onShown);
+        };
+        el.addEventListener("shown.bs.modal", onShown);
         instance.show();
       });
     });
-  }, [selectedImages]);
+  }, [selectedImages, folder, title]);
 
   const getViewSrc = (img) =>
     img.publicId ? cldUrl(img.publicId, { w: 900, fit: "fit" }) : img.url;
 
   const getRawHref = (img) => (img.publicId ? cldUrl(img.publicId) : img.url);
+
+  const whichSide = (img, index) => {
+    const a = (img?.alt || "").toLowerCase();
+    const pid = String(img?.publicId || "").toLowerCase();
+    if (a.includes("— left") || a.includes(" - left") || a.endsWith(" left")) return "left";
+    if (a.includes("— right") || a.includes(" - right") || a.endsWith(" right")) return "right";
+    if (pid.includes("left")) return "left";
+    if (pid.includes("right")) return "right";
+    // fallback to position
+    return index === 0 ? "left" : "right";
+  };
 
   const mimeToExt = {
     "image/avif": "avif",
@@ -88,47 +131,73 @@ function Modal(props) {
   };
 
   const handleDownload = async () => {
-  if (!set.length) return;
+    if (!set.length) return;
 
-  try {
-    const { default: JSZip } = await import("jszip");
-    const { saveAs } = await import("file-saver");
-
-    const zip = new JSZip();
-    const base = (title || "matchmade-pair")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-
-    const folder = zip.folder(base) || zip;
-
-    const blobs = await Promise.all(
-      set.map(async (img, i) => {
+    // Track the click(s) before starting heavy work
+    try {
+      // per-side events
+      set.forEach((img, i) => {
+        const side = whichSide(img, i);
         const url = getRawHref(img);
-        const res = await fetch(url, { mode: "cors" });
-        if (!res.ok) throw new Error(`fetch ${i + 1}: ${res.status}`);
-        const blob = await res.blob();
-        const ext = mimeToExt[blob.type] || "jpg";
-        folder.file(`${base}_${i + 1}.${ext}`, blob);
-      })
-    );
+        analytics.downloadPfp({
+          folder,
+          slug: slugify(title || ""),
+          title: title || "",
+          side,
+          format: (url.split("?")[0].split(".").pop() || "jpg").toLowerCase(),
+          url
+        });
+      });
+      // summary event
+      analytics.send?.("download_pfp_pair", {
+        item_id: slugify(title || ""),
+        item_name: title || "",
+        item_category: folder || "home",
+        count: set.length
+      });
+    } catch {
+      // no-op if analytics wrapper isn't loaded
+    }
 
-    const zipBlob = await zip.generateAsync({ type: "blob" });
-    saveAs(zipBlob, `${base}.zip`);
-  } catch (err) {
-    console.error("ZIP download failed:", err);
-    // fallback: open each image in a new tab
-    set.forEach((img, i) => {
-      const a = document.createElement("a");
-      a.href = img.publicId
-        ? cldUrl(img.publicId, { attach: `matchmade_image_${i + 1}` })
-        : img.url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.click();
-    });
-  }
-};
+    try {
+      const { default: JSZip } = await import("jszip");
+      const { saveAs } = await import("file-saver");
+
+      const zip = new JSZip();
+      const base = (title || "matchmade-pair")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+      const folderZip = zip.folder(base) || zip;
+
+      await Promise.all(
+        set.map(async (img, i) => {
+          const url = getRawHref(img);
+          const res = await fetch(url, { mode: "cors" });
+          if (!res.ok) throw new Error(`fetch ${i + 1}: ${res.status}`);
+          const blob = await res.blob();
+          const ext = mimeToExt[blob.type] || "jpg";
+          folderZip.file(`${base}_${i + 1}.${ext}`, blob);
+        })
+      );
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      saveAs(zipBlob, `${base}.zip`);
+    } catch (err) {
+      console.error("ZIP download failed:", err);
+      // fallback: open each image in a new tab
+      set.forEach((img, i) => {
+        const a = document.createElement("a");
+        a.href = img.publicId
+          ? cldUrl(img.publicId, { attach: `matchmade_image_${i + 1}` })
+          : img.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.click();
+      });
+    }
+  };
 
   return (
     <div
@@ -145,7 +214,7 @@ function Modal(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h2 className="modal-title fs-3" id="modalTitle">{title}</h2>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
 
           <div className="modal-body">
