@@ -27,7 +27,7 @@ cloudinary.config({
 
 function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
-  return `/pair${seg}/${slug}`;
+  return `/pair${seg}/${slug}/`;
 }
 
 function makeAltText(title, side, folder) {
@@ -129,7 +129,7 @@ function jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId, rightP
 }
 
 function jsonLdCategoryPage({ site, folder, items }) {
-  const url = folder === "home" ? `${site}/` : `${site}/${folder}`;
+  const url = folder === "home" ? `${site}/` : `${site}/${folder}/`;
   return [
     {
       "@context": "https://schema.org",
@@ -168,7 +168,7 @@ function safeMaxIso(a, b) {
 function categoryHtml({ site, folder, items, generatedAt }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
   const title = `${label} Matching PFP Pairs | MatchMade`;
-  const canonical = folder === "home" ? `${site}/` : `${site}/${folder}`;
+  const canonical = folder === "home" ? `${site}/` : `${site}/${folder}/`;
   const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
   const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
   const [pageLd, crumbsLd] = jsonLdCategoryPage({ site, folder, items });
@@ -217,7 +217,7 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
   const canonical = `${site}${pathForPair(folder, slug)}`;
   const safeTitle = escapeHtml(title);
   const safeDesc = escapeHtml(desc);
-  const backHref = folder === "home" ? "/" : `/${folder}`;
+  const backHref = folder === "home" ? "/" : `/${folder}/`;
   const backLabel = folder === "home" ? "Home" : escapeHtml(folder);
 
   const leftTs = leftCreatedAt ? Date.parse(leftCreatedAt) : 0;
@@ -391,7 +391,7 @@ function buildSitemapAndRobots() {
     if (folder !== "home") {
       folderNewest.set(folder, newestInFolder ? new Date(newestInFolder).toISOString() : undefined);
       urls.push({
-        loc: `${SITE}/${folder}`,
+        loc: `${SITE}/${folder}/`,
         changefreq: "weekly",
         priority: "0.9",
         lastmod: folderNewest.get(folder),
