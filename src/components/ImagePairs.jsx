@@ -115,9 +115,9 @@ export default function ImagePairs({ handleClick }) {
   };
 
   const prettyCat = humanize(folder);
-  const baseUrl = isHome ? `${SITE}/` : `${SITE}/${folder}`;
+  const baseUrl = isHome ? `${SITE}/` : `${SITE}/${folder}/`;
   const canonical = page > 1 && !isHome ? `${baseUrl}?page=${page}` : baseUrl;
-  // For home, use the site-wide title/desc you want (or skip Helmet entirely)
+ 
   const homeTitle = "MatchMade — Matching Profile Picture Pairs";
   const homeDesc = "Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps.";
   const title = isHome
