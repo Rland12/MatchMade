@@ -5,10 +5,6 @@ import { v2 as cloudinary } from "cloudinary";
 
 // config
 const SITE = "https://www.matchmadepics.com";
-const FOLDERS = (process.env.PAIRS_FOLDERS || "home,anime,cartoons,cute,lgbtq")
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
 
 const OUT_PUBLIC = path.join(process.cwd(), "public");
 const OUT_DATA_DIR = path.join(OUT_PUBLIC, "data");
@@ -23,7 +19,66 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// helpers
+const PARENT = "categories";
+
+// Helpers
+
+// ---- Dynamic folder discovery under /categories ----
+async function listSubfoldersPaginated(parent = PARENT) {
+  const all = [];
+  let next;
+  while (true) {
+    const res = await cloudinary.api.sub_folders(parent, { next_cursor: next });
+    if (Array.isArray(res.folders)) all.push(...res.folders.map(f => f.name));
+    if (!res.next_cursor) break;
+    next = res.next_cursor;
+  }
+  return all;
+}
+
+/**
+ * Final category list priority:
+ * 1) If PAIRS_FOLDERS is set, use it (explicit control).
+ * 2) Else, auto-discover subfolders under /categories.
+ * 3) Optional allow/deny filters via PAIRS_ALLOW / PAIRS_DENY.
+ * 4) Fallback default if Admin API fails.
+ * Keeps 'home' first even if home isn't under /categories.
+ */
+async function getCategoryFolders() {
+  const parseCsv = (s = "") =>
+    String(s).split(",").map(x => x.trim()).filter(Boolean);
+
+  const envList = parseCsv(process.env.PAIRS_FOLDERS || "");
+  if (envList.length) return envList;
+
+  try {
+    let list = await listSubfoldersPaginated(PARENT); // e.g. ["anime","cartoons","cute","lgbtq"]
+
+    // optional allow/deny
+    const allow = new Set(parseCsv(process.env.PAIRS_ALLOW || ""));
+    const deny  = new Set(parseCsv(process.env.PAIRS_DENY || ""));
+    if (allow.size) list = list.filter(n => allow.has(n));
+    if (deny.size)  list = list.filter(n => !deny.has(n));
+
+    // ensure 'home' is present and first (your site uses it)
+    if (!list.includes("home")) list = ["home", ...list];
+
+    list.sort((a, b) => {
+      if (a === "home" && b !== "home") return -1;
+      if (b === "home" && a !== "home") return 1;
+      return a.localeCompare(b);
+    });
+
+    return list.length ? list : ["home","anime","cartoons","cute","lgbtq"];
+  } catch (err) {
+    console.warn("Cloudinary Admin API failed; using fallback:", err?.message);
+    return ["home","anime","cartoons","cute","lgbtq"];
+  }
+}
+
+let FOLDERS = [];
+FOLDERS = await getCategoryFolders();
+console.log("→ Using categories:", FOLDERS.join(", "));
 
 function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
@@ -279,11 +334,12 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
 
 // cloudinary listing and pairing
 async function listAllInFolder(folder) {
+  const folderPath = `${PARENT}/${folder}`;
   const resources = [];
   let next = null;
   do {
     const res = await cloudinary.search
-      .expression(`folder:${folder}/* AND resource_type:image`)
+      .expression(`folder:${folderPath}/* AND resource_type:image`)
       .sort_by("public_id", "asc")
       .max_results(500)
       .next_cursor(next || undefined)
@@ -487,6 +543,10 @@ async function run() {
   ensureDir(OUT_DATA_DIR);
   ensureDir(OUT_PAIR_DIR);
 
+  // NEW: discover categories now
+  FOLDERS = await getCategoryFolders();
+  console.log("→ Using categories:", FOLDERS.join(", "));
+  
   for (const folder of FOLDERS) {
     console.log(`→ Building pairs for folder: ${folder}`);
     const resources = await listAllInFolder(folder);
