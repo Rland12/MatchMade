@@ -35,7 +35,6 @@ export default function Categories() {
     slug.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
   return (
-    <div className="container">
       <ul className="nav d-flex justify-content-center">
         {cats.map((slug) => {
           const path = slug.toLowerCase() === "home" ? "/" : `/${slug.toLowerCase()}`;
@@ -50,6 +49,5 @@ export default function Categories() {
           );
         })}
       </ul>
-    </div>
   );
 }

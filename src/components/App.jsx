@@ -17,35 +17,42 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="title"><Link to="/">MatchMade</Link></h1>
-        <p className="sub-title">Matching profile pictures for friends or special someone.</p>
+  <div className="App">
+    {/* keyboard accessibility */}
+    <a href="#main" className="skip-link">Skip to content</a>
 
+    <header className="App-header">
+      <h1 className="title"><Link to="/">MatchMade</Link></h1>
+      <p className="sub-title">Matching profile pictures for friends or special someone.</p>
+
+      <nav aria-label="Categories">
         <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
+      </nav>
+    </header>
 
-        <Routes location={state?.backgroundLocation || location}>
-          <Route path="/" element={<ImagePairs handleClick={handleClick} />} />
-          <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
-          <Route
-            path="/pair/:folder/:slug"
-            element={
-              <Suspense fallback={null}>
-                <PairSEO />
-              </Suspense>
-            }
-          />
-           {/* clean home pair path */}
-  <Route path="/pair/:slug" element={<PairSEO />} />
+    {/* page landmark */}
+    <main id="main" tabIndex={-1}>
+      <Routes location={state?.backgroundLocation || location}>
+        <Route path="/" element={<ImagePairs handleClick={handleClick} />} />
+        <Route path="/:category" element={<ImagePairs handleClick={handleClick} />} />
+        <Route
+          path="/pair/:folder/:slug"
+          element={
+            <Suspense fallback={null}>
+              <PairSEO />
+            </Suspense>
+          }
+        />
+        {/* clean home pair path */}
+        <Route path="/pair/:slug" element={<PairSEO />} />
+      </Routes>
+    </main>
 
-        </Routes>
-      </header>
-
-      <Suspense fallback={null}>
-        <Modal selectedImages={selectedImages} onClose={() => setSelectedImages({})} />
-      </Suspense>
-    </div>
-  );
+    <Suspense fallback={null}>
+      <Modal selectedImages={selectedImages} onClose={() => setSelectedImages({})} />
+    </Suspense>
+  </div>
+);
 }
 
 export default App;

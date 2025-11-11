@@ -219,7 +219,7 @@ function Modal(props) {
 
           <div className="modal-body">
             <div className="container">
-              <div className="row">
+              <div className="row gx-1">
                 {set.map((img, index) => {
                   const key = (img.publicId || img.url || "img") + index;
                   const src = getViewSrc(img);

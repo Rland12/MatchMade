@@ -1,41 +1,71 @@
-.App {
-  text-align: center;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Dosis", sans-serif;
-  color:#FEF8FF;
- 
-}
-p {
-  font-family: "Nunito", sans-serif;
-  color:#FEF8FF;
-}
-a{
-  text-decoration:none;
-  color:#FEF8FF;
-}
-.title a:hover{
-color:#FEF8FF;
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body, #root {
+  height: 100%;
+  background-color: #352635;
+  margin: 0;
 }
 
-.App-header {
-  background-color:#352635;
+.App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* centers everything vertically */
   align-items: center;
-  justify-content: center;
+  text-align: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+/* HEADER: compact, centered text */
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.App-header nav {
+  margin-top: .75rem;
+}
+
+/* Skip link (for a11y) */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #fff;
+  color: #000;
+  padding: .5rem .75rem;
+  border-radius: .25rem;
+  z-index: 1000;
+}
+
+/* Fonts & colors */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Dosis", sans-serif;
+  color: #FEF8FF;
+}
+p {
+  font-family: "Nunito", sans-serif;
+  color: #FEF8FF;
+}
+a {
+  text-decoration: none;
+  color: #FEF8FF;
+}
+.title a:hover {
+  color: #FEF8FF;
 }
 
 .App-link {
@@ -72,7 +102,6 @@ input[type="text"]:focus {
   margin-right: 10px;
   color:#eee0e0;
   text-decoration: none;
-  padding: 7px;
 }
 .nav-link{
   display: block;
@@ -244,3 +273,11 @@ img{
   }
 }
 
+@media (max-width: 600px) {
+  .App-header {
+    margin-top: 2.5rem;
+  }
+  .category {
+    font-size: 13px;
+  }
+}

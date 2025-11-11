@@ -231,7 +231,7 @@ function PairCard({ pair, handleClick }) {
   return (
     <a
       href={hrefStr}
-      className="row text-decoration-none"
+      className="row text-decoration-none gx-0"
       role="button"
       aria-label={`${pair.title} - open preview`}
       onClick={openAsModal}
