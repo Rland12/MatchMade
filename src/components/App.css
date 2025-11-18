@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   background-color: #352635;
   margin: 0;
@@ -8,7 +10,8 @@ html, body, #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centers everything vertically */
+  justify-content: center;
+  /* centers everything vertically */
   align-items: center;
   text-align: center;
   font-size: calc(10px + 2vmin);
@@ -19,9 +22,7 @@ html, body, #root {
 .App-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-
 
 #main {
   width: 100%;
@@ -29,18 +30,13 @@ html, body, #root {
   justify-content: center;
   flex-wrap: wrap;
 }
-
-
-.App-header nav {
-  margin-top: .75rem;
-}
-
 /* Skip link (for a11y) */
 .skip-link {
   position: absolute;
   left: -999px;
   top: auto;
 }
+
 .skip-link:focus {
   left: 1rem;
   top: 1rem;
@@ -52,24 +48,32 @@ html, body, #root {
 }
 
 /* Fonts & colors */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Dosis", sans-serif;
   color: #FEF8FF;
 }
+
 p {
   font-family: "Nunito", sans-serif;
   color: #FEF8FF;
 }
+
 a {
   text-decoration: none;
   color: #FEF8FF;
 }
+
 .title a:hover {
   color: #FEF8FF;
 }
 
 .App-link {
-  color:#61dafb;
+  color: #61dafb;
 }
 
 .search-container {
@@ -77,9 +81,10 @@ a {
   height: auto;
   padding-bottom: 15px;
 }
+
 input[type="text"] {
   font-family: "Nunito", sans-serif;
-  background-color:#eee0e0;
+  background-color: #eee0e0;
   border: 1px solid#08070c;
   box-sizing: border-box;
   border-radius: 100px;
@@ -87,55 +92,227 @@ input[type="text"] {
   font-size: 16px;
   width: 100%;
 }
+
 input[type="text"]:focus {
   box-shadow: 2px 2px black;
-  background-color:#e0d3d3;
+  background-color: #e0d3d3;
   outline: none;
 }
-.nav{
-  margin-bottom:20px;
-}
-.category {
-  font-family: "Nunito", sans-serif;
-  background-color:#604760;
-  border-radius: 30px;
-  margin-right: 10px;
-  color:#eee0e0;
-  text-decoration: none;
-}
-.nav-link{
-  display: block;
- 
-}
-.category:hover {
-  background-color:#eee0e0;
-  color:#604760;
-}
-.modal-content{
-  background-color:#352635;
-}
-.modal-header{
-  border:none;
-}
-.modal-footer{
-  justify-content: center;
-}
-.btn-close{
-filter: invert(1) hue-rotate(180deg);
-}
-.active{
-  background-color:#eee0e0;
-  color:#604760;
-}
-.nav-link:active{
-  background-color:#eee0e0;
-  color:#604760;
-}
-.nav-link:focus{
-  background-color:#eee0e0;
-  color:#604760;
+/* --- Nav base --- */
+nav {
+  margin-bottom: 1.5rem;
 }
 
+/* Row that holds the scroll strip + seasonal pill */
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap; /* desktop/tablet: can wrap gracefully */
+}
+
+/* Main category pills strip */
+.category-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;   /* desktop/tablet: normal wrap */
+}
+
+/* Pills */
+.category {
+  font-family: "Nunito", sans-serif;
+  background-color: #604760;
+  border-radius: 30px;
+  padding: 8px 16px;
+  color: #eee0e0;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.nav-link {
+  display: block;
+}
+
+.category:hover {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+.active,
+.nav-link:active,
+.nav-link:focus {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+/* Make sure nav never clips dropdowns */
+.App-header nav {
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+/* --- Seasonal dropdown (separate pill) --- */
+.seasonal-wrapper {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.seasonal-toggle {
+  cursor: pointer;
+  border: none;
+  background-color: #604760;
+  color: #eee0e0;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-family: "Nunito", sans-serif;
+}
+
+.seasonal-toggle:hover,
+.seasonal-toggle:focus,
+.seasonal-toggle.active {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+.caret {
+  margin-left: 0.25rem;
+  font-size: 0.8em;
+}
+
+/* Dropdown menu anchored to Seasonal pill */
+.seasonal-menu {
+  position: absolute;
+  top: 115%;
+  left: 0;
+  background-color: #604760;
+  border-radius: 16px;
+  padding: 0.25rem 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  display: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.seasonal-menu-open {
+  display: block;
+}
+
+.seasonal-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  color: #fef8ff;
+  cursor: pointer;
+}
+
+.seasonal-option:hover,
+.seasonal-option:focus {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+/* --- Mobile: horizontal scroll for main categories only --- */
+/* --- Mobile: horizontal scroll for main categories only --- */
+/* --- Mobile: compact horizontal scroll + Seasonal on the right --- */
+@media (max-width: 600px) {
+  .App-header {
+    margin-top: 2.5rem;
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  nav {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Entire row: strip + Seasonal */
+  .category-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;          /* keep everything on one line */
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+
+  /* Scrollable categories strip */
+  .category-strip {
+    flex: 0 1 60%;              /* ⬅ smaller strip: ~60% of the row */
+    min-width: 0;               /* allow shrinking, important for flex */
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0;
+    padding-left: 0.25rem;
+  }
+
+  .category-strip::-webkit-scrollbar {
+    display: none;              /* cleaner on mobile */
+  }
+
+  .category-strip > * {
+    flex: 0 0 auto;             /* pills keep natural width */
+  }
+
+  /* Seasonal button wrapper stays at its natural size on the right */
+  .seasonal-wrapper {
+    flex: 0 0 auto;
+  }
+
+  .category,
+  .seasonal-toggle {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+
+.category:hover {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+.modal-content {
+  background-color: #352635;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.btn-close {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.active {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+.nav-link:active {
+  background-color: #eee0e0;
+  color: #604760;
+}
+
+.nav-link:focus {
+  background-color: #eee0e0;
+  color: #604760;
+}
 /* .page-item button{
  
   background-color:#604760;
@@ -147,19 +324,22 @@ margin:5px;
   background-color:#eee0e0;
   color:#604760;
 } */
-img{
-  border-radius:36%;
+img {
+  border-radius: 36%;
 
 }
-.btn{
-  background-color:#604760;
-  color:#eee0e0;
+
+.btn {
+  background-color: #604760;
+  color: #eee0e0;
   border: none;
 }
-.btn:hover{
-  background-color:#eee0e0;
-  color:#604760;
+
+.btn:hover {
+  background-color: #eee0e0;
+  color: #604760;
 }
+
 /* ===============================
    MatchMade image skeleton + fade-in
    - Reserves a square (1:1) box to avoid layout shift
@@ -171,9 +351,12 @@ img{
 .mm-imgwrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;            /* Avoid CLS; fallback below if needed */
-  overflow: hidden;               /* Clip any overflows from children */
-  contain: content;               /* Hint: isolate paint/layout work */
+  aspect-ratio: 1 / 1;
+  /* Avoid CLS; fallback below if needed */
+  overflow: hidden;
+  /* Clip any overflows from children */
+  contain: content;
+  /* Hint: isolate paint/layout work */
 }
 
 /* Actual image: absolutely positioned to fill the box */
@@ -183,11 +366,16 @@ img{
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;              /* Fill square neatly */
-  opacity: 0;                     /* Hidden until loaded */
-  transition: opacity .3s ease;   /* Fade-in on load */
-  cursor: pointer;                /* Clickable thumb feel */
-  will-change: opacity;           /* Micro-optimization for the fade */
+  object-fit: cover;
+  /* Fill square neatly */
+  opacity: 0;
+  /* Hidden until loaded */
+  transition: opacity .3s ease;
+  /* Fade-in on load */
+  cursor: pointer;
+  /* Clickable thumb feel */
+  will-change: opacity;
+  /* Micro-optimization for the fade */
 }
 
 /* Reveal once loaded (toggled by React) */
@@ -199,12 +387,17 @@ img{
 .mm-skel {
   position: absolute;
   inset: 0;
-  border-radius: 36%;             /* Your signature rounded look */
+  border-radius: 36%;
+  /* Your signature rounded look */
   overflow: hidden;
-  background: #604760;            /* Base skeleton tone */
-  color: #EEE;                    /* If any text ever appears inside */
-  opacity: 0.7;                   /* Subtle translucency */
-  background-position: center;    /* If we set a blurred LQIP bg-image */
+  background: #604760;
+  /* Base skeleton tone */
+  color: #EEE;
+  /* If any text ever appears inside */
+  opacity: 0.7;
+  /* Subtle translucency */
+  background-position: center;
+  /* If we set a blurred LQIP bg-image */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -216,19 +409,19 @@ img{
   inset: 0;
   transform: translateX(-100%);
   /* Slightly asymmetric gradient for a softer pass */
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(238, 224, 224, 0.25) 45%,
-    rgba(238, 224, 224, 0.35) 55%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(238, 224, 224, 0.25) 45%,
+      rgba(238, 224, 224, 0.35) 55%,
+      transparent 100%);
   animation: mm-shimmer 1.5s ease-in-out infinite;
 }
 
 /* Animation keyframes */
 @keyframes mm-shimmer {
-  100% { transform: translateX(100%); }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* --------------------------------
@@ -248,8 +441,10 @@ img{
 @supports not (aspect-ratio: 1 / 1) {
   .mm-imgwrap {
     height: 0;
-    padding-top: 100%;  /* 1:1 box */
+    padding-top: 100%;
+    /* 1:1 box */
   }
+
   .mm-imgwrap img,
   .mm-skel {
     position: absolute;
@@ -262,22 +457,12 @@ img{
   .mm-skel {
     background: #5a3f5a;
   }
-  .mm-skel::after {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(238, 224, 224, 0.22) 45%,
-      rgba(238, 224, 224, 0.30) 55%,
-      transparent 100%
-    );
-  }
-}
 
-@media (max-width: 600px) {
-  .App-header {
-    margin-top: 2.5rem;
-  }
-  .category {
-    font-size: 13px;
+  .mm-skel::after {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(238, 224, 224, 0.22) 45%,
+        rgba(238, 224, 224, 0.30) 55%,
+        transparent 100%);
   }
 }

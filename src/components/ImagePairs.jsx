@@ -1,6 +1,11 @@
 // ImagePairs.jsx
 import { useEffect, useMemo, useState } from "react";
-import { useParams, useSearchParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  useParams,
+  useSearchParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { slugify } from "@/utils/slug";
 import NotFound from "./NotFound";
@@ -9,6 +14,13 @@ import { analytics } from "@/libs/analytics";
 
 const PAIRS_PER_PAGE = 6;
 const SITE = "https://www.matchmadepics.com";
+
+// map holiday ids (from ?holiday=…) to your Cloudinary tags (season_*)
+const HOLIDAY_TAGS = {
+  christmas: "season_christmas",
+  halloween: "season_halloween",
+  valentines: "season_valentines",
+};
 
 const folderForCategory = (cat) => {
   const slug = (cat || "/").replace(/^\/+/, "").toLowerCase();
@@ -32,13 +44,18 @@ const makeAltText = (title, side, folder) => {
 
 export default function ImagePairs({ handleClick }) {
   const params = useParams();
-  const isHome = !params.category;           // "/" has no category segment
+  const isHome = !params.category; // "/" has no category segment
   const folder = folderForCategory(params.category || "/");
 
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPageParam = searchParams.get("page") ?? searchParams.get("p");
   const parsed = parseInt(rawPageParam || "1", 10);
   const pageFromUrl = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+
+  // seasonal controls: /seasonal?holiday=christmas
+  const holidayId = (searchParams.get("holiday") || "").toLowerCase();
+  const holidayTag = HOLIDAY_TAGS[holidayId] || null;
+  const isSeasonalCategory = (params.category || "").toLowerCase() === "seasonal";
 
   useEffect(() => {
     const hasPage = searchParams.has("page");
@@ -56,20 +73,60 @@ export default function ImagePairs({ handleClick }) {
 
   useEffect(() => {
     let cancelled = false;
+
     (async () => {
       try {
         setState({ loading: true, error: null, allPairs: [] });
-        const url = `/data/pairs-${encodeURIComponent(folder)}.json`;
-        const res = await fetch(url, { cache: "no-store" });
-        const ct = res.headers.get("content-type") || "";
-        if (!res.ok || !ct.includes("application/json")) {
-          const text = await res.text().catch(() => "");
-          console.error("[ImagePairs] BAD RESPONSE", { status: res.status, ct, sample: text.slice(0, 200) });
-          throw new Error(`Bad JSON for ${folder}`);
+
+        let all = [];
+
+        // ---- SEASONAL VIEW ----
+        if (isSeasonalCategory && holidayTag) {
+          // load category list written by build script
+          const catsRes = await fetch("/data/categories.json", { cache: "no-store" });
+          const catsJson = await catsRes.json();
+          const folders = (catsJson.categories || []).filter((f) => f !== "seasonal");
+
+          for (const f of folders) {
+            const url = `/data/pairs-${encodeURIComponent(f)}.json`;
+            const res = await fetch(url, { cache: "no-store" });
+            const ct = res.headers.get("content-type") || "";
+            if (!res.ok || !ct.includes("application/json")) continue;
+
+            const data = await res.json();
+            const items = data.items || [];
+
+            for (const item of items) {
+              const tags = Array.isArray(item.tags) ? item.tags : [];
+              if (tags.includes(holidayTag)) {
+                // remember which folder it came from
+                all.push({ ...item, __folder: f });
+              }
+            }
+          }
+        } else if (isSeasonalCategory && !holidayTag) {
+          // /seasonal with no holiday selected → empty but not error
+          all = [];
+        } else {
+          // ---- NORMAL CATEGORY VIEW ----
+          const url = `/data/pairs-${encodeURIComponent(folder)}.json`;
+          const res = await fetch(url, { cache: "no-store" });
+          const ct = res.headers.get("content-type") || "";
+          if (!res.ok || !ct.includes("application/json")) {
+            const text = await res.text().catch(() => "");
+            console.error("[ImagePairs] BAD RESPONSE", {
+              status: res.status,
+              ct,
+              sample: text.slice(0, 200),
+            });
+            throw new Error(`Bad JSON for ${folder}`);
+          }
+          const data = await res.json();
+          all = data.items || [];
         }
-        const data = await res.json();
+
         if (cancelled) return;
-        const all = data.items || [];
+
         setState({ loading: false, error: null, allPairs: all });
 
         const totalPages = Math.max(1, Math.ceil(all.length / PAIRS_PER_PAGE));
@@ -78,17 +135,19 @@ export default function ImagePairs({ handleClick }) {
           const next = new URLSearchParams(searchParams);
           next.set("page", String(clamped));
           next.delete("p");
+          if (holidayId) next.set("holiday", holidayId);
           setSearchParams(next, { replace: true });
         }
       } catch (err) {
         if (!cancelled) setState({ loading: false, error: err.message, allPairs: [] });
       }
     })();
+
     return () => {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [folder]);
+  }, [folder, isSeasonalCategory, holidayTag]);
 
   const { totalPages, page, pageItems } = useMemo(() => {
     const total = state.allPairs.length;
@@ -110,21 +169,29 @@ export default function ImagePairs({ handleClick }) {
     const next = new URLSearchParams(searchParams);
     next.set("page", String(clamped));
     next.delete("p");
+    if (holidayId) next.set("holiday", holidayId);
     setSearchParams(next);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const prettyCat = humanize(folder);
   const baseUrl = isHome ? `${SITE}/` : `${SITE}/${folder}/`;
-  const canonical = page > 1 && !isHome ? `${baseUrl}?page=${page}` : baseUrl;
- 
+
+  // canonical that also respects holiday & page for seasonal
+  const canonParams = new URLSearchParams();
+  if (!isHome && page > 1) canonParams.set("page", String(page));
+  if (isSeasonalCategory && holidayId) canonParams.set("holiday", holidayId);
+  const canonQs = canonParams.toString();
+  const canonical = canonQs ? `${baseUrl}?${canonQs}` : baseUrl;
+
   const homeTitle = "MatchMade — Matching Profile Picture Pairs";
-  const homeDesc = "Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps.";
+  const homeDesc =
+    "Matching profile pictures to share with your friends or special someone. Choose from anime, cartoons, cute or LGBTQ matching pfps.";
   const title = isHome
     ? homeTitle
-    : (page > 1
-      ? `${prettyCat} Matching PFP Pairs - Page ${page} | MatchMade`
-      : `${prettyCat} Matching PFP Pairs | MatchMade`);
+    : page > 1
+    ? `${prettyCat} Matching PFP Pairs - Page ${page} | MatchMade`
+    : `${prettyCat} Matching PFP Pairs | MatchMade`;
   const description = isHome
     ? homeDesc
     : `Browse ${prettyCat} matching profile picture pairs. Download both sides in one click. Page ${page} of ${totalPages}.`;
@@ -140,8 +207,22 @@ export default function ImagePairs({ handleClick }) {
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
-        {!isHome && page > 1 && <link rel="prev" href={`${baseUrl}?page=${page - 1}`} />}
-        {!isHome && page < totalPages && <link rel="next" href={`${baseUrl}?page=${page + 1}`} />}
+        {!isHome && page > 1 && (
+          <link
+            rel="prev"
+            href={`${baseUrl}?page=${page - 1}${
+              isSeasonalCategory && holidayId ? `&holiday=${holidayId}` : ""
+            }`}
+          />
+        )}
+        {!isHome && page < totalPages && (
+          <link
+            rel="next"
+            href={`${baseUrl}?page=${page + 1}${
+              isSeasonalCategory && holidayId ? `&holiday=${holidayId}` : ""
+            }`}
+          />
+        )}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
@@ -166,7 +247,11 @@ export default function ImagePairs({ handleClick }) {
           <nav className="mt-4" aria-label="Image pairs pagination">
             <ul className="pagination justify-content-center">
               <li className={`page-item ${page <= 1 ? "disabled" : ""}`}>
-                <button className="page-link" onClick={() => goTo(page - 1)} aria-label="Previous page">
+                <button
+                  className="page-link"
+                  onClick={() => goTo(page - 1)}
+                  aria-label="Previous page"
+                >
                   «
                 </button>
               </li>
@@ -184,7 +269,11 @@ export default function ImagePairs({ handleClick }) {
               ))}
 
               <li className={`page-item ${page >= totalPages ? "disabled" : ""}`}>
-                <button className="page-link" onClick={() => goTo(page + 1)} aria-label="Next page">
+                <button
+                  className="page-link"
+                  onClick={() => goTo(page + 1)}
+                  aria-label="Next page"
+                >
                   »
                 </button>
               </li>
@@ -199,7 +288,13 @@ export default function ImagePairs({ handleClick }) {
 /* ===== Pair & Thumb components ===== */
 
 function PairCard({ pair, handleClick }) {
-  const folder = (useParams().category || "home").toLowerCase();
+  const params = useParams();
+  const routeFolder = (params.category || "home").toLowerCase();
+
+  // when on /seasonal, use the actual folder from the item
+  const folder =
+    routeFolder === "seasonal" ? (pair.__folder || "home") : routeFolder;
+
   const slug = slugify(pair.title);
   const dims = { w: 560, h: 560, fit: "fill", g: "auto" };
   const navigate = useNavigate();
@@ -210,7 +305,6 @@ function PairCard({ pair, handleClick }) {
 
   const openAsModal = (e) => {
     if (e) e.preventDefault();
-    // Track “select item” (click from list to detail)
     analytics.selectItem({ folder, slug, title: pair.title });
     navigate(hrefStr, { state: { modal: true, backgroundLocation: location } });
 
@@ -240,10 +334,13 @@ function PairCard({ pair, handleClick }) {
       {pair.imageSet.map((img, index) => {
         const isCloud = !!img.publicId;
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
-        const tinySrc = isCloud ? cldUrl(img.publicId, { w: 24, q: 10, blur: 2000 }) : null;
+        const tinySrc = isCloud
+          ? cldUrl(img.publicId, { w: 24, q: 10, blur: 2000 })
+          : null;
 
         const side = index === 0 ? "left" : "right";
-        const alt = (img.alt && img.alt.trim()) || makeAltText(pair.title, side, folder);
+        const alt =
+          (img.alt && img.alt.trim()) || makeAltText(pair.title, side, folder);
         return (
           <MMImage
             key={(img.publicId || img.url || "") + index}
@@ -266,7 +363,15 @@ function MMImage({ src, tiny, alt }) {
         {!loaded && (
           <div
             className="mm-skel"
-            style={tiny ? { backgroundImage: `url(${tiny})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+            style={
+              tiny
+                ? {
+                    backgroundImage: `url(${tiny})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
+                : undefined
+            }
           />
         )}
         <img

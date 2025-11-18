@@ -56,9 +56,9 @@ async function getCategoryFolders() {
 
     // optional allow/deny
     const allow = new Set(parseCsv(process.env.PAIRS_ALLOW || ""));
-    const deny  = new Set(parseCsv(process.env.PAIRS_DENY || ""));
+    const deny = new Set(parseCsv(process.env.PAIRS_DENY || ""));
     if (allow.size) list = list.filter(n => allow.has(n));
-    if (deny.size)  list = list.filter(n => !deny.has(n));
+    if (deny.size) list = list.filter(n => !deny.has(n));
 
     // ensure 'home' is present and first (your site uses it)
     if (!list.includes("home")) list = ["home", ...list];
@@ -69,16 +69,14 @@ async function getCategoryFolders() {
       return a.localeCompare(b);
     });
 
-    return list.length ? list : ["home","anime","cartoons","cute","lgbtq"];
+    return list.length ? list : ["home", "anime", "cartoons", "cute", "lgbtq"];
   } catch (err) {
     console.warn("Cloudinary Admin API failed; using fallback:", err?.message);
-    return ["home","anime","cartoons","cute","lgbtq"];
+    return ["home", "anime", "cartoons", "cute", "lgbtq"];
   }
 }
 
 let FOLDERS = [];
-FOLDERS = await getCategoryFolders();
-console.log("→ Using categories:", FOLDERS.join(", "));
 
 function pathForPair(folder, slug) {
   const seg = folder === "home" ? "" : `/${folder}`;
@@ -334,28 +332,32 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
 
 // cloudinary listing and pairing
 async function listAllInFolder(folder) {
-  const folderPath = `${PARENT}/${folder}`;
+  const folderPath = `${PARENT}/${folder}`; // /categories/<folder>
   const resources = [];
   let next = null;
+
   do {
     const res = await cloudinary.search
       .expression(`folder:${folderPath}/* AND resource_type:image`)
       .sort_by("public_id", "asc")
       .max_results(500)
-      .next_cursor(next || undefined)
+      .with_field("tags") 
       .execute();
+
     resources.push(...(res.resources || []));
     next = res.next_cursor;
   } while (next);
+
   return resources;
 }
+
+
 function toPairs(resources) {
   const unmatched = [];
   const partial = new Map(); // key -> { left:{id,ts}, right:{id,ts} }
-  const map = new Map(); // key -> { dir, base, left: {publicId, createdAt}? , right: {...}? }
+  const map = new Map();     // key -> { dir, base, left, right, leftMeta, rightMeta, leftTags, rightTags }
 
   for (const r of resources) {
-    // r.created_at is returned by Cloudinary Search (ISO string)
     const createdAt = r.created_at || null;
     const parts = r.public_id.split("/");
     const filename = parts.pop();
@@ -366,13 +368,28 @@ function toPairs(resources) {
       unmatched.push(r.public_id);
       continue;
     }
+
     const base = m[1];
     const side = m[2].toLowerCase();
     const key = `${dir}/${base}`;
 
-    if (!map.has(key)) map.set(key, { dir, base, left: null, right: null, leftMeta: null, rightMeta: null });
-    map.get(key)[side] = r.public_id;
-    map.get(key)[`${side}Meta`] = { createdAt };
+    if (!map.has(key)) {
+      map.set(key, {
+        dir,
+        base,
+        left: null,
+        right: null,
+        leftMeta: null,
+        rightMeta: null,
+        leftTags: [],
+        rightTags: [],
+      });
+    }
+
+    const entry = map.get(key);
+    entry[side] = r.public_id;
+    entry[`${side}Meta`] = { createdAt };
+    entry[`${side}Tags`] = Array.isArray(r.tags) ? r.tags : [];
 
     const p = partial.get(key) || {};
     p[side] = r.public_id;
@@ -384,12 +401,31 @@ function toPairs(resources) {
     .sort((a, b) => (a.base < b.base ? -1 : a.base > b.base ? 1 : 0))
     .map((p) => {
       const title = `${toTitleCase(p.base)} Pair`;
+
+      // merge Cloudinary tags from left & right
+      const tagSet = new Set([
+        ...(p.leftTags || []),
+        ...(p.rightTags || []),
+      ]);
+      const tags = [...tagSet];
+
+      const folderName = p.dir.split("/")[0]; // e.g. "anime", "cute"
+
       return {
         title,
         base: p.base,
+        tags, // ⬅️ THIS is what ImagePairs seasonal view reads
         imageSet: [
-          { publicId: p.left, alt: makeAltText(title, "left", p.dir.split("/")[0]), createdAt: p.leftMeta?.createdAt || null },
-          { publicId: p.right, alt: makeAltText(title, "right", p.dir.split("/")[0]), createdAt: p.rightMeta?.createdAt || null },
+          {
+            publicId: p.left,
+            alt: makeAltText(title, "left", folderName),
+            createdAt: p.leftMeta?.createdAt || null,
+          },
+          {
+            publicId: p.right,
+            alt: makeAltText(title, "right", folderName),
+            createdAt: p.rightMeta?.createdAt || null,
+          },
         ],
       };
     });
@@ -400,6 +436,7 @@ function toPairs(resources) {
 
   return { complete, unmatched, incomplete };
 }
+
 
 // sitemap and robots
 function buildSitemapAndRobots() {
@@ -546,7 +583,7 @@ async function run() {
   // NEW: discover categories now
   FOLDERS = await getCategoryFolders();
   console.log("→ Using categories:", FOLDERS.join(", "));
-  
+
   for (const folder of FOLDERS) {
     console.log(`→ Building pairs for folder: ${folder}`);
     const resources = await listAllInFolder(folder);
@@ -575,7 +612,6 @@ async function run() {
       const cleanFolder = folder === "home" ? "" : `${toTitleCase(folder)} `;
       const desc = `Browse ${cleanFolder}matching profile picture pairs for friends or special someone. Download both sides in one click.`;
 
-
       const html = pairHtml({
         site: SITE,
         cloud,
@@ -591,7 +627,6 @@ async function run() {
         leftCreatedAt,
         rightCreatedAt
       });
-
 
       const relPairDir = folder === "home" ? path.join("pair", slug) : path.join("pair", folder, slug);
       const pairDir = path.join(OUT_PUBLIC, relPairDir);
