@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Link, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import Categories from "./Categories";
@@ -49,8 +49,40 @@ function SeasonalMenu() {
 
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
+  const [categories, setCategories] = useState([
+    "Anime",
+    "Cartoons",
+    "Cute",
+    "Lgbtq",
+  ]);
   const location = useLocation();
   const state = location.state && location.state.modal ? location.state : null;
+
+  // 🔹 Load categories from build-pairs output
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/data/categories.json", { cache: "no-store" });
+        if (!res.ok) return; // fall back to default
+        const data = await res.json();
+        const raw = Array.isArray(data.categories) ? data.categories : [];
+
+        // "seasonal" (if i ever add it as a folder)
+        const labels = raw
+          .filter(
+            (c) => c.toLowerCase() !== "home" && c.toLowerCase() !== "seasonal"
+          )
+          .map((c) => c.charAt(0).toUpperCase() + c.slice(1).toLowerCase());
+
+        if (labels.length) {
+          setCategories(labels);
+        }
+      } catch (e) {
+        // ignore and keep defaults
+        console.warn("Failed to load categories.json", e);
+      }
+    })();
+  }, []);
 
   const handleClick = (pair) => {
     setSelectedImages({ ...pair, _openedAt: Date.now() });
@@ -64,7 +96,7 @@ function App() {
 
       <header className="App-header">
         <h1 className="title">
-          <Link to="/">MatchMade</Link>
+          <Link to="/" aria-label="Go to homepage">MatchMade</Link>
         </h1>
         <p className="sub-title">
           Matching profile pictures for friends or special someone.
@@ -73,7 +105,7 @@ function App() {
         <nav aria-label="Categories">
           <div className="category-row">
             <div className="category-strip">
-              <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
+              <Categories categories={categories} />
             </div>
 
             {/* Seasonal pill OUTSIDE scroll strip */}
