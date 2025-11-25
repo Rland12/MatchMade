@@ -73,7 +73,7 @@ function App() {
         <nav aria-label="Categories">
           <div className="category-row">
             <div className="category-strip">
-              <Categories categories={["Home", "Anime", "Cartoons", "Cute", "Lgbtq"]} />
+              <Categories categories={["Anime", "Cartoons", "Cute", "Lgbtq"]} />
             </div>
 
             {/* Seasonal pill OUTSIDE scroll strip */}
