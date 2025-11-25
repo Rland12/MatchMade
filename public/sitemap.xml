@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.matchmadepics.com/</loc>
-    <lastmod>2025-11-25T06:41:22.000Z</lastmod>
+    <lastmod>2025-11-25T07:02:06.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -725,12 +725,28 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Ekko_Jinx_sparkler_right</image:loc><image:title>Ekko Jinx Sparkler Pair — Right</image:title><image:caption>Ekko Jinx Sparkler matching profile picture pair (Cartoons)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/ethan-and-kris-pair/</loc>
+    <lastmod>2025-11-25T07:02:06.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Ethan_and_Kris_left</image:loc><image:title>Ethan And Kris Pair — Left</image:title><image:caption>Ethan And Kris matching profile picture pair (Cartoons)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Ethan_and_Kris_right</image:loc><image:title>Ethan And Kris Pair — Right</image:title><image:caption>Ethan And Kris matching profile picture pair (Cartoons)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/cartoons/flameprincess-finn-pair/</loc>
     <lastmod>2025-11-24T01:44:53.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/FlamePrincess-Finn_left</image:loc><image:title>Flameprincess Finn Pair — Left</image:title><image:caption>Flameprincess Finn matching profile picture pair (Cartoons)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/FlamePrincess-Finn_right</image:loc><image:title>Flameprincess Finn Pair — Right</image:title><image:caption>Flameprincess Finn matching profile picture pair (Cartoons)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/jesse-james-silly-pair/</loc>
+    <lastmod>2025-11-25T07:01:57.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Jesse_James_silly_left</image:loc><image:title>Jesse James Silly Pair — Left</image:title><image:caption>Jesse James Silly matching profile picture pair (Cartoons)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Jesse_James_silly_right</image:loc><image:title>Jesse James Silly Pair — Right</image:title><image:caption>Jesse James Silly matching profile picture pair (Cartoons)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/cartoons/jinx-ekko-pair/</loc>
@@ -950,7 +966,7 @@
   </url>
   <url>
     <loc>https://www.matchmadepics.com/cartoons/</loc>
-    <lastmod>2025-11-25T02:51:28.000Z</lastmod>
+    <lastmod>2025-11-25T07:02:06.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
