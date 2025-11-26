@@ -224,7 +224,7 @@ nav {
 /* --- Mobile: compact horizontal scroll + Seasonal on the right --- */
 @media (max-width: 600px) {
   .App-header {
-    margin-top: 2.5rem;
+    margin-top: 1.75rem;
     padding: 0 1rem;
     width: 100%;
   }
@@ -253,6 +253,7 @@ nav {
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: visible;
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: 0.25rem 0;
     padding-left: 0.25rem;
@@ -264,6 +265,7 @@ nav {
 
   .category-strip > * {
     flex: 0 0 auto;             /* pills keep natural width */
+    scroll-snap-align: start;
   }
 
   /* Seasonal button wrapper stays at its natural size on the right */
@@ -274,7 +276,7 @@ nav {
   .category,
   .seasonal-toggle {
     font-size: 0.9rem;
-    padding: 6px 12px;
+    padding: 8px 14px;
   }
 }
 
