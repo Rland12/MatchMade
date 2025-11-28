@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.matchmadepics.com/</loc>
-    <lastmod>2025-11-25T07:02:06.000Z</lastmod>
+    <lastmod>2025-11-28T17:15:17.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -55,6 +55,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/toh-girl-right</image:loc><image:title>Toh Girl Pair — Right</image:title><image:caption>Toh Girl matching profile picture pair</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/anime/bunny-girl-pair/</loc>
+    <lastmod>2025-11-28T17:11:45.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Bunny_Girl_left</image:loc><image:title>Bunny Girl Pair — Left</image:title><image:caption>Bunny Girl matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Bunny_Girl_right</image:loc><image:title>Bunny Girl Pair — Right</image:title><image:caption>Bunny Girl matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/anime/edwinry-pair/</loc>
     <lastmod>2025-10-04T01:08:28.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -101,6 +109,14 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Kayo_Satoru_left</image:loc><image:title>Kayo Satoru Pair — Left</image:title><image:caption>Kayo Satoru matching profile picture pair (Anime)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Kayo_Satoru_right</image:loc><image:title>Kayo Satoru Pair — Right</image:title><image:caption>Kayo Satoru matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/kirishima-tetsutetsu-pair/</loc>
+    <lastmod>2025-11-27T17:10:06.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Kirishima_Tetsutetsu_left</image:loc><image:title>Kirishima Tetsutetsu Pair — Left</image:title><image:caption>Kirishima Tetsutetsu matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Kirishima_Tetsutetsu_right</image:loc><image:title>Kirishima Tetsutetsu Pair — Right</image:title><image:caption>Kirishima Tetsutetsu matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/anime/len-rin-pair/</loc>
@@ -269,6 +285,54 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/anya-becky-left</image:loc><image:title>Anya Becky Pair — Left</image:title><image:caption>Anya Becky matching profile picture pair (Anime)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/anya-becky-right</image:loc><image:title>Anya Becky Pair — Right</image:title><image:caption>Anya Becky matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/baku-deku-pair/</loc>
+    <lastmod>2025-11-27T17:09:57.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_deku_left</image:loc><image:title>Baku Deku Pair — Left</image:title><image:caption>Baku Deku matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_deku_right</image:loc><image:title>Baku Deku Pair — Right</image:title><image:caption>Baku Deku matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/baku-deku-tied-pair/</loc>
+    <lastmod>2025-11-27T17:09:53.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_deku_tied_left</image:loc><image:title>Baku Deku Tied Pair — Left</image:title><image:caption>Baku Deku Tied matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_deku_tied_right</image:loc><image:title>Baku Deku Tied Pair — Right</image:title><image:caption>Baku Deku Tied matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/baku-kirishima-hero-pair/</loc>
+    <lastmod>2025-11-27T17:10:04.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_kirishima_hero_left</image:loc><image:title>Baku Kirishima Hero Pair — Left</image:title><image:caption>Baku Kirishima Hero matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_kirishima_hero_right</image:loc><image:title>Baku Kirishima Hero Pair — Right</image:title><image:caption>Baku Kirishima Hero matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/baku-kirishima-suit-pair/</loc>
+    <lastmod>2025-11-27T17:09:45.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_kirishima_suit_left</image:loc><image:title>Baku Kirishima Suit Pair — Left</image:title><image:caption>Baku Kirishima Suit matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_kirishima_suit_right</image:loc><image:title>Baku Kirishima Suit Pair — Right</image:title><image:caption>Baku Kirishima Suit matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/baku-mom-pair/</loc>
+    <lastmod>2025-11-27T17:09:49.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_mom_left</image:loc><image:title>Baku Mom Pair — Left</image:title><image:caption>Baku Mom matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/baku_mom_right</image:loc><image:title>Baku Mom Pair — Right</image:title><image:caption>Baku Mom matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/bakugo-toga-winter-pair/</loc>
+    <lastmod>2025-11-27T17:10:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/bakugo_toga_winter_left</image:loc><image:title>Bakugo Toga Winter Pair — Left</image:title><image:caption>Bakugo Toga Winter matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/bakugo_toga_winter_right</image:loc><image:title>Bakugo Toga Winter Pair — Right</image:title><image:caption>Bakugo Toga Winter matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/anime/bear-bg-pair/</loc>
@@ -616,7 +680,7 @@
   </url>
   <url>
     <loc>https://www.matchmadepics.com/anime/</loc>
-    <lastmod>2025-11-25T06:33:05.000Z</lastmod>
+    <lastmod>2025-11-28T17:11:45.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -773,6 +837,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Ladybug-ChatNoir_right</image:loc><image:title>Ladybug Chatnoir Pair — Right</image:title><image:caption>Ladybug Chatnoir matching profile picture pair (Cartoons)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/lucililith-pair/</loc>
+    <lastmod>2025-11-28T17:15:17.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Lucililith_left</image:loc><image:title>Lucililith Pair — Left</image:title><image:caption>Lucililith matching profile picture pair (Cartoons)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Lucililith_right</image:loc><image:title>Lucililith Pair — Right</image:title><image:caption>Lucililith matching profile picture pair (Cartoons)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/cartoons/mabelpines-dipperpines-sitting-pair/</loc>
     <lastmod>2025-11-24T13:25:42.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -851,14 +923,6 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Moxxie_Millie_boatdate_left</image:loc><image:title>Moxxie Millie Boatdate Pair — Left</image:title><image:caption>Moxxie Millie Boatdate matching profile picture pair (Cartoons)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Moxxie_Millie_boatdate_right</image:loc><image:title>Moxxie Millie Boatdate Pair — Right</image:title><image:caption>Moxxie Millie Boatdate matching profile picture pair (Cartoons)</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/cartoons/pucca-garu-pair/</loc>
-    <lastmod>2025-11-24T01:00:36.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Pucca-Garu_left</image:loc><image:title>Pucca Garu Pair — Left</image:title><image:caption>Pucca Garu matching profile picture pair (Cartoons)</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Pucca-Garu_right</image:loc><image:title>Pucca Garu Pair — Right</image:title><image:caption>Pucca Garu matching profile picture pair (Cartoons)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/cartoons/pucca-garu-pair/</loc>
@@ -966,7 +1030,7 @@
   </url>
   <url>
     <loc>https://www.matchmadepics.com/cartoons/</loc>
-    <lastmod>2025-11-25T07:02:06.000Z</lastmod>
+    <lastmod>2025-11-28T17:15:17.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1169,6 +1233,22 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/BigBoss-Kaz_chibi_right</image:loc><image:title>Bigboss Kaz Chibi Pair — Right</image:title><image:caption>Bigboss Kaz Chibi matching profile picture pair (Games)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/games/friday-night-funkin-pair/</loc>
+    <lastmod>2025-11-27T08:23:44.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Friday_night_funkin_left</image:loc><image:title>Friday Night Funkin Pair — Left</image:title><image:caption>Friday Night Funkin matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Friday_night_funkin_right</image:loc><image:title>Friday Night Funkin Pair — Right</image:title><image:caption>Friday Night Funkin matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/games/friday-night-funkin-sing-pair/</loc>
+    <lastmod>2025-11-27T08:23:46.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Friday_night_funkin_sing_left</image:loc><image:title>Friday Night Funkin Sing Pair — Left</image:title><image:caption>Friday Night Funkin Sing matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Friday_night_funkin_sing_right</image:loc><image:title>Friday Night Funkin Sing Pair — Right</image:title><image:caption>Friday Night Funkin Sing matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/games/kairisora-pair/</loc>
     <lastmod>2025-10-04T01:10:31.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -1193,6 +1273,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Kazuhira-lipstick_right</image:loc><image:title>Kazuhira Lipstick Pair — Right</image:title><image:caption>Kazuhira Lipstick matching profile picture pair (Games)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/games/linka-link-pair/</loc>
+    <lastmod>2025-11-28T17:10:57.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Linka_link_left</image:loc><image:title>Linka Link Pair — Left</image:title><image:caption>Linka Link matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/Linka_link_right</image:loc><image:title>Linka Link Pair — Right</image:title><image:caption>Linka Link matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/games/liquidsnakecat-solidsnakecat-pair/</loc>
     <lastmod>2025-11-24T00:44:30.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -1207,6 +1295,14 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/SusanStorm_MrFantastic_left</image:loc><image:title>Susanstorm Mrfantastic Pair — Left</image:title><image:caption>Susanstorm Mrfantastic matching profile picture pair (Games)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/SusanStorm_MrFantastic_right</image:loc><image:title>Susanstorm Mrfantastic Pair — Right</image:title><image:caption>Susanstorm Mrfantastic matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/games/fnaf-bonnie-freddie-pair/</loc>
+    <lastmod>2025-11-27T08:23:47.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/fnaf_bonnie_freddie_left</image:loc><image:title>Fnaf Bonnie Freddie Pair — Left</image:title><image:caption>Fnaf Bonnie Freddie matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/fnaf_bonnie_freddie_right</image:loc><image:title>Fnaf Bonnie Freddie Pair — Right</image:title><image:caption>Fnaf Bonnie Freddie matching profile picture pair (Games)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/games/kazuhira-snake-shot-pair/</loc>
@@ -1225,8 +1321,24 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/link-linka_right</image:loc><image:title>Link Linka Pair — Right</image:title><image:caption>Link Linka matching profile picture pair (Games)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/games/mario-luigi-pair/</loc>
+    <lastmod>2025-11-27T08:23:50.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/mario_luigi_left</image:loc><image:title>Mario Luigi Pair — Left</image:title><image:caption>Mario Luigi matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/mario_luigi_right</image:loc><image:title>Mario Luigi Pair — Right</image:title><image:caption>Mario Luigi matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/games/sora-kairi-sunset-pair/</loc>
+    <lastmod>2025-11-28T17:10:57.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/sora_kairi_sunset_left</image:loc><image:title>Sora Kairi Sunset Pair — Left</image:title><image:caption>Sora Kairi Sunset matching profile picture pair (Games)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/sora_kairi_sunset_right</image:loc><image:title>Sora Kairi Sunset Pair — Right</image:title><image:caption>Sora Kairi Sunset matching profile picture pair (Games)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/games/</loc>
-    <lastmod>2025-11-25T05:27:48.000Z</lastmod>
+    <lastmod>2025-11-28T17:10:57.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
