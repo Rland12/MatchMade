@@ -338,24 +338,35 @@ img {
   gap: 1rem;
 }
 
+@media (min-width: 992px) {
+  .pair-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .pair-card {
   display: flex;
   gap: 0.75rem;
   padding: 0.5rem;
   border-radius: 18px;
-  background-color: rgba(255, 255, 255, 0.04);
-  transition: background-color .2s ease, transform .2s ease;
+  background-color: transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
   touch-action: manipulation;
 }
 
 .pair-card:hover,
 .pair-card:focus-visible {
-  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 0 2px rgba(255, 248, 255, 0.1),
+    0 12px 25px rgba(96, 71, 96, 0.35);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
 .pair-card:focus-visible {
-  box-shadow: 0 0 0 3px rgba(255, 248, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 248, 255, 0.4),
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 12px 25px rgba(96, 71, 96, 0.35);
 }
 
 .pair-thumb {
