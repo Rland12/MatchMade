@@ -158,12 +158,6 @@ export default function ImagePairs({ handleClick }) {
     return { totalPages: pages, page: safePage, pageItems: items };
   }, [state.allPairs, pageFromUrl]);
 
-  const columns = useMemo(() => {
-    const cols = [[], [], []];
-    pageItems.forEach((pair, idx) => cols[idx % 3].push(pair));
-    return cols;
-  }, [pageItems]);
-
   const goTo = (n) => {
     const clamped = Math.min(Math.max(n, 1), totalPages || 1);
     const next = new URLSearchParams(searchParams);
@@ -229,17 +223,13 @@ export default function ImagePairs({ handleClick }) {
       </Helmet>
 
       <div className="container">
-        <div className="row">
-          {columns.map((col, colIndex) => (
-            <div className="col-md-4" key={`col-${colIndex}`}>
-              {col.map((pair, pairIndex) => (
-                <PairCard
-                  pair={pair}
-                  handleClick={handleClick}
-                  key={`pair-${colIndex}-${pairIndex}-${pair.title || ""}`}
-                />
-              ))}
-            </div>
+        <div className="pair-grid">
+          {pageItems.map((pair, pairIndex) => (
+            <PairCard
+              pair={pair}
+              handleClick={handleClick}
+              key={`pair-${pairIndex}-${pair.title || ""}`}
+            />
           ))}
         </div>
 
@@ -325,7 +315,7 @@ function PairCard({ pair, handleClick }) {
   return (
     <a
       href={hrefStr}
-      className="row text-decoration-none gx-0"
+      className="pair-card text-decoration-none"
       role="button"
       aria-label={`${pair.title} - open preview`}
       onClick={openAsModal}
@@ -358,7 +348,7 @@ function MMImage({ src, tiny, alt }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="col-6 d-flex justify-content-center">
+    <div className="pair-thumb">
       <div className="mm-imgwrap m-1">
         {!loaded && (
           <div
