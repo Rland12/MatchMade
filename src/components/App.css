@@ -331,6 +331,89 @@ img {
 
 }
 
+.pair-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  row-gap: 0.75rem;
+}
+
+@media (min-width: 992px) {
+  .pair-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 0.85rem;
+    row-gap: 0rem;
+  }
+}
+
+.pair-card {
+  display: flex;
+  padding: 0.35rem;
+  border-radius: 18px;
+  background-color: transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
+  touch-action: manipulation;
+}
+
+.pair-card:hover,
+.pair-card:focus-visible {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 0 2px rgba(255, 248, 255, 0.1),
+    0 12px 25px rgba(96, 71, 96, 0.35);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.pair-card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 248, 255, 0.4),
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 12px 25px rgba(96, 71, 96, 0.35);
+}
+
+.pair-thumb {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.pair-thumb .mm-imgwrap {
+  margin: 0.2rem;
+}
+
+@media (max-width: 600px) {
+  .pair-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    
+  }
+
+  .pair-card {
+    padding: 0.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 660px;
+  } 
+  
+}
+.pagination {
+  gap: 0.35rem;
+}
+
+.pagination .page-link {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .pagination .page-link {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.9rem;
+  }
+}
+
 .btn {
   background-color: #604760;
   color: #eee0e0;
