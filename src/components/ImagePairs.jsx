@@ -235,7 +235,7 @@ export default function ImagePairs({ handleClick }) {
 
         {totalPages > 1 && (
           <nav className="mt-4" aria-label="Image pairs pagination">
-            <ul className="pagination justify-content-center">
+            <ul className="pagination">
               <li className={`page-item ${page <= 1 ? "disabled" : ""}`}>
                 <button
                   className="page-link"

@@ -140,13 +140,6 @@ nav {
   color: #604760;
 }
 
-.active,
-.nav-link:active,
-.nav-link:focus {
-  background-color: #eee0e0;
-  color: #604760;
-}
-
 /* Make sure nav never clips dropdowns */
 .App-header nav {
   position: relative;
@@ -219,7 +212,6 @@ nav {
   color: #604760;
 }
 
-/* --- Mobile: horizontal scroll for main categories only --- */
 /* --- Mobile: horizontal scroll for main categories only --- */
 /* --- Mobile: compact horizontal scroll + Seasonal on the right --- */
 @media (max-width: 600px) {
@@ -301,20 +293,15 @@ nav {
   filter: invert(1) hue-rotate(180deg);
 }
 
-.active {
+/* Nav-only active styles so we don't affect pagination */
+.App-header .category.active,
+.App-header .nav-link.category:active,
+.App-header .nav-link.category:focus,
+.App-header .seasonal-toggle.active {
   background-color: #eee0e0;
   color: #604760;
 }
 
-.nav-link:active {
-  background-color: #eee0e0;
-  color: #604760;
-}
-
-.nav-link:focus {
-  background-color: #eee0e0;
-  color: #604760;
-}
 /* .page-item button{
  
   background-color:#604760;
@@ -552,6 +539,7 @@ img {
   }
 }
 /* MatchMade pagination overrides */
+/* Base pagination layout */
 .pagination {
   display: flex;
   flex-wrap: wrap;
@@ -560,46 +548,68 @@ img {
   margin-top: 1rem;
 }
 
-/* Base pill */
+/* Page buttons */
 .pagination .page-link {
-  width: 2.1rem;
-  height: 2.1rem;
-  padding: 0;                    /* remove Bootstrap padding */
-  border-radius: 50%;            /* perfect circle */
-  border: none;                  /* remove Bootstrap border */
-  background-color: #fef8ff;     /* light pill */
-  color: #604760;                /* your purple */
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: #fef8ff;
+  box-shadow: none;
+  border:none;
+
+}
+.arrow{
+  justify-content: center;
+}
+.page-item:first-child .page-link {
+border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+    transform: translateY(1px); 
+}
+.page-item:last-child .page-link {
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+   transform: translateY(1px); 
+}
+.page-item:first-child:hover{
+  border:none;
+}
+.page-item:not(:first-child) .page-link {
+    margin-left: calc(-1 * var(--bs-border-width));
+}
+/* Active page */
+.pagination .page-item.active .page-link {
+  color: #fef8ff;
+  border: 1px solid #eee0e0;
 }
 
 /* Hover */
-.pagination .page-link:hover {
-  background-color: #eee0e0;
-  color: #352635;
+.pagination .page-link:hover, .page-link:focus{
+  border-radius: 15px;
+  border: 1px solid #eee0e0;
 }
 
-/* Active + focus states (kill the blue box) */
-.pagination .page-item.active .page-link,
-.pagination .page-link:focus {
-  background-color: #604760;     /* active circle color */
-  color: #fef8ff;
-  box-shadow: 0 0 0 2px #fef8ff; /* optional ring; remove if you don't like it */
-  outline: none;
-}
-
-/* Make it smaller on small screens */
+/* Mobile: turn into a scrollable strip so it doesn't feel crammed */
 @media (max-width: 600px) {
   .pagination {
-    gap: 0.25rem;
+    flex-wrap: nowrap;        /* one row */
+    overflow-x: auto;         /* scroll left/right */
+    justify-content: flex-start;
+    padding: 0.25rem 0.5rem;
   }
 
   .pagination .page-link {
-    width: 1.8rem;
-    height: 1.8rem;
+    padding: 0.25rem 0.55rem;
     font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .pagination::-webkit-scrollbar {
+    display: none;            /* cleaner on mobile */
   }
 }
+
 
