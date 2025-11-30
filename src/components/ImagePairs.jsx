@@ -223,12 +223,12 @@ export default function ImagePairs({ handleClick }) {
       </Helmet>
 
       <div className="container">
-        <div className="pair-grid">
-          {pageItems.map((pair, pairIndex) => (
-            <PairCard
-              pair={pair}
-              handleClick={handleClick}
-              key={`pair-${pairIndex}-${pair.title || ""}`}
+      <div className="pair-grid">
+        {pageItems.map((pair, pairIndex) => (
+          <PairCard
+            pair={pair}
+            handleClick={handleClick}
+            key={`pair-${pairIndex}-${pair.title || ""}`}
             />
           ))}
         </div>
@@ -349,7 +349,7 @@ function MMImage({ src, tiny, alt }) {
 
   return (
     <div className="pair-thumb">
-      <div className="mm-imgwrap m-1">
+      <div className="mm-imgwrap">
         {!loaded && (
           <div
             className="mm-skel"
