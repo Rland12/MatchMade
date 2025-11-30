@@ -401,6 +401,10 @@ img {
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
   font-size: 0.95rem;
+  background-color: #fef8ff;
+  color: #604760;
+  border: none;
+  box-shadow: 0 0 0 1px rgba(254, 248, 255, 0.5);
 }
 
 @media (max-width: 600px) {
@@ -408,6 +412,20 @@ img {
     padding: 0.35rem 0.65rem;
     font-size: 0.9rem;
   }
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-item.active .page-link:focus,
+.pagination .page-item.active .page-link:hover {
+  background-color: transparent;
+  color: #fef8ff;
+  box-shadow: 0 0 0 1px rgba(254, 248, 255, 0.85);
+}
+
+.pagination .page-link:focus,
+.pagination .page-link:hover {
+  color: #fef8ff;
+  box-shadow: 0 0 0 1px rgba(254, 248, 255, 0.75);
 }
 
 .btn {
