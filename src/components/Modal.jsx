@@ -159,10 +159,18 @@ function Modal(props) {
       // no-op if analytics wrapper isn't loaded
     }
 
+    let JSZip;
+    let saveAs;
     try {
-      const { default: JSZip } = await import("jszip");
-      const { saveAs } = await import("file-saver");
+      ({ default: JSZip } = await import("jszip"));
+      ({ saveAs } = await import("file-saver"));
+    } catch (err) {
+      console.error("ZIP libraries failed to load:", err);
+      alert("Download is unavailable right now. Please try again.");
+      return;
+    }
 
+    try {
       const zip = new JSZip();
       const base = (title || "matchmade-pair")
         .toLowerCase()
@@ -186,6 +194,7 @@ function Modal(props) {
       saveAs(zipBlob, `${base}.zip`);
     } catch (err) {
       console.error("ZIP download failed:", err);
+      alert("Download failed. Opening each image instead.");
       // fallback: open each image in a new tab
       set.forEach((img, i) => {
         const a = document.createElement("a");
@@ -229,7 +238,7 @@ function Modal(props) {
                         src={src}
                         alt={img.alt || ""}
                         className="img-fluid m-1"
-                        loading="eager"
+                        loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"
                       />
                     </div>
