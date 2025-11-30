@@ -551,3 +551,55 @@ img {
         transparent 100%);
   }
 }
+/* MatchMade pagination overrides */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+/* Base pill */
+.pagination .page-link {
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;                    /* remove Bootstrap padding */
+  border-radius: 50%;            /* perfect circle */
+  border: none;                  /* remove Bootstrap border */
+  background-color: #fef8ff;     /* light pill */
+  color: #604760;                /* your purple */
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover */
+.pagination .page-link:hover {
+  background-color: #eee0e0;
+  color: #352635;
+}
+
+/* Active + focus states (kill the blue box) */
+.pagination .page-item.active .page-link,
+.pagination .page-link:focus {
+  background-color: #604760;     /* active circle color */
+  color: #fef8ff;
+  box-shadow: 0 0 0 2px #fef8ff; /* optional ring; remove if you don't like it */
+  outline: none;
+}
+
+/* Make it smaller on small screens */
+@media (max-width: 600px) {
+  .pagination {
+    gap: 0.25rem;
+  }
+
+  .pagination .page-link {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.8rem;
+  }
+}
+
