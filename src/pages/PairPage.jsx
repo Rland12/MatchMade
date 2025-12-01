@@ -3,7 +3,7 @@
 // - Renders both images so crawlers can index them.
 // - Emits per-pair <title>, description, canonical, and (optional) OG/Twitter.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { cldUrl } from "@/libs/cdn";
