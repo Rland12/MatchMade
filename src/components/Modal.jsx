@@ -10,6 +10,7 @@ function Modal(props) {
 
   const set = selectedImages?.imageSet ?? [];
   const title = selectedImages?.title ?? "";
+  const credit = selectedImages?.credit ?? null;
 
   const modalRef = useRef(null);
   const lastActiveRef = useRef(null);
@@ -221,8 +222,23 @@ function Modal(props) {
     >
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
+
           <div className="modal-header">
-            <h2 className="modal-title fs-3" id="modalTitle">{title}</h2>
+            <div className="credit-container">
+              <h2 className="modal-title fs-3" id="modalTitle">{title}</h2>
+              {credit && credit.name && (
+                <p className="pair-credit">
+                  Art by{" "}
+                  {credit.url ? (
+                    <a href={credit.url} target="_blank" rel="noreferrer">
+                      {credit.name}
+                    </a>
+                  ) : (
+                    credit.name
+                  )}
+                </p>
+              )}
+            </div>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
 
@@ -234,17 +250,20 @@ function Modal(props) {
                   const src = getViewSrc(img);
                   return (
                     <div className="col-6 d-flex justify-content-center" key={key}>
-                      <img
-                        src={src}
-                        alt={img.alt || ""}
-                        className="img-fluid m-1"
-                        loading={index === 0 ? "eager" : "lazy"}
-                        decoding="async"
-                      />
+                      <div className="modal-avatar-wrap">
+                        <img
+                          src={src}
+                          alt={img.alt || ""}
+                          className="modal-avatar-img"
+                          loading={index === 0 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
+                      </div>
                     </div>
                   );
                 })}
               </div>
+
             </div>
           </div>
 

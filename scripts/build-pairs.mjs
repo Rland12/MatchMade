@@ -332,33 +332,40 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
 
 // cloudinary listing and pairing
 async function listAllInFolder(folder) {
-  const folderPath = `${PARENT}/${folder}`; // /categories/<folder>
-  const resources = [];
-  let next = null;
+  const folderPath = `${PARENT}/${folder}`; // e.g. categories/anime
+  const all = [];
+  let nextCursor;
 
   do {
-    const res = await cloudinary.search
+    let search = cloudinary.search
       .expression(`folder:${folderPath}/* AND resource_type:image`)
       .sort_by("public_id", "asc")
       .max_results(500)
-      .with_field("tags") 
-      .execute();
+      .with_field("tags")
+      .with_field("context"); // 👈 THIS is the important part
 
-    resources.push(...(res.resources || []));
-    next = res.next_cursor;
-  } while (next);
+    if (nextCursor) {
+      search = search.next_cursor(nextCursor);
+    }
 
-  return resources;
+    const res = await search.execute();
+    all.push(...res.resources);
+    nextCursor = res.next_cursor;
+  } while (nextCursor);
+
+  return all;
 }
+
 
 
 function toPairs(resources) {
   const unmatched = [];
-  const partial = new Map(); // key -> { left:{id,ts}, right:{id,ts} }
-  const map = new Map();     // key -> { dir, base, left, right, leftMeta, rightMeta, leftTags, rightTags }
+  const partial = new Map();
+  const map = new Map();
 
   for (const r of resources) {
     const createdAt = r.created_at || null;
+
     const parts = r.public_id.split("/");
     const filename = parts.pop();
     const dir = parts.join("/");
@@ -373,6 +380,13 @@ function toPairs(resources) {
     const side = m[2].toLowerCase();
     const key = `${dir}/${base}`;
 
+    // ---- read artist credit from Cloudinary context ----
+    const ctx = r.context || {};
+    const custom = ctx.custom || ctx;
+
+    const artistName = custom.artist || null;
+    const artistUrl = custom.artist_url || null;
+
     if (!map.has(key)) {
       map.set(key, {
         dir,
@@ -383,10 +397,16 @@ function toPairs(resources) {
         rightMeta: null,
         leftTags: [],
         rightTags: [],
+        creditName: null,
+        creditUrl: null,
       });
     }
 
     const entry = map.get(key);
+
+    if (artistName && !entry.creditName) entry.creditName = artistName;
+    if (artistUrl && !entry.creditUrl) entry.creditUrl = artistUrl;
+
     entry[side] = r.public_id;
     entry[`${side}Meta`] = { createdAt };
     entry[`${side}Tags`] = Array.isArray(r.tags) ? r.tags : [];
@@ -401,20 +421,24 @@ function toPairs(resources) {
     .sort((a, b) => (a.base < b.base ? -1 : a.base > b.base ? 1 : 0))
     .map((p) => {
       const title = `${toTitleCase(p.base)} Pair`;
+      const folderName = p.dir.split("/")[0];
 
-      // merge Cloudinary tags from left & right
       const tagSet = new Set([
         ...(p.leftTags || []),
         ...(p.rightTags || []),
       ]);
       const tags = [...tagSet];
 
-      const folderName = p.dir.split("/")[0]; // e.g. "anime", "cute"
+      // ---- build the credit object that goes into JSON ----
+      const credit = p.creditName
+        ? { name: p.creditName, url: p.creditUrl || null }
+        : null;
 
       return {
         title,
         base: p.base,
-        tags, // ⬅️ THIS is what ImagePairs seasonal view reads
+        tags,
+        credit,
         imageSet: [
           {
             publicId: p.left,
@@ -432,10 +456,15 @@ function toPairs(resources) {
 
   const incomplete = [...partial.entries()]
     .filter(([, sides]) => !(sides.left && sides.right))
-    .map(([key, sides]) => ({ key, left: !!sides.left, right: !!sides.right }));
+    .map(([key, sides]) => ({
+      key,
+      left: !!sides.left,
+      right: !!sides.right,
+    }));
 
   return { complete, unmatched, incomplete };
 }
+
 
 
 // sitemap and robots

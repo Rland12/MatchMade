@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.matchmadepics.com/</loc>
-    <lastmod>2025-12-01T19:17:30.000Z</lastmod>
+    <lastmod>2025-12-08T02:38:13.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -711,6 +711,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/sunset-tease_right</image:loc><image:title>Sunset Tease Pair — Right</image:title><image:caption>Sunset Tease matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/anime/sylveon-girls-pair/</loc>
+    <lastmod>2025-12-08T02:38:13.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/sylveon_girls_left</image:loc><image:title>Sylveon Girls Pair — Left</image:title><image:caption>Sylveon Girls matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/w_1024,c_fit,f_jpg/sylveon_girls_right</image:loc><image:title>Sylveon Girls Pair — Right</image:title><image:caption>Sylveon Girls matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/anime/winter-serenade-pair/</loc>
     <lastmod>2025-11-09T22:20:27.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -744,7 +752,7 @@
   </url>
   <url>
     <loc>https://www.matchmadepics.com/anime/</loc>
-    <lastmod>2025-12-01T19:17:30.000Z</lastmod>
+    <lastmod>2025-12-08T02:38:13.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

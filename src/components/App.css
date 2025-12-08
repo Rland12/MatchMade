@@ -74,6 +74,7 @@ body,
   justify-content: center;
   flex-wrap: wrap;
 }
+
 /* Skip link (for a11y) */
 .skip-link {
   position: absolute;
@@ -142,6 +143,7 @@ input[type="text"]:focus {
   background-color: #e0d3d3;
   outline: none;
 }
+
 /* --- Nav base --- */
 nav {
   margin-bottom: 1.5rem;
@@ -153,7 +155,8 @@ nav {
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
-  flex-wrap: wrap; /* desktop/tablet: can wrap gracefully */
+  flex-wrap: wrap;
+  /* desktop/tablet: can wrap gracefully */
 }
 
 /* Main category pills strip */
@@ -161,7 +164,8 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;   /* desktop/tablet: normal wrap */
+  flex-wrap: wrap;
+  /* desktop/tablet: normal wrap */
 }
 
 /* Pills */
@@ -289,15 +293,18 @@ nav {
     display: flex;
     align-items: center;
     width: 100%;
-    flex-wrap: nowrap;          /* keep everything on one line */
+    flex-wrap: nowrap;
+    /* keep everything on one line */
     justify-content: space-between;
     gap: 0.4rem;
   }
 
   /* Scrollable categories strip */
   .category-strip {
-    flex: 0 1 60%;              /* ⬅ smaller strip: ~60% of the row */
-    min-width: 0;               /* allow shrinking, important for flex */
+    flex: 0 1 60%;
+    /* ⬅ smaller strip: ~60% of the row */
+    min-width: 0;
+    /* allow shrinking, important for flex */
     display: flex;
     align-items: center;
     gap: 0.35rem;
@@ -311,11 +318,13 @@ nav {
   }
 
   .category-strip::-webkit-scrollbar {
-    display: none;              /* cleaner on mobile */
+    display: none;
+    /* cleaner on mobile */
   }
 
-  .category-strip > * {
-    flex: 0 0 auto;             /* pills keep natural width */
+  .category-strip>* {
+    flex: 0 0 auto;
+    /* pills keep natural width */
     scroll-snap-align: start;
   }
 
@@ -342,6 +351,13 @@ nav {
 
 .modal-header {
   border: none;
+  align-items: normal;
+}
+
+.credit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
 
 .modal-footer {
@@ -426,10 +442,35 @@ img {
   margin: 0.2rem;
 }
 
+/* Modal pair layout */
+.modal-body .row {
+  justify-content: center;
+}
+
+/* Square wrapper for each avatar in the modal */
+.modal-avatar-wrap {
+  width: min(42vw, 220px);   /* responsive on small screens, max size on larger */
+  aspect-ratio: 1 / 1;       /* force a square */
+  border-radius: 36%;        /* same rounded style as grid */
+  overflow: hidden;
+  background: #2a1a2f;       /* subtle fallback bg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image fills the square and is cropped instead of stretched */
+.modal-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 @media (max-width: 600px) {
   .pair-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    
+
   }
 
   .pair-card {
@@ -440,9 +481,10 @@ img {
 @media (max-width: 768px) {
   .container {
     max-width: 660px;
-  } 
-  
+  }
+
 }
+
 .pagination {
   gap: 0.35rem;
 }
@@ -597,6 +639,7 @@ img {
         transparent 100%);
   }
 }
+
 /* MatchMade pagination overrides */
 /* Base pagination layout */
 .pagination {
@@ -617,28 +660,34 @@ img {
   background-color: transparent;
   color: #fef8ff;
   box-shadow: none;
-  border:none;
+  border: none;
 
 }
-.arrow{
+
+.arrow {
   justify-content: center;
 }
+
 .page-item:first-child .page-link {
-border-top-right-radius: 1px;
+  border-top-right-radius: 1px;
   border-bottom-right-radius: 1px;
-    transform: translateY(1px); 
+  transform: translateY(1px);
 }
+
 .page-item:last-child .page-link {
   border-top-left-radius: 1px;
   border-bottom-left-radius: 1px;
-   transform: translateY(1px); 
+  transform: translateY(1px);
 }
-.page-item:first-child:hover{
-  border:none;
+
+.page-item:first-child:hover {
+  border: none;
 }
+
 .page-item:not(:first-child) .page-link {
-    margin-left: calc(-1 * var(--bs-border-width));
+  margin-left: calc(-1 * var(--bs-border-width));
 }
+
 /* Active page */
 .pagination .page-item.active .page-link {
   color: #fef8ff;
@@ -646,16 +695,30 @@ border-top-right-radius: 1px;
 }
 
 /* Hover */
-.pagination .page-link:hover, .page-link:focus{
+.pagination .page-link:hover,
+.page-link:focus {
   border-radius: 15px;
   border: 1px solid #eee0e0;
+}
+
+.pair-credit {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #a8a8b3;
+}
+
+.pair-credit a {
+  color: #aaffe5;
+  text-decoration: underline;
 }
 
 /* Mobile: turn into a scrollable strip so it doesn't feel crammed */
 @media (max-width: 600px) {
   .pagination {
-    flex-wrap: nowrap;        /* one row */
-    overflow-x: auto;         /* scroll left/right */
+    flex-wrap: nowrap;
+    /* one row */
+    overflow-x: auto;
+    /* scroll left/right */
     justify-content: flex-start;
     padding: 0.25rem 0.5rem;
   }
@@ -667,6 +730,7 @@ border-top-right-radius: 1px;
   }
 
   .pagination::-webkit-scrollbar {
-    display: none;            /* cleaner on mobile */
+    display: none;
+    /* cleaner on mobile */
   }
 }
