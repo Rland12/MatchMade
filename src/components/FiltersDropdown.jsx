@@ -32,9 +32,35 @@ export default function FiltersDropdown() {
         currentFilters.includes(pt.tag)
     );
 
-    const activeSeasonLabel = SEASONS.find((s) => s.id === currentHoliday)?.label || null;
+    const activeSeasonLabel =
+        SEASONS.find((s) => s.id === currentHoliday)?.label || null;
 
-    const activeTypesLabel = activeTypes.length > 0 ? activeTypes.map((t) => t.label).join(" · ") : "";
+    const activeTypesLabel =
+        activeTypes.length > 0 ? activeTypes.map((t) => t.label).join(" · ") : "";
+
+    // how many things are “on” (season counts as 1, each type as 1)
+    const filterCount =
+        (currentHoliday ? 1 : 0) + activeTypes.length;
+
+    // verbose: “Christmas · boy x boy · poc”
+    const detailedSummary = [
+        activeSeasonLabel,
+        activeTypesLabel || null,
+    ]
+        .filter(Boolean)
+        .join(" · ");
+
+    // compact: when lots are selected, shorten to “Christmas · 2 filters”
+    const compactSummary =
+        filterCount > 2
+            ? [
+                activeSeasonLabel,
+                `${filterCount - (activeSeasonLabel ? 1 : 0)} filters`,
+            ]
+                .filter(Boolean)
+                .join(" · ")
+            : detailedSummary;
+
 
     const setSeason = (id) => {
         const next = new URLSearchParams(searchParams);
@@ -116,13 +142,10 @@ export default function FiltersDropdown() {
                 aria-haspopup="true"
                 aria-expanded={open}
             >
-                <span>Filters:                                                                         </span>
-                {hasAnyFilter && (
+                <span>Filters: </span>
+                {hasAnyFilter && compactSummary && (
                     <span className="seasonal-chip">
-                        {activeSeasonLabel}
-                        {activeTypesLabel
-                            ? ` · ${activeTypesLabel}`
-                            : ""}
+                        {compactSummary}
                     </span>
                 )}
                 <span className="caret">▾</span>
