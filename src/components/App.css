@@ -223,6 +223,26 @@ nav {
   font-size: 0.8em;
 }
 
+.seasonal-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 260px;
+  /* desktop cap */
+}
+
+
+/* On small screens, tighten it further */
+@media (max-width: 600px) {
+  .seasonal-toggle {
+    max-width: 190px;
+  }
+
+  .seasonal-chip {
+    max-width: 110px;
+  }
+}
+
 /* Dropdown menu anchored to Seasonal pill */
 .seasonal-menu {
   position: absolute;
@@ -237,15 +257,19 @@ nav {
   z-index: 20;
   overflow: hidden;
 }
+
 .seasonal-chip {
+  font-size: 0.75rem;
   max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .seasonal-menu-open {
   display: block;
 }
+
 .no-pairs {
   text-align: center;
   margin: 3rem 0;
@@ -274,7 +298,7 @@ nav {
   transition: transform .2s ease;
 }
 
-.btn-clear-filters:hover{
+.btn-clear-filters:hover {
   transform: translateY(-2px);
 }
 
@@ -506,11 +530,15 @@ img {
 
 /* Square wrapper for each avatar in the modal */
 .modal-avatar-wrap {
-  width: min(42vw, 220px);   /* responsive on small screens, max size on larger */
-  aspect-ratio: 1 / 1;       /* force a square */
-  border-radius: 36%;        /* same rounded style as grid */
+  width: min(42vw, 220px);
+  /* responsive on small screens, max size on larger */
+  aspect-ratio: 1 / 1;
+  /* force a square */
+  border-radius: 36%;
+  /* same rounded style as grid */
   overflow: hidden;
-  background: #2a1a2f;       /* subtle fallback bg */
+  background: #2a1a2f;
+  /* subtle fallback bg */
   display: flex;
   align-items: center;
   justify-content: center;
