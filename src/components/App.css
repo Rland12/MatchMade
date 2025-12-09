@@ -226,38 +226,95 @@ nav {
 /* Dropdown menu anchored to Seasonal pill */
 .seasonal-menu {
   position: absolute;
+  text-align: left;
   top: 115%;
   left: 0;
   background-color: #604760;
   border-radius: 16px;
-  padding: 0.25rem 0;
+  padding-top: 0.25rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   display: none;
   z-index: 20;
   overflow: hidden;
 }
-
+.seasonal-chip {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .seasonal-menu-open {
   display: block;
+}
+.no-pairs {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.no-pairs h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-pairs p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  max-width: 420px;
+  margin: 0 auto 1rem;
+}
+
+.btn-clear-filters {
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  background: #eee0e0;
+  color: #604760;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+.btn-clear-filters:hover{
+  transform: translateY(-2px);
 }
 
 .seasonal-option {
   display: block;
   width: 100%;
+  padding: 0.35rem 0.9rem;
   text-align: left;
-  padding: 0.4rem 0.9rem;
-  background: transparent;
   border: none;
-  font-family: "Nunito", sans-serif;
+  background: transparent;
+  color: #f5e7ff;
   font-size: 0.9rem;
-  color: #fef8ff;
   cursor: pointer;
 }
 
-.seasonal-option:hover,
-.seasonal-option:focus {
+/* ACTIVE = selected filter */
+.seasonal-option.active {
   background-color: #eee0e0;
   color: #604760;
+}
+
+/* HOVER – subtle, but not as strong as active */
+.seasonal-option:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* FOCUS – outline only, don’t change background/colors */
+.seasonal-option:focus-visible {
+  outline: 2px solid #eee0e0;
+  outline-offset: 2px;
+}
+
+.seasonal-section-label {
+  text-decoration: underline;
+  display: block;
+  padding: 0.35rem 0.9rem 0.15rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
 }
 
 /* --- Mobile: horizontal scroll for main categories only --- */

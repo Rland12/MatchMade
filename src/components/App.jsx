@@ -4,14 +4,10 @@ import { Link, Routes, Route, useLocation, useNavigate } from "react-router-dom"
 import "./App.css";
 import Categories from "./Categories";
 import ImagePairs from "./ImagePairs";
+import FiltersDropdown from "./FiltersDropdown";
 
 const Modal = lazy(() => import("./Modal"));
 const PairSEO = lazy(() => import("./PairSEO"));
-
-const HOLIDAYS = [
-  { key: "christmas", label: "Christmas" },
-  { key: "halloween", label: "Halloween" },
-];
 
 const SOCIAL_LINKS = [
   {
@@ -46,40 +42,6 @@ const SOCIAL_LINKS = [
   // },
 ];
 
-function SeasonalMenu() {
-  const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const goHoliday = (key) => {
-    navigate(`/seasonal?holiday=${key}`);
-    setOpen(false);
-  };
-
-  return (
-    <div className="seasonal-wrapper">
-      <button
-        className={`category seasonal-toggle ${open ? "active" : ""}`}
-        onClick={() => setOpen(v => !v)}
-      >
-        Seasonal <span className="caret">▾</span>
-      </button>
-
-      <div className={"seasonal-menu" + (open ? " seasonal-menu-open" : "")}>
-        {HOLIDAYS.map((h) => (
-          <button
-            key={h.key}
-            className="seasonal-option"
-            onClick={() => goHoliday(h.key)}
-          >
-            {h.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-
 function App() {
   const [selectedImages, setSelectedImages] = useState({});
   const [categories, setCategories] = useState([
@@ -91,6 +53,16 @@ function App() {
   const location = useLocation();
   const state = location.state && location.state.modal ? location.state : null;
 
+  const navigate = useNavigate();
+  const handleModalClose = () => {
+    setSelectedImages({});
+    // if this route was opened as a modal over a background location,
+    // go back to that background route
+    const locState = location.state;
+    if (locState && locState.modal && locState.backgroundLocation) {
+      navigate(locState.backgroundLocation, { replace: true });
+    }
+  };
   // 🔹 Load categories from build-pairs output
   useEffect(() => {
     (async () => {
@@ -156,8 +128,8 @@ function App() {
               <Categories categories={categories} />
             </div>
 
-            {/* Seasonal pill OUTSIDE scroll strip */}
-            <SeasonalMenu />
+            {/* Filters (season + pair type) */}
+            <FiltersDropdown />
           </div>
         </nav>
 
@@ -182,7 +154,7 @@ function App() {
       <Suspense fallback={null}>
         <Modal
           selectedImages={selectedImages}
-          onClose={() => setSelectedImages({})}
+          onClose={handleModalClose}
         />
       </Suspense>
     </div>
