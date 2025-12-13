@@ -8,8 +8,8 @@
  * - Small helpers for downloads and srcset
  *
  * Usage:
- *   cldUrl("anime-girl-hold-left", { w: 560, h: 560, fit: "fill", g: "auto" })
- *   cldUrl("anime-girl-hold-left", { w: 900, fit: "fit" }) // modal
+ *   cldUrl("anime-girl-hold-left", { w: 420, h: 420, fit: "fill", g: "auto" })
+ *   cldUrl("anime-girl-hold-left", { w: 720, fit: "fit" }) // modal
  */
 
 export function cldUrl(publicId, opts = {}) {
@@ -28,7 +28,7 @@ export function cldUrl(publicId, opts = {}) {
 
     // Quality/format
     f = "auto",       // format auto
-    q = "auto:eco",       // quality auto lower bandwidth by default
+    q = "auto",       // quality auto lower bandwidth by default
     dpr = 1,     // DPR auto (retina aware)
     format,           // explicit format override (webp/avif/jpg/...)
     // NOTE: if `format` is provided, we won't emit f_auto.
