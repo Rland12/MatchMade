@@ -122,18 +122,20 @@ function asOverlayId(publicId) {
     .replace(/\.(png|jpe?g|webp|avif|gif)$/i, "")
     .replace(/\//g, ":");
 }
-function viewUrl(cloud, publicId, w = 900, fmt = "jpg") {
-  return `https://res.cloudinary.com/${cloud}/image/upload/w_${w},c_fit,f_${fmt}/${publicId}`;
+function viewUrl(cloud, publicId, w = 900) {
+  return `https://res.cloudinary.com/${cloud}/image/upload/f_auto,q_auto,w_${w},c_fit/${publicId}`;
 }
+
 function buildOgPairUrl(cloud, leftPublicId, rightPublicId, baseId = BASE_CANVAS_ID) {
   const l = asOverlayId(leftPublicId);
   const r = asOverlayId(rightPublicId);
   return `https://res.cloudinary.com/${cloud}/image/upload/` +
-    `w_1200,h_630,c_fill,b_black/` +
+    `f_auto,q_auto,w_1200,h_630,c_fill,b_black/` +
     `l_${l},w_600,h_630,c_fit,g_center,x_-320/` +
     `l_${r},w_600,h_630,c_fit,g_center,x_320/` +
     `${baseId}`;
 }
+
 
 function rawImageUrl(cloud, publicId) {
   return `https://res.cloudinary.com/${cloud}/image/upload/${publicId}`;
@@ -160,7 +162,7 @@ function jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId, rightP
     caption: `${title} matching profile picture pair${folder === "home" ? "" : ` (${toTitleCase(folder)})`}`,
     url,
     contentUrl: rawImageUrl(cloud, pubId),
-    thumbnailUrl: viewUrl(cloud, pubId, 512, "jpg")
+    thumbnailUrl: viewUrl(cloud, pubId, 512)
   });
   return [
     {
@@ -215,15 +217,14 @@ function safeMaxIso(a, b) {
   return max ? new Date(max).toISOString() : undefined;
 }
 
-
-
 //keep near helpers
 function categoryHtml({ site, folder, items, generatedAt }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
   const title = `${label} Matching PFP Pairs | MatchMade`;
   const canonical = folder === "home" ? `${site}/` : `${site}/${folder}/`;
   const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
-  const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
+  const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
+
   const [pageLd, crumbsLd] = jsonLdCategoryPage({ site, folder, items });
   if (generatedAt) pageLd.dateModified = generatedAt;
   const jsonLd = JSON.stringify([pageLd, crumbsLd], null, 0);
@@ -496,7 +497,7 @@ function buildSitemapAndRobots() {
         lastmod: pairLast,
         images: (item.imageSet || []).map((img, idx) => {
           const loc = img.publicId
-            ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024, "jpg")
+            ? viewUrl(process.env.CLOUDINARY_CLOUD_NAME, img.publicId, 1024)
             : img.url;
           const side = idx === 0 ? "Left" : "Right";
           const capFolder = folder === "home" ? "" : ` (${toTitleCase(folder)})`;
@@ -585,7 +586,7 @@ function injectHomeOgFromFirstPair() {
     }
 
     if (!ogUrl) {
-      ogUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
+      ogUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
     }
 
     if (fs.existsSync(INDEX_HTML_PATH)) {

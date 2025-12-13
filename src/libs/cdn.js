@@ -28,8 +28,8 @@ export function cldUrl(publicId, opts = {}) {
 
     // Quality/format
     f = "auto",       // format auto
-    q = "auto",       // quality auto
-    dpr = "auto",     // DPR auto (retina aware)
+    q = "auto:eco",       // quality auto lower bandwidth by default
+    dpr = 1,     // DPR auto (retina aware)
     format,           // explicit format override (webp/avif/jpg/...)
     // NOTE: if `format` is provided, we won't emit f_auto.
 

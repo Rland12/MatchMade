@@ -355,7 +355,7 @@ function PairCard({ pair, handleClick }) {
 
 
   const slug = slugify(pair.title);
-  const dims = { w: 560, h: 560, fit: "fill", g: "auto" };
+  const dims = { w: 420, h: 420, fit: "fill", g: "auto" };
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -393,9 +393,6 @@ function PairCard({ pair, handleClick }) {
       {pair.imageSet.map((img, index) => {
         const isCloud = !!img.publicId;
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
-        const tinySrc = isCloud
-          ? cldUrl(img.publicId, { w: 24, q: 10, blur: 2000 })
-          : null;
 
         const side = index === 0 ? "left" : "right";
         const alt =
@@ -404,7 +401,6 @@ function PairCard({ pair, handleClick }) {
           <MMImage
             key={(img.publicId || img.url || "") + index}
             src={fullSrc}
-            tiny={tinySrc}
             alt={alt}
           />
         );
@@ -413,26 +409,13 @@ function PairCard({ pair, handleClick }) {
   );
 }
 
-function MMImage({ src, tiny, alt }) {
+function MMImage({ src, alt }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <div className="pair-thumb">
       <div className="mm-imgwrap">
-        {!loaded && (
-          <div
-            className="mm-skel"
-            style={
-              tiny
-                ? {
-                  backgroundImage: `url(${tiny})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }
-                : undefined
-            }
-          />
-        )}
+        {!loaded && <div className="mm-skel"/>}
         <img
           src={src}
           alt={alt}

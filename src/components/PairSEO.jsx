@@ -62,7 +62,7 @@ export default function PairSEO() {
 
   const ogImagePublicId = item.imageSet?.[0]?.publicId || null;
   const ogImageUrl = ogImagePublicId
-    ? cldUrl(ogImagePublicId, { w: 1200, h: 630, fit: "fill", g: "auto" })
+    ? cldUrl(ogImagePublicId, { w: 960, h: 504, fit: "fill", g: "auto" })
     : item.imageSet?.[0]?.url || "";
 
   const jsonLd = {
@@ -72,7 +72,7 @@ export default function PairSEO() {
     description,
     url: canonical,
     image: item.imageSet
-      ?.map((img) => (img.publicId ? cldUrl(img.publicId, { w: 1024, h: 1024, fit: "fill", g: "auto" }) : img.url))
+      ?.map((img) => (img.publicId ? cldUrl(img.publicId, { w: 900, h: 900, fit: "fill", g: "auto" }) : img.url))
       .filter(Boolean),
   };
 
@@ -104,7 +104,7 @@ export default function PairSEO() {
         <div className="row">
           {item.imageSet?.map((img, i) => {
             const src = img.publicId
-              ? cldUrl(img.publicId, { w: 1024, h: 1024, fit: "fill", g: "auto" })
+              ? cldUrl(img.publicId, { w: 900, h: 900, fit: "fill", g: "auto" })
               : img.url;
             const side = i === 0 ? "left" : "right";
             const alt = (img.alt && img.alt.trim()) || makeAltText(item.title, side, folder);

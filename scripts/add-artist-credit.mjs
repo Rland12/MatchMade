@@ -42,6 +42,42 @@ const PAIR_CREDITS = [
     artist: "CIOSUI",
     url: "https://ciosui.carrd.co/",
   },
+  {
+    folder: "anime",
+    base: "okeri",
+    artist: "MINYU",
+    url: "https://lit.link/en/AyellowDog",
+  },
+  {
+    folder: "anime",
+    base: "Fukube",
+    artist: "MINYU",
+    url: "https://lit.link/en/AyellowDog",
+  },
+  {
+    folder: "anime",
+    base: "holiday sweets",
+    artist: "妖怪春歌",
+    url: "https://www.pixiv.net/en/users/33177449",
+  },
+  {
+    folder: "anime",
+    base: "holiday sweets",
+    artist: "妖怪春歌",
+    url: "https://www.pixiv.net/en/users/33177449",
+  },
+  //  {
+  //   folder: "anime",
+  //   base: "tokyo noise",
+  //   artist: "ChihoIshi",
+  //   url: "https://potofu.me/chihoishi",
+  // },
+    //  {
+  //   folder: "anime",
+  //   base: "obana demon slayer",
+  //   artist: "ChihoIshi",
+  //   url: "https://potofu.me/chihoishi",
+  // },
   // add more credited pairs here later
 ];
 

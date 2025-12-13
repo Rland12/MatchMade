@@ -11,7 +11,7 @@ import { cldUrl } from "@/libs/cdn";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-const VIEW_W = 900; // preview width per side
+const VIEW_W = 720; // preview width per side
 
 export default function PairDetail() {
   const { folder, slug } = useParams();

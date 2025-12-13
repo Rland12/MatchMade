@@ -10,7 +10,7 @@ import { cldUrl } from "@/libs/cdn";
 import { slugify } from "@/utils/slug";
 
 const SITE = "https://www.matchmadepics.com";
-const VIEW = { w: 900, fit: "fit" }; // safe transform for display
+const VIEW = { w: 720, fit: "fit" }; // safe transform for display
 
 export default function PairPage() {
   const { folder, slug } = useParams();

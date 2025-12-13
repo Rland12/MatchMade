@@ -108,7 +108,7 @@ function Modal(props) {
   }, [selectedImages, folder, title]);
 
   const getViewSrc = (img) =>
-    img.publicId ? cldUrl(img.publicId, { w: 900, fit: "fit" }) : img.url;
+    img.publicId ? cldUrl(img.publicId, { w: 780, fit: "fit" }) : img.url;
 
   const getRawHref = (img) => (img.publicId ? cldUrl(img.publicId) : img.url);
 
