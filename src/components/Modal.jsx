@@ -110,7 +110,12 @@ function Modal(props) {
   const getViewSrc = (img) =>
     img.publicId ? cldUrl(img.publicId, { w: 780, fit: "fit" }) : img.url;
 
-  const getRawHref = (img) => (img.publicId ? cldUrl(img.publicId) : img.url);
+ // limit download size but keep good quality
+const getRawHref = (img) =>
+  img.publicId
+    ? cldUrl(img.publicId, { w: 1024, fit: "fit", q: "auto" })
+    : img.url;
+
 
   const whichSide = (img, index) => {
     const a = (img?.alt || "").toLowerCase();
