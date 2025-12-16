@@ -90,6 +90,12 @@ const PAIR_CREDITS = [
     artist: "ChihoIshi",
     url: "https://potofu.me/chihoishi",
   },
+  {
+    folder: "anime",
+    base: "Denji_Reze",
+    artist: "Starless Night",
+    url: "https://www.facebook.com/profile.php?id=61562240311408",
+  },
   // {
   //   folder: "anime",
   //   base: "nagi reo",
