@@ -96,12 +96,18 @@ const PAIR_CREDITS = [
     artist: "Starless Night",
     url: "https://www.facebook.com/profile.php?id=61562240311408",
   },
-  // {
-  //   folder: "anime",
-  //   base: "nagi reo",
-  //   artist: "doran",
-  //   url: "",
-  // },
+  {
+    folder: "anime",
+    base: "nagi-reo-candy",
+    artist: "doran",
+    url: "https://x.com/ddd1doran",
+  },
+   {
+    folder: "anime",
+    base: "nagi-reo-hat",
+    artist: "doran",
+    url: "https://x.com/ddd1doran",
+  },
   //  {
   //   folder: "anime",
   //   base: "tokyo noise",
