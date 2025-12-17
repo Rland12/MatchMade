@@ -96,6 +96,12 @@ const PAIR_CREDITS = [
     artist: "Starless Night",
     url: "https://www.facebook.com/profile.php?id=61562240311408",
   },
+   {
+    folder: "anime",
+    base: "Kanae_Mitsuri",
+    artist: "Starless Night",
+    url: "https://www.facebook.com/profile.php?id=61562240311408",
+  },
   {
     folder: "anime",
     base: "nagi-reo-candy",
