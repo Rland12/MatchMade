@@ -115,16 +115,17 @@ export default function ImagePairs({ handleClick }) {
 
         let items = [];
 
-        if (holidayTag) {
-          // Seasonal view: pull from *all* folders
+        if (holidayTag || isHome) {
+          // Home + seasonal views: pull from *all* folders
           const results = await Promise.all(
             ALL_FOLDERS.map((fName) => fetchFolderItems(fName))
           );
           items = results.flat();
         } else {
-          // Normal view: just this category's folder
+          // Category view: just this category's folder
           items = await fetchFolderItems(folder);
         }
+
 
         // --- Seasonal tag filter (season_christmas, etc.) ---
         if (holidayTag) {
@@ -177,13 +178,23 @@ export default function ImagePairs({ handleClick }) {
 
   const { totalPages, page, pageItems } = useMemo(() => {
     const total = state.allPairs.length;
+
+    // Home: show a random 6-pack from all categories, no pagination
+    if (isHome) {
+      const shuffled = state.allPairs.slice().sort(() => Math.random() - 0.5);
+      const items = shuffled.slice(0, PAIRS_PER_PAGE);
+      return { totalPages: 1, page: 1, pageItems: items };
+    }
+
+    // Categories: keep normal pagination
     const pages = Math.max(1, Math.ceil(total / PAIRS_PER_PAGE));
     const safePage = Math.min(Math.max(pageFromUrl, 1), pages);
     const start = (safePage - 1) * PAIRS_PER_PAGE;
     const items = state.allPairs.slice(start, start + PAIRS_PER_PAGE);
 
     return { totalPages: pages, page: safePage, pageItems: items };
-  }, [state.allPairs, pageFromUrl]);
+  }, [state.allPairs, pageFromUrl, isHome]);
+
   const hasResults =
     !state.loading && !state.error && state.allPairs.length > 0;
 
@@ -415,7 +426,7 @@ function MMImage({ src, alt }) {
   return (
     <div className="pair-thumb">
       <div className="mm-imgwrap">
-        {!loaded && <div className="mm-skel"/>}
+        {!loaded && <div className="mm-skel" />}
         <img
           src={src}
           alt={alt}

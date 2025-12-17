@@ -17,6 +17,10 @@ function Modal(props) {
   const sentViewRef = useRef(false);
 
   const location = useLocation();
+  // Simple mobile detection for UI (not security critical)
+  const isMobile =
+    typeof navigator !== "undefined" &&
+    /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
 
   // Derive folder from the current URL: /pair/:slug  => home,  /pair/:folder/:slug => folder
   const getFolderFromPath = () => {
@@ -110,11 +114,11 @@ function Modal(props) {
   const getViewSrc = (img) =>
     img.publicId ? cldUrl(img.publicId, { w: 780, fit: "fit" }) : img.url;
 
- // limit download size but keep good quality
-const getRawHref = (img) =>
-  img.publicId
-    ? cldUrl(img.publicId, { w: 1024, fit: "fit", q: "auto" })
-    : img.url;
+  // limit download size but keep good quality
+  const getRawHref = (img) =>
+    img.publicId
+      ? cldUrl(img.publicId, { w: 1024, fit: "fit", q: "auto" })
+      : img.url;
 
 
   const whichSide = (img, index) => {
@@ -126,6 +130,48 @@ const getRawHref = (img) =>
     if (pid.includes("right")) return "right";
     // fallback to position
     return index === 0 ? "left" : "right";
+  };
+
+  const handleDownloadSide = async (side) => {
+    if (!set.length) return;
+
+    const index = side === "right" ? 1 : 0;
+    const img = set[index];
+    if (!img) return;
+
+    const baseName = (title || "matchmade-pair")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    const defaultFilename = `${baseName}-${side}.jpg`;
+
+    const url = getRawHref(img);
+
+    // Load only file-saver (no need for JSZip here)
+    let saveAs;
+    try {
+      ({ saveAs } = await import("file-saver"));
+    } catch (err) {
+      console.error("file-saver failed to load:", err);
+      alert("Download is unavailable right now. Please try again.");
+      return;
+    }
+
+    try {
+      const res = await fetch(url, { mode: "cors" });
+      if (!res.ok) throw new Error(`fetch image: ${res.status}`);
+
+      const blob = await res.blob();
+      const ext = mimeToExt[blob.type] || "jpg";
+      const filename = defaultFilename.replace(/\.jpg$/, `.${ext}`);
+
+      // This is what gives you the same style of prompt as the ZIP
+      saveAs(blob, filename);
+    } catch (err) {
+      console.error("Side download failed:", err);
+      alert("Could not download this image. Please try again.");
+    }
   };
 
   const mimeToExt = {
@@ -273,19 +319,49 @@ const getRawHref = (img) =>
           </div>
 
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => {
-                if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-                handleDownload();
-              }}
-              data-bs-dismiss="modal"
-              disabled={!set.length}
-            >
-              Download Image Pair
-            </button>
+            {isMobile ? (
+              <>
+                <div className="d-flex gap-2 w-100">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary flex-fill"
+                    onClick={() => handleDownloadSide("left")}
+                    disabled={!set[0]}
+                  >
+                    Save Left Image
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary flex-fill"
+                    onClick={() => handleDownloadSide("right")}
+                    disabled={!set[1]}
+                  >
+                    Save Right Image
+                  </button>
+                </div>
+                <p className="small mt-2 mb-0">
+                 You can also tap and hold each image to add it to your gallery, instead of files.
+                </p>
+              </>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur();
+                  }
+                  handleDownload(); // existing ZIP logic
+                }}
+                data-bs-dismiss="modal"
+                disabled={!set.length}
+              >
+                Download Image Pair (ZIP)
+              </button>
+            )}
           </div>
+
+
         </div>
       </div>
     </div>
