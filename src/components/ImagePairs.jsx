@@ -80,6 +80,18 @@ export default function ImagePairs({ handleClick }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+    // When switching seasonal holiday (christmas <-> halloween), reset to page 1
+  useEffect(() => {
+    if (!holidayId) return;          // only care about seasonal views
+    if (pageFromUrl === 1) return;   // already on page 1, nothing to do
+
+    const next = new URLSearchParams(searchParams);
+    next.set("page", "1");
+    next.delete("p");
+    setSearchParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [holidayId]);
+
   const [state, setState] = useState({ loading: true, error: null, allPairs: [] });
 
   useEffect(() => {
@@ -179,21 +191,30 @@ export default function ImagePairs({ handleClick }) {
   const { totalPages, page, pageItems } = useMemo(() => {
     const total = state.allPairs.length;
 
-    // Home: show a random 6-pack from all categories, no pagination
-    if (isHome) {
+    // Plain home only (no holiday, no extra filters):
+    // show a random 6-pack from all categories, no pagination
+    if (isHome && !holidayTag && activeFilterTags.length === 0) {
       const shuffled = state.allPairs.slice().sort(() => Math.random() - 0.5);
       const items = shuffled.slice(0, PAIRS_PER_PAGE);
       return { totalPages: 1, page: 1, pageItems: items };
     }
 
-    // Categories: keep normal pagination
+    // All other views (categories, home+holiday, filtered):
+    // use normal pagination based on pageFromUrl
     const pages = Math.max(1, Math.ceil(total / PAIRS_PER_PAGE));
     const safePage = Math.min(Math.max(pageFromUrl, 1), pages);
     const start = (safePage - 1) * PAIRS_PER_PAGE;
     const items = state.allPairs.slice(start, start + PAIRS_PER_PAGE);
 
     return { totalPages: pages, page: safePage, pageItems: items };
-  }, [state.allPairs, pageFromUrl, isHome]);
+  }, [
+    state.allPairs,
+    pageFromUrl,
+    isHome,
+    holidayTag,
+    activeFilterTags.length,
+  ]);
+
 
   const hasResults =
     !state.loading && !state.error && state.allPairs.length > 0;

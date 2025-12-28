@@ -7,54 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.matchmadepics.com/pair/autumn-crush-pair/</loc>
-    <lastmod>2025-09-30T03:52:06.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/autumn-crush-left</image:loc><image:title>Autumn Crush Pair — Left</image:title><image:caption>Autumn Crush matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/autumn-crush-right</image:loc><image:title>Autumn Crush Pair — Right</image:title><image:caption>Autumn Crush matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/catboy-pair/</loc>
-    <lastmod>2025-09-28T18:05:22.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/catboy-left</image:loc><image:title>Catboy Pair — Left</image:title><image:caption>Catboy matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/catboy-right</image:loc><image:title>Catboy Pair — Right</image:title><image:caption>Catboy matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/heartshot-pair/</loc>
-    <lastmod>2025-09-30T03:52:18.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/heartshot-left</image:loc><image:title>Heartshot Pair — Left</image:title><image:caption>Heartshot matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/heartshot-right</image:loc><image:title>Heartshot Pair — Right</image:title><image:caption>Heartshot matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/matching-boy-girl-pair/</loc>
-    <lastmod>2025-09-28T18:05:33.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/matching-boy-girl-left</image:loc><image:title>Matching Boy Girl Pair — Left</image:title><image:caption>Matching Boy Girl matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/matching-boy-girl-right</image:loc><image:title>Matching Boy Girl Pair — Right</image:title><image:caption>Matching Boy Girl matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/squidgame-girl-pair/</loc>
-    <lastmod>2025-09-28T18:05:38.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/squidgame-girl-left</image:loc><image:title>Squidgame Girl Pair — Left</image:title><image:caption>Squidgame Girl matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/squidgame-girl-right</image:loc><image:title>Squidgame Girl Pair — Right</image:title><image:caption>Squidgame Girl matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
-    <loc>https://www.matchmadepics.com/pair/toh-girl-pair/</loc>
-    <lastmod>2025-09-28T18:05:45.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/toh-girl-left</image:loc><image:title>Toh Girl Pair — Left</image:title><image:caption>Toh Girl matching profile picture pair</image:caption></image:image>
-    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/toh-girl-right</image:loc><image:title>Toh Girl Pair — Right</image:title><image:caption>Toh Girl matching profile picture pair</image:caption></image:image>
-  </url>
-  <url>
     <loc>https://www.matchmadepics.com/pair/anime/bunny-girl-pair/</loc>
     <lastmod>2025-11-28T17:11:45.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -335,6 +287,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/anya-becky-right</image:loc><image:title>Anya Becky Pair — Right</image:title><image:caption>Anya Becky matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/anime/autumn-crush-pair/</loc>
+    <lastmod>2025-09-30T03:52:06.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/autumn-crush-left</image:loc><image:title>Autumn Crush Pair — Left</image:title><image:caption>Autumn Crush matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/autumn-crush-right</image:loc><image:title>Autumn Crush Pair — Right</image:title><image:caption>Autumn Crush matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/anime/bachira-and-isagi-pair/</loc>
     <lastmod>2025-12-16T09:00:31.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -421,6 +381,14 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/blindboydemon_left</image:loc><image:title>Blindboydemon Pair — Left</image:title><image:caption>Blindboydemon matching profile picture pair (Anime)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/blindboydemon_right</image:loc><image:title>Blindboydemon Pair — Right</image:title><image:caption>Blindboydemon matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/catboy-pair/</loc>
+    <lastmod>2025-09-28T18:05:22.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/catboy-left</image:loc><image:title>Catboy Pair — Left</image:title><image:caption>Catboy matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/catboy-right</image:loc><image:title>Catboy Pair — Right</image:title><image:caption>Catboy matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/anime/cheek-bite-pair/</loc>
@@ -591,6 +559,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/manga-cozy-hug_right</image:loc><image:title>Manga Cozy Hug Pair — Right</image:title><image:caption>Manga Cozy Hug matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/anime/matching-boy-girl-pair/</loc>
+    <lastmod>2025-09-28T18:05:33.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/matching-boy-girl-left</image:loc><image:title>Matching Boy Girl Pair — Left</image:title><image:caption>Matching Boy Girl matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/matching-boy-girl-right</image:loc><image:title>Matching Boy Girl Pair — Right</image:title><image:caption>Matching Boy Girl matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/pair/anime/mine-lover-pair/</loc>
     <lastmod>2025-09-30T03:43:05.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -757,6 +733,14 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/soft-manga-couple_left</image:loc><image:title>Soft Manga Couple Pair — Left</image:title><image:caption>Soft Manga Couple matching profile picture pair (Anime)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/soft-manga-couple_right</image:loc><image:title>Soft Manga Couple Pair — Right</image:title><image:caption>Soft Manga Couple matching profile picture pair (Anime)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/anime/squidgame-girl-pair/</loc>
+    <lastmod>2025-09-28T18:05:38.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/squidgame-girl-left</image:loc><image:title>Squidgame Girl Pair — Left</image:title><image:caption>Squidgame Girl matching profile picture pair (Anime)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/squidgame-girl-right</image:loc><image:title>Squidgame Girl Pair — Right</image:title><image:caption>Squidgame Girl matching profile picture pair (Anime)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/anime/star-eye-royals-pair/</loc>
@@ -1189,6 +1173,14 @@
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/stitch_lilo_halloween_right</image:loc><image:title>Stitch Lilo Halloween Pair — Right</image:title><image:caption>Stitch Lilo Halloween matching profile picture pair (Cartoons)</image:caption></image:image>
   </url>
   <url>
+    <loc>https://www.matchmadepics.com/pair/cartoons/toh-girl-pair/</loc>
+    <lastmod>2025-09-28T18:05:45.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/toh-girl-left</image:loc><image:title>Toh Girl Pair — Left</image:title><image:caption>Toh Girl matching profile picture pair (Cartoons)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/toh-girl-right</image:loc><image:title>Toh Girl Pair — Right</image:title><image:caption>Toh Girl matching profile picture pair (Cartoons)</image:caption></image:image>
+  </url>
+  <url>
     <loc>https://www.matchmadepics.com/cartoons/</loc>
     <lastmod>2025-12-16T05:02:44.000Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -1289,6 +1281,14 @@
     <priority>0.8</priority>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/dino_kitty_left</image:loc><image:title>Dino Kitty Pair — Left</image:title><image:caption>Dino Kitty matching profile picture pair (Cute)</image:caption></image:image>
     <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/dino_kitty_right</image:loc><image:title>Dino Kitty Pair — Right</image:title><image:caption>Dino Kitty matching profile picture pair (Cute)</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://www.matchmadepics.com/pair/cute/heartshot-pair/</loc>
+    <lastmod>2025-09-30T03:52:18.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/heartshot-left</image:loc><image:title>Heartshot Pair — Left</image:title><image:caption>Heartshot matching profile picture pair (Cute)</image:caption></image:image>
+    <image:image><image:loc>https://res.cloudinary.com/dgdsujybp/image/upload/f_auto,q_auto,w_1024,c_fit/heartshot-right</image:loc><image:title>Heartshot Pair — Right</image:title><image:caption>Heartshot matching profile picture pair (Cute)</image:caption></image:image>
   </url>
   <url>
     <loc>https://www.matchmadepics.com/pair/cute/hugging-pair/</loc>
