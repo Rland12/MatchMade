@@ -326,7 +326,7 @@ export default function ImagePairs({ handleClick }) {
             </div>
 
             {totalPages > 1 && (
-              <nav className="mt-4" aria-label="Image pairs pagination">
+              <nav className="mt-2" aria-label="Image pairs pagination">
                 <ul className="pagination">
                   <li className={`page-item ${page <= 1 ? "disabled" : ""}`}>
                     <button

@@ -553,6 +553,13 @@ function buildSitemapAndRobots() {
     }
   }
 
+  // About page
+  urls.push({
+    loc: `${SITE}/about`,
+    changefreq: "monthly",
+    priority: "0.3",
+  });
+
   // Home entry = newest across all folders
   urls.unshift({
     loc: `${SITE}/`,
