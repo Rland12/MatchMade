@@ -296,6 +296,34 @@ function categoryHtml({ site, folder, items, generatedAt }) {
   </html>`;
 }
 
+function aboutHtml({ site }) {
+  const title = "About MatchMade - Matching Profile Pics Site";
+  const desc =
+    "MatchMade is a small site for curated matching profile pics (pfps) for friends, couples and besties. Learn how it works, who made it, and how to use the images.";
+  const canonical = `${site}/about/`;
+
+  return `<!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>${escapeHtml(title)}</title>
+    <meta name="description" content="${escapeHtml(desc)}"/>
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="${canonical}"/>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="/backgroundApp.css">
+  </head>
+  <body class="App App-header">
+    <main>
+      <h1>About MatchMade &amp; Matching Profile Pics</h1>
+      <p class="sub-title">${escapeHtml(desc)}</p>
+      <p><a href="/">← Back to home</a></p>
+      <!-- Real HTML stub so /about/ returns 200 for crawlers. SPA handles navigation client-side. -->
+    </main>
+  </body>
+  </html>`;
+}
 
 
 function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rightId, leftUrl, rightUrl, leftCreatedAt, rightCreatedAt }) {
@@ -555,7 +583,7 @@ function buildSitemapAndRobots() {
 
   // About page
   urls.push({
-    loc: `${SITE}/about`,
+    loc: `${SITE}/about/`,
     changefreq: "monthly",
     priority: "0.3",
   });
@@ -744,6 +772,15 @@ async function run() {
       "utf8"
     );
   }
+
+  // emit a real HTML file so /about/ returns 200
+  const aboutDir = path.join(OUT_PUBLIC, "about");
+  ensureDir(aboutDir);
+  fs.writeFileSync(
+    path.join(aboutDir, "index.html"),
+    aboutHtml({ site: SITE }),
+    "utf8"
+  );
 
   const categoriesPath = path.join(OUT_DATA_DIR, "categories.json");
   fs.writeFileSync(categoriesPath, JSON.stringify({ categories: FOLDERS }, null, 2), "utf8");

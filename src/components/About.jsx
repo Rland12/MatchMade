@@ -15,7 +15,7 @@ export default function About() {
             <Helmet>
                 <title>{title}</title>
                 <meta name="description" content={description} />
-                <link rel="canonical" href={`${SITE}/about`} />
+                <link rel="canonical" href={`${SITE}/about/`} />
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
             </Helmet>
@@ -66,7 +66,7 @@ export default function About() {
             <section>
                 <h3>What are matching pfps?</h3>
                 <p>
-                    Matching profile pictures (pfps) are two images that complement each other, 
+                    Matching profile pictures (pfps) are two images that complement each other,
                     often featuring the same character or theme but with different poses or expressions.
                     They're used by friends, couples, and besties to show their connection and share a common aesthetic.
                 </p>
@@ -95,7 +95,7 @@ export default function About() {
 
                     You can also return to the <span><Link to="/">homepage</Link></span> to start browsing pairs.
                 </p>
-                  <SocialLinks/>
+                <SocialLinks />
             </section>
         </div>
     );
