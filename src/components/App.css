@@ -6,6 +6,11 @@ body,
   margin: 0;
 }
 
+body {
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
+  line-height: 1.6;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -14,7 +19,7 @@ body,
   /* centers everything vertically */
   align-items: center;
   text-align: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 1rem;
   color: white;
 }
 
@@ -108,9 +113,24 @@ p {
   color: #FEF8FF;
 }
 
+.sub-title {
+  font-size: clamp(0.95rem, 0.9rem + 0.4vw, 1.1rem);
+  line-height: 1.5;
+  max-width: 44rem;
+  margin: 0.75rem auto 1.5rem;
+  text-align: center;
+  opacity: 0.9;
+}
+
+
 a {
   text-decoration: none;
   color: #FEF8FF;
+}
+
+.title {
+  font-size: clamp(1.9rem, 1.3rem + 2vw, 2.8rem);
+  line-height: 1.1;
 }
 
 .title a:hover {
@@ -176,7 +196,7 @@ nav {
   padding: 8px 16px;
   color: #eee0e0;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 0.8rem + 0.3vw, 1rem);
 }
 
 .nav-link {
@@ -382,7 +402,7 @@ nav {
 
   /* Scrollable categories strip */
   .category-strip {
-    flex: 0 1 60%;
+    flex: 0 1 66%;
     /* ⬅ smaller strip: ~60% of the row */
     min-width: 0;
     /* allow shrinking, important for flex */
@@ -476,16 +496,32 @@ img {
 
 .pair-grid {
   width: 100%;
+  max-width: 1080px;
+  /* keeps 3 cards at a nice size */
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 0.85rem;
   row-gap: 0.75rem;
 }
 
-@media (min-width: 992px) {
+/* Medium screens: 2 per row */
+@media (max-width: 900px) {
   .pair-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 0.85rem;
-    row-gap: 0rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Very small screens: still 2 per row, but tighter padding */
+@media (max-width: 600px) {
+  .pair-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0;
+    row-gap: 0.5rem;
+  }
+
+  .pair-card {
+    padding: 0.3rem;
   }
 }
 
@@ -552,17 +588,6 @@ img {
   display: block;
 }
 
-@media (max-width: 600px) {
-  .pair-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-
-  }
-
-  .pair-card {
-    padding: 0.3rem;
-  }
-}
-
 @media (max-width: 768px) {
   .container {
     max-width: 660px;
@@ -580,10 +605,10 @@ img {
   font-size: 0.95rem;
 }
 
+
 @media (max-width: 600px) {
   .pagination .page-link {
     padding: 0.35rem 0.65rem;
-    font-size: 0.9rem;
   }
 }
 
@@ -591,7 +616,9 @@ img {
   background-color: #604760;
   color: #eee0e0;
   border: none;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
 }
+
 
 .btn:hover {
   background-color: #eee0e0;
@@ -741,12 +768,13 @@ img {
   align-items: center;
   justify-content: center;
   padding: 0.35rem 0.75rem;
-  font-size: 0.9rem;
+  border-radius: 999px;
+  font-size: clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem);
+  white-space: nowrap;
   background-color: transparent;
   color: #fef8ff;
   box-shadow: none;
   border: none;
-
 }
 
 .arrow {
@@ -806,12 +834,6 @@ img {
     /* scroll left/right */
     justify-content: flex-start;
     padding: 0.25rem 0.5rem;
-  }
-
-  .pagination .page-link {
-    padding: 0.25rem 0.55rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
   }
 
   .pagination::-webkit-scrollbar {

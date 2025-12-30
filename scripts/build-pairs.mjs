@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { v2 as cloudinary } from "cloudinary";
 
+
 // config
 const SITE = "https://www.matchmadepics.com";
 
@@ -21,8 +22,33 @@ cloudinary.config({
 
 const PARENT = "categories";
 
-// Helpers
+// Per-category subtitles used in static HTML stubs / meta descriptions
+const CATEGORY_SUBTITLES = {
+  home:
+    "Find matching profile pics for friends, couples and besties. Browse anime, cartoons, cute, games, movies and LGBTQ matching pfps and download both sides in one click.",
+  anime:
+    "Soft, cute and cool anime matching profile pics for friends, couples and besties. Pick an anime matching profile picture pair and save both sides for Discord, Instagram or TikTok.",
+  cartoons:
+    "Cartoon matching profile pics inspired by your favorite shows and characters. Choose a cartoon matching profile picture pair for you and your friend or special someone.",
+  cute:
+    "Adorable, cozy and pastel matching profile pics with soft vibes. Browse cute matching profile picture pairs for you and your favorite person and download both sides together.",
+  games:
+    "Game and gamer-themed matching profile pics. Find matching profile picture pairs for Discord, and more, and grab both sides in one tap.",
+  lgbtq:
+    "Pride-friendly LGBTQ matching profile pics for friends and partners. Discover matching profile picture pairs that reflect your identity and download both images easily.",
+  movies:
+    "Movie and TV inspired matching profile pics for film lovers and besties. Choose a matching profile picture pair from your favorite characters and save both sides.",
+};
 
+function getCategorySubtitle(folder) {
+  const key = (folder || "home").toLowerCase();
+  if (CATEGORY_SUBTITLES[key]) return CATEGORY_SUBTITLES[key];
+
+  const label = key === "home" ? "Home" : toTitleCase(key);
+  return `Browse ${label.toLowerCase()} matching profile pics (matching profile picture pairs). Download both sides in one click.`;
+}
+
+// Helpers
 // ---- Dynamic folder discovery under /categories ----
 async function listSubfoldersPaginated(parent = PARENT) {
   const all = [];
@@ -220,14 +246,21 @@ function safeMaxIso(a, b) {
 //keep near helpers
 function categoryHtml({ site, folder, items, generatedAt }) {
   const label = folder === "home" ? "Home" : toTitleCase(folder);
-  const title = `${label} Matching PFP Pairs | MatchMade`;
-  const canonical = folder === "home" ? `${site}/` : `${site}/${folder}/`;
-  const desc = `Browse ${label.toLowerCase()} matching profile picture pairs. Download both sides in one click.`;
+  const isHome = folder === "home";
+
+  const title = isHome
+    ? "Matching Profile Pics – Anime, Cartoons, Cute, Games, Movies & LGBTQ | MatchMade"
+    : `${label} Matching Profile Pics | MatchMade`;
+
+  const canonical = isHome ? `${site}/` : `${site}/${folder}/`;
+  const desc = getCategorySubtitle(folder);
   const og = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,b_black/${BASE_CANVAS_ID}`;
 
   const [pageLd, crumbsLd] = jsonLdCategoryPage({ site, folder, items });
   if (generatedAt) pageLd.dateModified = generatedAt;
   const jsonLd = JSON.stringify([pageLd, crumbsLd], null, 0);
+
+  const h1Text = isHome ? "MatchMade | Home" : `MatchMade | ${label}`;
 
   return `<!doctype html>
   <html lang="en">
@@ -238,6 +271,8 @@ function categoryHtml({ site, folder, items, generatedAt }) {
     <meta name="description" content="${escapeHtml(desc)}"/>
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="${canonical}"/>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <link rel="stylesheet" href="/backgroundApp.css">
 
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="MatchMade"/>
@@ -248,16 +283,11 @@ function categoryHtml({ site, folder, items, generatedAt }) {
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="630"/>
 
-    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-    <link rel="stylesheet" href="/backgroundApp.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nunito&display=swap" rel="stylesheet">
     <script type="application/ld+json">${jsonLd}</script>
   </head>
   <body class="App App-header">
     <main>
-      <h1>MatchMade</h1>
+      <h1>${escapeHtml(h1Text)}</h1>
       <p class="sub-title">${escapeHtml(desc)}</p>
       <p><a href="/">← Back to home</a></p>
       <!-- Real HTML stub so /${folder} returns 200 for crawlers. SPA handles navigation client-side. -->
@@ -265,6 +295,7 @@ function categoryHtml({ site, folder, items, generatedAt }) {
   </body>
   </html>`;
 }
+
 
 
 function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rightId, leftUrl, rightUrl, leftCreatedAt, rightCreatedAt }) {
@@ -640,7 +671,7 @@ async function run() {
       const leftUrl = viewUrl(cloud, leftId, 900);
       const rightUrl = viewUrl(cloud, rightId, 900);
       const cleanFolder = folder === "home" ? "" : `${toTitleCase(folder)} `;
-      const desc = `Browse ${cleanFolder}matching profile picture pairs for friends or special someone. Download both sides in one click.`;
+      const desc = `Browse ${cleanFolder}matching profile pics for friends or special someone. Download both sides in one click.`;
 
       const html = pairHtml({
         site: SITE,

@@ -59,7 +59,7 @@ export default function PairPage() {
   // Per-page meta
   const canonical = `${SITE}/pair/${folder}/${slug}`;
   const metaTitle = `${title} | MatchMade`;
-  const metaDesc = `Download the ${title} matching profile picture pair. Left & Right images included.`;
+  const metaDesc = `Download the ${title} matching profile pics (left and right) in one click.`;
   const ogImage = imgs[0]?.url || ""; // For Google only; social bots may not run JS on GH Pages.
 
   return (
@@ -104,7 +104,7 @@ export default function PairPage() {
         <button
           type="button"
           className="btn btn-primary"
-        
+
           onClick={() => {
             window.dispatchEvent(new CustomEvent("mm:setSelectedImages", { detail: state.pair }));
           }}
