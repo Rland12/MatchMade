@@ -744,25 +744,6 @@ async function run() {
     );
   }
 
-    // emit a real HTML file so /about/ returns 200 and boots the SPA
-  if (fs.existsSync(INDEX_HTML_PATH)) {
-    const indexHtml = fs.readFileSync(INDEX_HTML_PATH, "utf8");
-    const aboutDir = path.join(OUT_PUBLIC, "about");
-    ensureDir(aboutDir);
-    fs.writeFileSync(
-      path.join(aboutDir, "index.html"),
-      indexHtml,
-      "utf8"
-    );
-    console.log(
-      `   Wrote /about/ → ${path.relative(
-        process.cwd(),
-        path.join(aboutDir, "index.html")
-      )}`
-    );
-  }
-
-
   const categoriesPath = path.join(OUT_DATA_DIR, "categories.json");
   fs.writeFileSync(categoriesPath, JSON.stringify({ categories: FOLDERS }, null, 2), "utf8");
   console.log(`   Wrote categories → ${path.relative(process.cwd(), categoriesPath)}`);

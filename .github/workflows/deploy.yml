@@ -33,7 +33,9 @@ jobs:
           VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
         run: |
           npm run build
+          mkdir -p dist/about
           cp dist/index.html dist/404.html
+          cp dist/index.html dist/about/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
