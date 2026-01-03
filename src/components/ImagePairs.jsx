@@ -9,7 +9,7 @@ import {
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { slugify } from "@/utils/slug";
 import NotFound from "./NotFound";
-import { cldUrl } from "../libs/cdn";
+import { cldSrcSet, cldUrl } from "../libs/cdn";
 import { analytics } from "@/libs/analytics";
 
 const PAIRS_PER_PAGE = 6;
@@ -320,6 +320,7 @@ export default function ImagePairs({ handleClick }) {
                 <PairCard
                   pair={pair}
                   handleClick={handleClick}
+                  pairIndex={pairIndex}
                   key={`pair-${pairIndex}-${pair.title || ""}`}
                 />
               ))}
@@ -378,7 +379,7 @@ export default function ImagePairs({ handleClick }) {
 
 /* ===== Pair & Thumb components ===== */
 
-function PairCard({ pair, handleClick }) {
+function PairCard({ pair, handleClick, pairIndex }) {
   const params = useParams();
   const routeFolder = (params.category || "home").toLowerCase();
 
@@ -388,6 +389,7 @@ function PairCard({ pair, handleClick }) {
 
   const slug = slugify(pair.title);
   const dims = { w: 420, h: 420, fit: "fill", g: "auto" };
+  const srcSetWidths = [220, 320, 420, 560];
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -425,6 +427,8 @@ function PairCard({ pair, handleClick }) {
       {pair.imageSet.map((img, index) => {
         const isCloud = !!img.publicId;
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
+        const srcSet = isCloud ? cldSrcSet(img.publicId, srcSetWidths, dims) : undefined;
+        const sizes = "(max-width: 900px) 50vw, 33vw";
 
         const side = index === 0 ? "left" : "right";
         const alt =
@@ -433,7 +437,10 @@ function PairCard({ pair, handleClick }) {
           <MMImage
             key={(img.publicId || img.url || "") + index}
             src={fullSrc}
+            srcSet={srcSet}
+            sizes={srcSet ? sizes : undefined}
             alt={alt}
+            priority={pairIndex === 0}
           />
         );
       })}
@@ -441,7 +448,7 @@ function PairCard({ pair, handleClick }) {
   );
 }
 
-function MMImage({ src, alt }) {
+function MMImage({ src, srcSet, sizes, alt, priority = false }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -450,10 +457,13 @@ function MMImage({ src, alt }) {
         {!loaded && <div className="mm-skel" />}
         <img
           src={src}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt}
           className={loaded ? "is-loaded" : ""}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
           onLoad={() => setLoaded(true)}
         />
       </div>
