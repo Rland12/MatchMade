@@ -23,7 +23,7 @@ export default function PairDetail() {
     (async () => {
       try {
         setState((s) => ({ ...s, loading: true, error: null }));
-        const res = await fetch(`/data/pairs-${encodeURIComponent(folder)}.json`, { cache: "no-store" });
+        const res = await fetch(`/data/pairs-${encodeURIComponent(folder)}.json?v=${__MM_BUILD__}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         if (cancelled) return;

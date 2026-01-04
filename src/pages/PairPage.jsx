@@ -22,7 +22,7 @@ export default function PairPage() {
     (async () => {
       try {
         setState({ loading: true, error: null, pair: null });
-        const res = await fetch(`/data/pairs-${encodeURIComponent(folder)}.json`, { cache: "no-store" });
+        const res = await fetch(`/data/pairs-${encodeURIComponent(folder)}.json?v=${__MM_BUILD__}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         const found = (json.items || []).find((it) => slugify(it.title) === slug);

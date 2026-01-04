@@ -80,7 +80,7 @@ export default function ImagePairs({ handleClick }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-    // When switching seasonal holiday (christmas <-> halloween), reset to page 1
+  // When switching seasonal holiday (christmas <-> halloween), reset to page 1
   useEffect(() => {
     if (!holidayId) return;          // only care about seasonal views
     if (pageFromUrl === 1) return;   // already on page 1, nothing to do
@@ -100,8 +100,8 @@ export default function ImagePairs({ handleClick }) {
     const ALL_FOLDERS = ["home", "anime", "cartoons", "cute", "games", "lgbtq", "movies"];
 
     const fetchFolderItems = async (folderName) => {
-      const url = `/data/pairs-${encodeURIComponent(folderName)}.json`;
-      const res = await fetch(url, { cache: "no-store" });
+      const url = `/data/pairs-${encodeURIComponent(folderName)}.json?v=${__MM_BUILD__}`;
+      const res = await fetch(url);
       const ct = res.headers.get("content-type") || "";
 
       if (!res.ok || !ct.includes("application/json")) {
@@ -264,8 +264,24 @@ export default function ImagePairs({ handleClick }) {
 
   if (state.error) return <NotFound />;
   if (state.loading && pageItems.length === 0) {
-    return <div className="container py-5 text-center">Loading…</div>;
+    return (
+      <div className="container">
+        <div className="pair-grid" aria-hidden="true">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="pair-card">
+              <div className="pair-thumb">
+                <div className="mm-imgwrap"><div className="mm-skel" /></div>
+              </div>
+              <div className="pair-thumb">
+                <div className="mm-imgwrap"><div className="mm-skel" /></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
+
 
   const buildPageHref = (newPage) => {
     const params = new URLSearchParams();
@@ -429,7 +445,7 @@ function PairCard({ pair, handleClick, pairIndex }) {
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
         const srcSet = isCloud ? cldSrcSet(img.publicId, srcSetWidths, dims) : undefined;
         const sizes =
-  "(min-width: 1200px) 180px, (min-width: 900px) 170px, (min-width: 600px) 24vw, 24vw";
+          "(min-width: 1200px) 180px, (min-width: 900px) 170px, (min-width: 600px) 24vw, 24vw";
 
 
         const side = index === 0 ? "left" : "right";

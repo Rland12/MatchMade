@@ -72,7 +72,7 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/data/categories.json", { cache: "no-store" });
+        const res = await fetch(`/data/categories.json?v=${__MM_BUILD__}`);
         if (!res.ok) return; // fall back to default
         const data = await res.json();
         const raw = Array.isArray(data.categories) ? data.categories : [];
