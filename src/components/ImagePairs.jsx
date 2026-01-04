@@ -388,7 +388,7 @@ function PairCard({ pair, handleClick, pairIndex }) {
 
 
   const slug = slugify(pair.title);
-  const dims = { w: 420, h: 420, fit: "fill", g: "auto" };
+  const dims = { w: 420, h: 420, fit: "fit", g: "auto" }; // no crop
   const srcSetWidths = [220, 320, 420, 560];
   const navigate = useNavigate();
   const location = useLocation();
@@ -429,7 +429,8 @@ function PairCard({ pair, handleClick, pairIndex }) {
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
         const srcSet = isCloud ? cldSrcSet(img.publicId, srcSetWidths, dims) : undefined;
         const sizes =
-          "(min-width: 1200px) 320px, (min-width: 900px) 30vw, (min-width: 600px) 45vw, 48vw";
+  "(min-width: 1200px) 180px, (min-width: 900px) 170px, (min-width: 600px) 24vw, 24vw";
+
 
         const side = index === 0 ? "left" : "right";
         const alt =
