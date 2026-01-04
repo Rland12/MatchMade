@@ -428,7 +428,8 @@ function PairCard({ pair, handleClick, pairIndex }) {
         const isCloud = !!img.publicId;
         const fullSrc = isCloud ? cldUrl(img.publicId, dims) : img.url;
         const srcSet = isCloud ? cldSrcSet(img.publicId, srcSetWidths, dims) : undefined;
-        const sizes = "(max-width: 900px) 50vw, 33vw";
+        const sizes =
+          "(min-width: 1200px) 320px, (min-width: 900px) 30vw, (min-width: 600px) 45vw, 48vw";
 
         const side = index === 0 ? "left" : "right";
         const alt =
@@ -440,7 +441,7 @@ function PairCard({ pair, handleClick, pairIndex }) {
             srcSet={srcSet}
             sizes={srcSet ? sizes : undefined}
             alt={alt}
-            priority={pairIndex === 0}
+            priority={pairIndex < 2}
           />
         );
       })}
