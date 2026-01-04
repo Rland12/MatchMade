@@ -413,6 +413,8 @@ function PairCard({ pair, handleClick }) {
     }
   };
 
+  const sizes = "(max-width: 640px) 50vw, 33vw";
+
   return (
     <a
       href={hrefStr}
@@ -434,6 +436,7 @@ function PairCard({ pair, handleClick }) {
             key={(img.publicId || img.url || "") + index}
             src={fullSrc}
             alt={alt}
+            sizes={sizes}
           />
         );
       })}
@@ -441,7 +444,7 @@ function PairCard({ pair, handleClick }) {
   );
 }
 
-function MMImage({ src, alt }) {
+function MMImage({ src, alt, sizes }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -451,6 +454,7 @@ function MMImage({ src, alt }) {
         <img
           src={src}
           alt={alt}
+          sizes={sizes}
           className={loaded ? "is-loaded" : ""}
           loading="lazy"
           decoding="async"
