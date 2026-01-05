@@ -23,7 +23,7 @@ const HOLIDAY_TAGS = {
 };
 // extra tag-based filters from Cloudinary
 // match filters → Cloudinary tags
-
+// "/" route maps to "home" (UI route). Data for home comes from /data/pairs-home.json.
 const folderForCategory = (cat) => {
   const slug = (cat || "/").replace(/^\/+/, "").toLowerCase();
   if (!slug) return "home";
@@ -44,8 +44,8 @@ const makeAltText = (title, side, folder) => {
   return `${theme}matching profile picture pair titled “${title}”, ${sideLabel}`;
 };
 
-// Stable random sample (stable per load and avoids “shuffle on rerender.”
-// when other async work updates state.
+// Pick a stable random sample once per load.
+// We store this in state so the homepage doesn't reshuffle on rerenders.
 const pickRandomSample = (arr, n) => {
   const copy = Array.isArray(arr) ? arr.slice() : [];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -115,6 +115,7 @@ export default function ImagePairs({ handleClick }) {
   useEffect(() => {
     let cancelled = false;
 
+    // Category folders used to build seasonal + cross-category views (home pool is fetched separately).
     const ALL_FOLDERS = ["anime", "cartoons", "cute", "games", "lgbtq", "movies"];
 
     const fetchFolderItems = async (folderName) => {
@@ -136,7 +137,7 @@ export default function ImagePairs({ handleClick }) {
       const data = await res.json();
       const items = data.items || [];
       // remember which folder each pair came from
-      return items.map((item) => ({ ...item, __folder: folderName }));
+      return items.map((item) => ({ ...item, __folder: item.__folder || folderName }));
     };
 
     (async () => {
@@ -145,13 +146,16 @@ export default function ImagePairs({ handleClick }) {
 
         let items = [];
 
-        // seasonal home OR filtered home:home pulls from all category folders.
-        if (holidayTag || isHome) {
-          const results = await Promise.all(ALL_FOLDERS.map((fName) => fetchFolderItems(fName)));
+        // Home (and seasonal views) pull from all category folders.
+        if (isHome && !holidayTag) {
+          items = await fetchFolderItems("home"); // the generated pool of 12
+        } else if (holidayTag || isHome) {
+          const results = await Promise.all(ALL_FOLDERS.map((f) => fetchFolderItems(f)));
           items = results.flat();
         } else {
           items = await fetchFolderItems(folder);
         }
+
 
 
 
@@ -172,6 +176,7 @@ export default function ImagePairs({ handleClick }) {
         }
 
         if (cancelled) return;
+        // Plain home uses the generated /data/pairs-home.json pool (built from all categories).
         const isPlainHome = isHome && !holidayTag && activeFilterTags.length === 0;
         const homeSample = isPlainHome ? pickRandomSample(items, PAIRS_PER_PAGE) : [];
 
@@ -211,8 +216,15 @@ export default function ImagePairs({ handleClick }) {
     const total = state.allPairs.length;
 
     if (isHome && !holidayTag && activeFilterTags.length === 0) {
-      return { totalPages: 1, page: 1, pageItems: state.homeSample };
+      return {
+        totalPages: 1,
+        page: 1,
+        pageItems: state.homeSample.length
+          ? state.homeSample
+          : state.allPairs.slice(0, PAIRS_PER_PAGE),
+      };
     }
+
 
 
     // All other views (categories, home+holiday, filtered):
@@ -415,12 +427,11 @@ function PairCard({ pair, handleClick, pairIndex }) {
 
   const slug = slugify(pair.title);
   const dims = { w: 420, h: 420, fit: "fit", g: "auto" }; // no crop
-  const srcSetWidths = [220, 320, 420, 560];
+  const srcSetWidths = [220, 320, 420];
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isHome = folder === "home";
-  const hrefStr = isHome ? `/pair/${slug}` : `/pair/${folder}/${slug}`;
+  const hrefStr = `/pair/${folder}/${slug}`;
 
   const openAsModal = (e) => {
     if (e) e.preventDefault();

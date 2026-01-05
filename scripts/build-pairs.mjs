@@ -3,7 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { v2 as cloudinary } from "cloudinary";
 
-
 // config
 const SITE = "https://www.matchmadepics.com";
 
@@ -241,6 +240,17 @@ function safeMaxIso(a, b) {
   const t2 = b ? Date.parse(b) : 0;
   const max = Math.max(t1, t2);
   return max ? new Date(max).toISOString() : undefined;
+}
+
+const HOME_POOL_SIZE = Number(process.env.HOME_POOL_SIZE || 12);
+
+function pickRandomSample(arr, n) {
+  const copy = Array.isArray(arr) ? arr.slice() : [];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
 }
 
 //keep near helpers
@@ -506,6 +516,7 @@ function buildSitemapAndRobots() {
 
   // Pairs + gather newest times
   for (const folder of FOLDERS) {
+    if (folder === "home") continue; // home JSON is UI-only (mixed folders)
     const p = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
     if (!fs.existsSync(p)) continue;
     const json = JSON.parse(fs.readFileSync(p, "utf8"));
@@ -606,7 +617,7 @@ function buildSitemapAndRobots() {
   }
 }
 
-// inject home OG from first home pair
+//inject home OG from first item in the generated home pool
 function injectHomeOgFromFirstPair() {
   try {
     const homeJsonPath = path.join(OUT_DATA_DIR, "pairs-home.json");
@@ -747,6 +758,34 @@ async function run() {
   const categoriesPath = path.join(OUT_DATA_DIR, "categories.json");
   fs.writeFileSync(categoriesPath, JSON.stringify({ categories: FOLDERS }, null, 2), "utf8");
   console.log(`   Wrote categories → ${path.relative(process.cwd(), categoriesPath)}`);
+    // ---- Build HOME pool from all categories (UI-only file) ----
+  const merged = [];
+
+  for (const folder of FOLDERS) {
+    if (folder === "home") continue; // home is UI-only, not a real category source
+    const fp = path.join(OUT_DATA_DIR, `pairs-${folder}.json`);
+    if (!fs.existsSync(fp)) continue;
+
+    const data = JSON.parse(fs.readFileSync(fp, "utf8"));
+    for (const item of data.items || []) {
+      // IMPORTANT: preserve where it came from so links go to /pair/<folder>/<slug>/
+      merged.push({ ...item, __folder: folder });
+    }
+  }
+
+  const homeItems = pickRandomSample(merged, HOME_POOL_SIZE);
+
+  const homeJsonOut = {
+    folder: "home",
+    generatedAt: new Date().toISOString(),
+    totalPairs: homeItems.length,
+    items: homeItems,
+  };
+
+  const homePath = path.join(OUT_DATA_DIR, "pairs-home.json");
+  fs.writeFileSync(homePath, JSON.stringify(homeJsonOut, null, 2), "utf8");
+  console.log(`   Wrote HOME pool (${homeItems.length}) → ${path.relative(process.cwd(), homePath)}`);
+
 
   buildSitemapAndRobots();
   injectHomeOgFromFirstPair();

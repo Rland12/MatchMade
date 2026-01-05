@@ -36,11 +36,28 @@ export default function PairPage() {
     return () => { cancelled = true; };
   }, [folder, slug]);
 
-  if (state.loading) return <div className="container py-5 text-center">Loading…</div>;
+   if (state.loading) {
+    return (
+      <div className="container">
+        <div className="pair-grid" aria-hidden="true">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="pair-card">
+              <div className="pair-thumb">
+                <div className="mm-imgwrap"><div className="mm-skel" /></div>
+              </div>
+              <div className="pair-thumb">
+                <div className="mm-imgwrap"><div className="mm-skel" /></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+   }
   if (state.error || !state.pair) {
     return (
       <div className="container py-5 text-center">
-        <h2 className="mb-3">We couldn’t find that pair.</h2>
+        <h2 className="mb-3">We couldn't find that pair.</h2>
         <Link className="btn btn-secondary" to={`/${folder}`}>Back to {folder}</Link>
       </div>
     );
