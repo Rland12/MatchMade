@@ -44,6 +44,18 @@ const makeAltText = (title, side, folder) => {
   return `${theme}matching profile picture pair titled “${title}”, ${sideLabel}`;
 };
 
+// Stable random sample (stable per load and avoids “shuffle on rerender.”
+// when other async work updates state.
+const pickRandomSample = (arr, n) => {
+  const copy = Array.isArray(arr) ? arr.slice() : [];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+};
+
+
 export default function ImagePairs({ handleClick }) {
   const params = useParams();
   const isHome = !params.category; // "/" has no category segment
@@ -92,12 +104,18 @@ export default function ImagePairs({ handleClick }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [holidayId]);
 
-  const [state, setState] = useState({ loading: true, error: null, allPairs: [] });
+  const [state, setState] = useState({
+    loading: true,
+    error: null,
+    allPairs: [],
+    homeSample: [],
+  });
+
 
   useEffect(() => {
     let cancelled = false;
 
-    const ALL_FOLDERS = ["home", "anime", "cartoons", "cute", "games", "lgbtq", "movies"];
+    const ALL_FOLDERS = ["anime", "cartoons", "cute", "games", "lgbtq", "movies"];
 
     const fetchFolderItems = async (folderName) => {
       const url = `/data/pairs-${encodeURIComponent(folderName)}.json?v=${__MM_BUILD__}`;
@@ -105,12 +123,12 @@ export default function ImagePairs({ handleClick }) {
       const ct = res.headers.get("content-type") || "";
 
       if (!res.ok || !ct.includes("application/json")) {
-        const sample = await res.text().catch(() => "");
+        const bodyText = await res.text().catch(() => "");
         console.error("[ImagePairs] BAD RESPONSE", {
           folderName,
           status: res.status,
           ct,
-          sample: sample.slice(0, 200),
+          sample: bodyText.slice(0, 200),
         });
         throw new Error(`Bad JSON for ${folderName}`);
       }
@@ -123,20 +141,18 @@ export default function ImagePairs({ handleClick }) {
 
     (async () => {
       try {
-        setState({ loading: true, error: null, allPairs: [] });
+        setState((prev) => ({ ...prev, loading: true, error: null }));
 
         let items = [];
 
+        // seasonal home OR filtered home:home pulls from all category folders.
         if (holidayTag || isHome) {
-          // Home + seasonal views: pull from *all* folders
-          const results = await Promise.all(
-            ALL_FOLDERS.map((fName) => fetchFolderItems(fName))
-          );
+          const results = await Promise.all(ALL_FOLDERS.map((fName) => fetchFolderItems(fName)));
           items = results.flat();
         } else {
-          // Category view: just this category's folder
           items = await fetchFolderItems(folder);
         }
+
 
 
         // --- Seasonal tag filter (season_christmas, etc.) ---
@@ -156,8 +172,10 @@ export default function ImagePairs({ handleClick }) {
         }
 
         if (cancelled) return;
+        const isPlainHome = isHome && !holidayTag && activeFilterTags.length === 0;
+        const homeSample = isPlainHome ? pickRandomSample(items, PAIRS_PER_PAGE) : [];
 
-        setState({ loading: false, error: null, allPairs: items });
+        setState({ loading: false, error: null, allPairs: items, homeSample });
 
         // clamp page if filters made us run out of pages
         const totalPages = Math.max(1, Math.ceil(items.length / PAIRS_PER_PAGE));
@@ -176,6 +194,7 @@ export default function ImagePairs({ handleClick }) {
             loading: false,
             error: err.message || "Failed to load pairs",
             allPairs: [],
+            homeSample: [],
           });
         }
       }
@@ -185,19 +204,16 @@ export default function ImagePairs({ handleClick }) {
       cancelled = true;
     };
     // re-run when category or filters change
-  }, [folder, holidayTag, filterKey, pageFromUrl, holidayId, rawFilters, searchParams, setSearchParams]);
+  }, [folder, holidayTag, filterKey, pageFromUrl, holidayId, rawFilters, setSearchParams]);
 
 
   const { totalPages, page, pageItems } = useMemo(() => {
     const total = state.allPairs.length;
 
-    // Plain home only (no holiday, no extra filters):
-    // show a random 6-pack from all categories, no pagination
     if (isHome && !holidayTag && activeFilterTags.length === 0) {
-      const shuffled = state.allPairs.slice().sort(() => Math.random() - 0.5);
-      const items = shuffled.slice(0, PAIRS_PER_PAGE);
-      return { totalPages: 1, page: 1, pageItems: items };
+      return { totalPages: 1, page: 1, pageItems: state.homeSample };
     }
+
 
     // All other views (categories, home+holiday, filtered):
     // use normal pagination based on pageFromUrl
@@ -207,13 +223,7 @@ export default function ImagePairs({ handleClick }) {
     const items = state.allPairs.slice(start, start + PAIRS_PER_PAGE);
 
     return { totalPages: pages, page: safePage, pageItems: items };
-  }, [
-    state.allPairs,
-    pageFromUrl,
-    isHome,
-    holidayTag,
-    activeFilterTags.length,
-  ]);
+  }, [state.allPairs, state.homeSample, pageFromUrl, isHome, holidayTag, activeFilterTags.length]);
 
 
   const hasResults =
@@ -337,7 +347,7 @@ export default function ImagePairs({ handleClick }) {
                   pair={pair}
                   handleClick={handleClick}
                   pairIndex={pairIndex}
-                  key={`pair-${pairIndex}-${pair.title || ""}`}
+                  key={`${pair.__folder || "x"}-${slugify(pair.title || "")}`}
                 />
               ))}
             </div>
@@ -458,7 +468,7 @@ function PairCard({ pair, handleClick, pairIndex }) {
             srcSet={srcSet}
             sizes={srcSet ? sizes : undefined}
             alt={alt}
-            priority={pairIndex < 2}
+            priority={pairIndex === 0}
           />
         );
       })}

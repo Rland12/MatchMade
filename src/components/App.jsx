@@ -53,7 +53,9 @@ function App() {
     "Anime",
     "Cartoons",
     "Cute",
+    "Games",
     "Lgbtq",
+    "Movies",
   ]);
   const location = useLocation();
   const state = location.state && location.state.modal ? location.state : null;

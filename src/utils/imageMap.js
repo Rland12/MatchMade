@@ -1,5 +1,5 @@
 export const imageMap = {
-  //Future:add loading placeholder for images
+
   "/": [
     [
       {
