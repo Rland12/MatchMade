@@ -147,17 +147,21 @@ export default function ImagePairs({ handleClick }) {
         let items = [];
 
         // Home (and seasonal views) pull from all category folders.
-        if (isHome && !holidayTag) {
-          items = await fetchFolderItems("home"); // the generated pool of 12
-        } else if (holidayTag || isHome) {
+        const isPlainHome = isHome && !holidayTag && activeFilterTags.length === 0;
+
+        // Plain home: fast (small pool)
+        if (isPlainHome) {
+          items = await fetchFolderItems("home"); // generated pool (12)
+        }
+        // Home with holiday OR any filters: full site scan (correct results)
+        else if (holidayTag || (isHome && activeFilterTags.length > 0)) {
           const results = await Promise.all(ALL_FOLDERS.map((f) => fetchFolderItems(f)));
           items = results.flat();
-        } else {
+        }
+        // Category pages
+        else {
           items = await fetchFolderItems(folder);
         }
-
-
-
 
         // --- Seasonal tag filter (season_christmas, etc.) ---
         if (holidayTag) {
@@ -177,7 +181,6 @@ export default function ImagePairs({ handleClick }) {
 
         if (cancelled) return;
         // Plain home uses the generated /data/pairs-home.json pool (built from all categories).
-        const isPlainHome = isHome && !holidayTag && activeFilterTags.length === 0;
         const homeSample = isPlainHome ? pickRandomSample(items, PAIRS_PER_PAGE) : [];
 
         setState({ loading: false, error: null, allPairs: items, homeSample });
