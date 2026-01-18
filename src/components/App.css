@@ -11,6 +11,14 @@ body {
   line-height: 1.6;
 }
 
+:root {
+  --text-strong: #fef8ff;
+  --text-body: #f3e8f3;
+  --text-muted: #cfc3d0;
+  --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --text-shadow-strong: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -20,7 +28,7 @@ body {
   align-items: center;
   text-align: center;
   font-size: 1rem;
-  color: white;
+  color: var(--text-strong);
 }
 
 /* HEADER: compact, centered text */
@@ -105,12 +113,14 @@ h4,
 h5,
 h6 {
   font-family: "Dosis", sans-serif;
-  color: #FEF8FF;
+  color: var(--text-strong);
+  text-shadow: var(--text-shadow-strong);
 }
 
 p {
   font-family: "Nunito", sans-serif;
-  color: #FEF8FF;
+  color: var(--text-body);
+  text-shadow: var(--text-shadow);
 }
 
 .sub-title {
@@ -125,7 +135,8 @@ p {
 
 a {
   text-decoration: none;
-  color: #FEF8FF;
+  color: var(--text-strong);
+  text-shadow: var(--text-shadow);
 }
 
 .title {
@@ -468,6 +479,115 @@ nav {
 .btn-close {
   filter: invert(1) hue-rotate(180deg);
 }
+/* overlay styles */
+.mm-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 248, 255, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  padding: 0;
+}
+
+.mm-swatch:focus-visible {
+  outline: 2px solid #eee0e0;
+  outline-offset: 2px;
+}
+
+.mm-color {
+  width: 42px;
+  height: 32px;
+  padding: 0;
+}
+
+.mm-overlay-panel {
+  background: #2f1f33;
+  border-color: rgba(255, 248, 255, 0.12);
+  color: var(--text-body);
+}
+
+.mm-overlay-toolbar {
+  gap: 0.75rem;
+}
+
+.mm-overlay-state {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-overlay-badge {
+  background: #1e121f;
+  color: var(--text-strong);
+  border: 1px solid rgba(255, 248, 255, 0.18);
+}
+
+.mm-overlay-choice {
+  border: 1px solid rgba(255, 248, 255, 0.22);
+  background: #3c2a40;
+  color: #f3e8f3;
+}
+
+.mm-overlay-choice:hover,
+.mm-overlay-choice:focus-visible {
+  background: #eee0e0;
+  color: #604760;
+}
+
+.mm-overlay-choice.active {
+  background: #eee0e0;
+  color: #604760;
+  border-color: #eee0e0;
+}
+
+.mm-overlay-select {
+  background-color: #604760;
+  color: var(--text-strong);
+  border-color: rgba(255, 248, 255, 0.2);
+  font-family: "Nunito", sans-serif;
+}
+
+.mm-overlay-select:focus {
+  border-color: #eee0e0;
+  box-shadow: 0 0 0 2px rgba(238, 224, 224, 0.25);
+}
+
+.mm-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 248, 255, 0.22);
+  background: #604760;
+  color: #fef8ff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  line-height: 1;
+}
+
+.mm-iconbtn.is-on {
+  color: #604760;
+  background-color: #eee0e0;
+  border-color: #eee0e0;
+}
+
+.mm-iconbtn-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.mm-iconbtn:focus-visible {
+  outline: 2px solid #eee0e0;
+  outline-offset: 2px;
+}
+
+.mm-overlay-reset {
+  background: transparent;
+  color: #f3e8f3;
+}
+
+.mm-overlay-reset:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* Nav-only active styles so we don't affect pagination */
 .App-header .category.active,
@@ -478,20 +598,8 @@ nav {
   color: #604760;
 }
 
-/* .page-item button{
- 
-  background-color:#604760;
-  color:#eee0e0;
-border-radius: 50%;
-margin:5px;
-}
-.page-item button:hover{
-  background-color:#eee0e0;
-  color:#604760;
-} */
 img {
   border-radius: 36%;
-
 }
 
 .pair-grid {
@@ -615,12 +723,12 @@ img {
 }
 
 .btn {
+  font-family: "Nunito", sans-serif;
   background-color: #604760;
   color: #eee0e0;
   border: none;
   font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
 }
-
 
 .btn:hover {
   background-color: #eee0e0;
@@ -819,7 +927,7 @@ img {
 .pair-credit {
   margin-top: 0.75rem;
   font-size: 0.8rem;
-  color: #a8a8b3;
+  color: var(--text-muted);
 }
 
 .pair-credit a {
