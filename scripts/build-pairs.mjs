@@ -242,6 +242,14 @@ function safeMaxIso(a, b) {
   return max ? new Date(max).toISOString() : undefined;
 }
 
+function clampIso(iso) {
+  if (!iso) return undefined;
+  const ts = Date.parse(iso);
+  if (!ts) return undefined;
+  const now = Date.now();
+  return new Date(Math.min(ts, now)).toISOString();
+}
+
 const HOME_POOL_SIZE = Number(process.env.HOME_POOL_SIZE || 12);
 
 function pickRandomSample(arr, n) {
@@ -320,14 +328,18 @@ function pairHtml({ site, cloud, folder, slug, title, desc, ogImage, leftId, rig
   const earliestTs = Math.min(...[leftTs, rightTs].filter(Boolean)) || latestTs;
   const dateModified = new Date(latestTs).toISOString();
   const datePublished = new Date(earliestTs).toISOString();
-  const jsonLd = JSON.stringify(
-    {
-      ...jsonLdPairPage({ site, cloud, folder, slug, title, leftPublicId: leftId, rightPublicId: rightId })[0],
-      datePublished,
-      dateModified
-    },
-    null, 0
-  );
+  const [pageLd, crumbsLd] = jsonLdPairPage({
+    site,
+    cloud,
+    folder,
+    slug,
+    title,
+    leftPublicId: leftId,
+    rightPublicId: rightId
+  });
+  pageLd.datePublished = datePublished;
+  pageLd.dateModified = dateModified;
+  const jsonLd = JSON.stringify([pageLd, crumbsLd], null, 0);
 
   return `<!doctype html>
   <html lang="en">
@@ -526,7 +538,8 @@ function buildSitemapAndRobots() {
       const slug = slugify(item.title || "");
       if (!slug) continue;
 
-      const pairLast = safeMaxIso(item.imageSet?.[0]?.createdAt, item.imageSet?.[1]?.createdAt);
+      const pairLastRaw = safeMaxIso(item.imageSet?.[0]?.createdAt, item.imageSet?.[1]?.createdAt);
+      const pairLast = clampIso(pairLastRaw);
       const pairTs = pairLast ? Date.parse(pairLast) : 0;
       newestInFolder = Math.max(newestInFolder, pairTs);
       newestAll = Math.max(newestAll, pairTs);
@@ -553,7 +566,8 @@ function buildSitemapAndRobots() {
 
     // category entry (skip home here; we’ll add home separately)
     if (folder !== "home") {
-      folderNewest.set(folder, newestInFolder ? new Date(newestInFolder).toISOString() : undefined);
+      const folderLastmod = newestInFolder ? clampIso(new Date(newestInFolder).toISOString()) : undefined;
+      folderNewest.set(folder, folderLastmod);
       urls.push({
         loc: `${SITE}/${folder}/`,
         changefreq: "weekly",
@@ -575,7 +589,7 @@ function buildSitemapAndRobots() {
     loc: `${SITE}/`,
     changefreq: "weekly",
     priority: "1.0",
-    lastmod: newestAll ? new Date(newestAll).toISOString() : undefined,
+    lastmod: newestAll ? clampIso(new Date(newestAll).toISOString()) : undefined,
   });
 
   // Build XML (only include <lastmod> if present)
@@ -745,7 +759,7 @@ async function run() {
         const iso = safeMaxIso(it.imageSet?.[0]?.createdAt, it.imageSet?.[1]?.createdAt);
         return Math.max(acc, iso ? Date.parse(iso) : 0);
       }, 0);
-      lastmod = newest ? new Date(newest).toISOString() : null;
+      lastmod = newest ? clampIso(new Date(newest).toISOString()) : null;
     }
 
     fs.writeFileSync(
